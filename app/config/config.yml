@@ -67,3 +67,10 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+developtech_agility:
+    model:
+        class:
+            project: AppBundle\Entity\Project
+            feature: AppBundle\Entity\Feature
+            feedback: AppBundle\Entity\Feedback

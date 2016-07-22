@@ -29,7 +29,7 @@ class Feedback extends FeedbackModel {
     /**
      * @var Project
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="features")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Project", inversedBy="feedbacks")
      */
     protected $project;
 }

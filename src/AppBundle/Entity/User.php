@@ -30,6 +30,16 @@ class User implements UserInterface {
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=65, unique=true)
+     */
+    protected $email;
+
+    /** @var string **/
+    protected $plainPassword;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=140)
      */
     protected $password;
@@ -114,6 +124,44 @@ class User implements UserInterface {
     }
 
     /**
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $plainPassword
+     * @return User
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
      * @param string $password
      * @return User
      */
@@ -182,7 +230,7 @@ class User implements UserInterface {
      * @param boolean $isEnabled
      * @return User
      */
-    protected function setIsEnabled($isEnabled) {
+    public function enable($isEnabled) {
         $this->isEnabled = $isEnabled;
 
         return $this;

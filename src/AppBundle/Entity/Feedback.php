@@ -13,7 +13,7 @@ class Feedback extends FeedbackModel {
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\BetaTester")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $author;
@@ -21,7 +21,7 @@ class Feedback extends FeedbackModel {
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\Developer")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $developer;

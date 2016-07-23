@@ -1,16 +1,24 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AppBundle\Entity\User;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Entity
+ * @ORM\Table(name="users__user")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string", length=2)
+ * @ORM\DiscriminatorMap({
+ *     "DE" = "Developer",
+ *     "PO" = "ProductOwner",
+ *     "BT" = "BetaTester"
+ * })
+ * @ORM\HasLifecycleCallbacks
  */
-class User implements UserInterface {
+abstract class User implements UserInterface {
     /**
      * @var integer
      *
@@ -85,6 +93,24 @@ class User implements UserInterface {
      * @ORM\Column(type="datetime")
      **/
     protected $updatedAt;
+
+    const TYPE_DEVELOPER = 'DE';
+    const TYPE_PRODUCT_OWNER = 'PO';
+    const TYPE_BETA_TESTER = 'BT';
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist() {
+        $this->createdAt = $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate() {
+        $this->updatedAt = new \DateTime();
+    }
 
     /**
      * @param integer $id

@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Project extends ProjectModel {
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\ProductOwner")
      */
     protected $productOwner;
 

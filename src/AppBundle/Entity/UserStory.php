@@ -14,7 +14,7 @@ class UserStory extends FeatureModel {
      * @var UserInterface
      *
      * The user story responsible
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\Developer")
      */
     protected $developer;
 

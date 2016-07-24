@@ -36,7 +36,7 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
                 ->setId($projectData['id'])
                 ->setName($projectData['name'])
                 ->setSlug($projectData['slug'])
-                ->setProductOwner($this->getReference("user-{$projectData['product_owner_id']}"))
+                ->setProductOwner($this->getReference("product-owner-{$projectData['product_owner_id']}"))
                 ->setBetaTestStatus($projectData['beta_test_status'])
                 ->setNbBetaTesters($projectData['nb_beta_testers'])
                 ->setCreatedAt(new \DateTime($projectData['created_at']))
@@ -51,6 +51,6 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
      * @return int
      */
     public function getOrder() {
-        return 2;
+        return 3;
     }
 }

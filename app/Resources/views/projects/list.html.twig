@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }} - Projets{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{ 'project.list.title' | trans }}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        {% for project in projects %}
+                            <li class="list-group-item">{{ project.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a class="btn btn-success" href="{{ path('new_project') }}">
+                        {{ 'project.creation.link' | trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

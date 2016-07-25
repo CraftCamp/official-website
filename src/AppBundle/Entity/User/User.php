@@ -4,10 +4,12 @@ namespace AppBundle\Entity\User;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\User\UserRepository")
  * @ORM\Table(name="users__user")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string", length=2)
@@ -60,7 +62,7 @@ abstract class User implements UserInterface {
     protected $salt;
 
     /**
-     * @var array
+     * @var ArrayCollection
      *
      * @ORM\Column(type="array")
      **/
@@ -79,6 +81,12 @@ abstract class User implements UserInterface {
      * @ORM\Column(type="boolean")
      **/
     protected $isLocked;
+
+    /**
+     * @var \AppBundle\Entity\ActivationLink
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User\ActivationLink", cascade={"remove"})
+     */
+    protected $activationLink;
 
     /**
      * @var \DateTime
@@ -110,6 +118,10 @@ abstract class User implements UserInterface {
      */
     public function preUpdate() {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function __construct() {
+        $this->roles = new ArrayCollection();
     }
 
     /**
@@ -231,8 +243,26 @@ abstract class User implements UserInterface {
      */
     public function addRole($role)
     {
-        $this->roles[] = $role;
+        $this->roles->add($role);
 
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function hasRole($role) {
+        return $this->roles->contains($role);
+    }
+
+    /**
+     * @param string $role
+     * @return User
+     */
+    public function removeRole($role) {
+        if($this->hasRole($role)) {
+            $this->roles->removeElement($role);
+        }
         return $this;
     }
 
@@ -241,7 +271,7 @@ abstract class User implements UserInterface {
      */
     public function getRoles()
     {
-        return $this->roles;
+        return $this->roles->toArray();
     }
 
     /**
@@ -265,7 +295,7 @@ abstract class User implements UserInterface {
     /**
      * @return boolean
      */
-    public function getIsEnabled() {
+    public function isEnabled() {
         return $this->isEnabled;
     }
 
@@ -286,6 +316,23 @@ abstract class User implements UserInterface {
     public function getIsLocked()
     {
         return $this->isLocked;
+    }
+
+    /**
+     * @param \AppBundle\Entity\User\ActivationLink $activationLink
+     * @return \AppBundle\Entity\User\User
+     */
+    public function setActivationLink($activationLink) {
+        $this->activationLink = $activationLink;
+
+        return $this;
+    }
+
+    /**
+     * @return \AppBundle\Entity\User\ActivationLink
+     */
+    public function getActivationLink() {
+        return $this->activationLink;
     }
 
     /**

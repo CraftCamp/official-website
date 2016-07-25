@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\DataFixtures\ORM;
+namespace AppBundle\DataFixtures\ORM\User;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\{
@@ -28,7 +28,7 @@ class LoadProductOwnerData extends AbstractFixture implements OrderedFixtureInte
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
-        $data = include('fixtures/product_owners.php');
+        $data = include(dirname(__DIR__) . '/fixtures/product_owners.php');
 
         foreach($data as $productOwnerData) {
             $productOwner =
@@ -38,11 +38,16 @@ class LoadProductOwnerData extends AbstractFixture implements OrderedFixtureInte
                 ->setEmail($productOwnerData['email'])
                 ->setPlainPassword($productOwnerData['plain_password'])
                 ->setSalt(md5(uniqid(null, true)))
-                ->enable($productOwnerData['is_active'])
+                ->enable($productOwnerData['is_enabled'])
                 ->setIsLocked($productOwnerData['is_locked'])
                 ->setOrganization($this->getReference("organization-{$productOwnerData['organization_id']}"))
                 ->setCreatedAt(new \DateTime($productOwnerData['created_at']))
                 ->setUpdatedAt(new \DateTime($productOwnerData['updated_at']))
+                ->setActivationLink(
+                    ($this->hasReference("activation-link-{$productOwnerData['activation_link_id']}"))
+                    ? $this->getReference("activation-link-{$productOwnerData['activation_link_id']}")
+                    : null
+                )
             ;
             foreach($productOwnerData['roles'] as $role) {
                 $productOwner->addRole($role);
@@ -62,6 +67,6 @@ class LoadProductOwnerData extends AbstractFixture implements OrderedFixtureInte
      * @return int
      */
     public function getOrder() {
-        return 2;
+        return 3;
     }
 }

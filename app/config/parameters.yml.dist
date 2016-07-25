@@ -17,3 +17,8 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    # Mail sender
+    website_url: http://127.0.0.1:8000
+    website_mail: postmaster@yourwebsite.com
+    mail_name: yourwebsite.com

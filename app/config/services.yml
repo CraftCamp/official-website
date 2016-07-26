@@ -1,9 +1,68 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
+    developtech.user_manager.class: AppBundle\Manager\UserManager
+    developtech.authentication_manager.class: AppBundle\Security\Authentication\AuthenticationManager
+    developtech.authentication_handler.class: AppBundle\Security\Authentication\AuthenticationHandler
+
 
 services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    developtech.organization_manager:
+        class: AppBundle\Manager\OrganizationManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@developtech.slugger"
+
+    developtech.user_manager:
+        class: AppBundle\Manager\UserManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@security.password_encoder"
+            - "@translator"
+            - "@developtech.activation_link_manager"
+
+    developtech.user_provider:
+        class: AppBundle\Security\User\Provider\UserProvider
+        arguments:
+            - "@developtech.user_manager"
+
+    developtech.authentication_manager:
+        class: %developtech.authentication_manager.class%
+        arguments:
+            - "@request_stack"
+            - "@security.token_storage"
+            - "@security.encoder_factory"
+            - "@security.user_checker.main"
+            - "@session"
+            - "@developtech.user_provider"
+            - "@event_dispatcher"
+            - "main"
+
+    developtech.authentication_handler:
+        class: %developtech.authentication_handler.class%
+        arguments:
+            - "@session"
+            - "@router"
+            - "@translator"
+
+    developtech.activation_link_manager:
+        class: AppBundle\Manager\ActivationLinkManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@developtech.mailer"
+
+    developtech.slugger:
+        class: AppBundle\Utils\Slugger
+
+    developtech.mailer:
+        class: AppBundle\Utils\Mailer
+        arguments:
+            - "@swiftmailer.mailer"
+            - "@translator"
+            - "%website_url%"
+            - "%website_mail%"
+            - "%mail_name%"

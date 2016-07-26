@@ -1,0 +1,100 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }} - Projets{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{ 'project.creation.title' | trans }}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form, {"attr" : {"action": path("project_creation")}}) }}
+                        {{ form_label(form.name, 'project.name') }}
+                        {% if not form.name.vars.valid %}
+                            <div class="form-errors alert alert-danger">
+                                {{ form_errors(form.name) }}
+                            </div>
+                        {% endif %}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+
+                        <h3>
+                            {{ 'user.title' | trans }}
+                        </h3>
+
+                        {{ form_label(form.productOwner.username, 'user.username') }}
+                        {% if not form.productOwner.username.vars.valid %}
+                            <div class="form-errors alert alert-danger">
+                                {{ form_errors(form.productOwner.username) }}
+                            </div>
+                        {% endif %}
+                        {{ form_widget(form.productOwner.username, {'attr': {'class': 'form-control'}}) }}
+
+                        {{ form_label(form.productOwner.email, 'user.email') }}
+                        {% if not form.productOwner.email.vars.valid %}
+                            <div class="form-errors alert alert-danger">
+                                {{ form_errors(form.productOwner.email) }}
+                            </div>
+                        {% endif %}
+                        {{ form_widget(form.productOwner.email, {'attr': {'class': 'form-control'}}) }}
+
+                        {{ form_label(form.productOwner.plainPassword.first, 'user.plainPassword.first') }}
+                        {% if not form.productOwner.plainPassword.first.vars.valid %}
+                            <div class="form-errors alert alert-danger">
+                                {{ form_errors(form.productOwner.plainPassword.first) }}
+                            </div>
+                        {% endif %}
+                        {{ form_widget(form.productOwner.plainPassword.first, {"attr": {"class": "form-control"}}) }}
+
+                        {{ form_label(form.productOwner.plainPassword.second, 'user.plainPassword.second') }}
+                        {% if not form.productOwner.plainPassword.second.vars.valid %}
+                            <div class="form-errors alert alert-danger">
+                                {{ form_errors(form.productOwner.plainPassword.second) }}
+                            </div>
+                        {% endif %}
+                        {{ form_widget(form.productOwner.plainPassword.second, {"attr": {"class": "form-control"}}) }}
+
+                        <h3>
+                            {{ 'organization.title' | trans }}
+                        </h3>
+
+                        {{ form_label(form.productOwner.organization.name, 'organization.name') }}
+                        {{ form_widget(form.productOwner.organization.name, {'attr': {'class': 'form-control'}}) }}
+                        {% if not form.productOwner.organization.name.vars.valid %}
+                            <div class="form-errors alert alert-danger">
+                                {{ form_errors(form.productOwner.organization.name) }}
+                            </div>
+                        {% endif %}
+
+                        {{ form_label(form.productOwner.organization.description, 'organization.description') }}
+                        {{ form_widget(form.productOwner.organization.description, {'attr': {'class': 'form-control'}}) }}
+                        {% if not form.productOwner.organization.description.vars.valid %}
+                            <div class="form-errors alert alert-danger">
+                                {{ form_errors(form.productOwner.organization.description) }}
+                            </div>
+                        {% endif %}
+
+                        {{ form_widget(form) }}
+                        <button type="submit" class="btn btn-success">
+                            {{ 'project.creation.validate' | trans }}
+                        </button>
+                        <a href="{{ path('project_creation') }}" class="btn btn-default">
+                            {{ 'project.return_to_list' | trans }}
+                        </a>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

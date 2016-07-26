@@ -1,0 +1,23 @@
+---
+project:
+    name: 'Nom du projet'
+    list:
+        title: 'Liste des projets'
+    creation:
+        link: 'Créer un projet'
+        title: 'Création de votre projet'
+        validate: 'Valider la création'
+    menu_item: 'Projets'
+    return_to_list: 'Retourner à la liste'
+
+organization:
+    title: 'Votre organisation'
+    name: 'Nom'
+    description: 'Description'
+
+user:
+    title: 'Informations personnelles'
+    username: 'Nom d''utilisateur'
+    email: 'Adresse e-mail'
+    plainPassword.first: 'Mot de passe'
+    plainPassword.second: 'Confirmation du mot de passe'

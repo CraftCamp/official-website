@@ -1,11 +1,3 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-    developtech.user_manager.class: AppBundle\Manager\UserManager
-    developtech.authentication_manager.class: AppBundle\Security\Authentication\AuthenticationManager
-    developtech.authentication_handler.class: AppBundle\Security\Authentication\AuthenticationHandler
-
-
 services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
@@ -31,7 +23,7 @@ services:
             - "@developtech.user_manager"
 
     developtech.authentication_manager:
-        class: %developtech.authentication_manager.class%
+        class: AppBundle\Security\Authentication\AuthenticationManager
         arguments:
             - "@request_stack"
             - "@security.token_storage"
@@ -43,7 +35,7 @@ services:
             - "main"
 
     developtech.authentication_handler:
-        class: %developtech.authentication_handler.class%
+        class: AppBundle\Security\Authentication\AuthenticationHandler
         arguments:
             - "@session"
             - "@router"

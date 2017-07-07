@@ -69,8 +69,4 @@ swiftmailer:
     spool:     { type: memory }
 
 developtech_agility:
-    model:
-        class:
-            project: AppBundle\Entity\Project
-            feature: AppBundle\Entity\Feature
-            feedback: AppBundle\Entity\Feedback
+    user_class: AppBundle\Entity\User\User

@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\{
     ContainerInterface,
     ContainerAwareInterface
 };
-use AppBundle\Entity\Project;
+use Developtech\AgilityBundle\Entity\Project;
 
 class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
     /** @var ContainerInterface */
@@ -35,6 +35,7 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
                 (new Project())
                 ->setId($projectData['id'])
                 ->setName($projectData['name'])
+				->setDescription($projectData['description'])
                 ->setSlug($projectData['slug'])
                 ->setProductOwner($this->getReference("product-owner-{$projectData['product_owner_id']}"))
                 ->setBetaTestStatus($projectData['beta_test_status'])

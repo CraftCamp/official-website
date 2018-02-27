@@ -58,3 +58,8 @@ services:
             - "%website_url%"
             - "%website_mail%"
             - "%mail_name%"
+
+    developtech.project_subscriber:
+        class: AppBundle\Subscriber\ProjectSubscriber
+        tags:
+            - {name: kernel.event_subscriber}

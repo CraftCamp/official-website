@@ -5,11 +5,14 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use AppBundle\Entity\User\User;
+use AppBundle\Entity\User\ProductOwner;
+use AppBundle\Entity\User\Developer;
+use AppBundle\Entity\User\BetaTester;
+use AppBundle\Entity\Organization;
 use Doctrine\ORM\ORMException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use AppBundle\Manager\ActivationLinkManager;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Form\{Form, FormError};
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -49,29 +52,43 @@ class UserManager {
     }
 
     /**
-     * @param \Symfony\Component\Form\Form $form
-     * @param \AppBundle\Entity\User\User $user
-     * @return bool
+     * @param array $data
+     * @param string $type
+	 * @param Organization $organization
+     * @return User
      */
-    public function createUser(Form $form, User &$user): bool {
-        $return = false;
-        if(!$this->checkUsername($user->getUsername())) {
-            $return = true;
-            $form->get('username')->addError(new FormError(
-                $this->translator->trans('users.registration.username_already_taken'))
-            );
+    public function createUser($data, $type, Organization $organization = null): User
+	{
+        if (empty($data['username']) || !$this->checkUsername($data['username'])) {
+            throw new BadRequestHttpException('users.invalid_username');
         }
-        if(!$this->checkEmail($user->getEmail())) {
-            $return = true;
-            $form->get('email')->addError(new FormError(
-                $this->translator->trans('users.registration.email_already_taken'))
-            );
+        if (empty($data['email']) || !$this->checkEmail($data['email'])) {
+            throw new BadRequestHttpException('users.invalid_email');
         }
-        if($return) {
-            return false;
-        }
+		if (empty($data['password']) || empty($data['password_confirmation'])) {
+            throw new BadRequestHttpException('users.invalid_password');
+		}
+		if ($data['password'] !== $data['password_confirmation']) {
+			throw new BadRequestHttpException('users.password_mismatch');
+		}
+		switch($type) {
+			case User::TYPE_PRODUCT_OWNER: 
+				$user = new ProductOwner();
+				$user->setOrganization($organization);
+				break;
+			case User::TYPE_DEVELOPER:
+				$user = new Developer();
+				break;
+			case User::TYPE_BETA_TESTER:
+				$user = new BetaTester();
+				break;
+			default:
+				throw new BadRequestHttpException('users.invalid_type');
+		}
+		$user->setUsername($data['username']);
+		$user->setEmail($data['email']);
         $user->setSalt(uniqid('', true));
-        $password = $this->encoder->encodePassword($user, $user->getPlainPassword());
+        $password = $this->encoder->encodePassword($user, $data['password']);
         $user->setPassword($password);
         $user->addRole('ROLE_USER');
         $user->enable(false);
@@ -83,7 +100,7 @@ class UserManager {
         $this->activationLinkManager->createActivationLink($user);
         $this->activationLinkManager->sendValidationMail($user);
 
-        return true;
+        return $user;
     }
 
     /**

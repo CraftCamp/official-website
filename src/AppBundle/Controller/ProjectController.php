@@ -7,10 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
-use AppBundle\Form\ProjectType;
-
-use AppBundle\Entity\Project;
+use AppBundle\Entity\Organization;
+use AppBundle\Entity\User\ProductOwner;
 
 class ProjectController extends Controller {
 
@@ -28,7 +28,7 @@ class ProjectController extends Controller {
      */
     public function newAction($form = null) {
         return $this->render('projects/new.html.twig', [
-            'form' => (($form !== null) ? $form : $this->createForm(ProjectType::class))->createView()
+            'organization_types' => Organization::getTypes()
         ]);
     }
 
@@ -36,28 +36,30 @@ class ProjectController extends Controller {
      * @Route("/projects", name="project_creation", methods={"POST"})
      */
     public function createAction(Request $request) {
-        $projectData = new Project();
-        $form = $this->createForm(ProjectType::class, $projectData);
-
-        $form->handleRequest($request);
-
-        if (!$form->isValid()) {
-            return $this->forward('AppBundle:Project:new', [
-                'form' => $form
-            ]);
-        }
-        $productOwner = $projectData->getProductOwner();
+		$data = json_decode($request->getContent(), true);
+		
         $connection = $this->getDoctrine()->getManager()->getConnection();
         $connection->beginTransaction();
-        $this->get('developtech.organization_manager')->createOrganization($productOwner->getOrganization());
-        if (!$this->get('developtech.user_manager')->createUser($form->get('productOwner'), $productOwner)) {
-            $connection->rollback();
-            return $this->forward('AppBundle:Project:new', [
-                'form' => $form
-            ]);
-        }
-        $project = $this->get('developtech_agility.project_manager')->createProject($projectData->getName(), $productOwner);
-        $connection->commit();
-        return $this->forward('AppBundle:Project:getList');
+		try {
+			$organization = $this->get('developtech.organization_manager')->createOrganization($data['organization']);
+			$productOwner = $this->get('developtech.user_manager')->createUser(
+				$data['product_owner'],
+				ProductOwner::TYPE_PRODUCT_OWNER,
+				$organization
+			);
+			$project = $this->get('developtech_agility.project_manager')->createProject(
+				$data['project']['name'],
+				$data['project']['description'],
+				$productOwner,
+				$data['repository'] ?? []
+			);
+			$connection->commit();
+			return new JsonResponse($project, 201);
+		} catch (\Exception $ex) {
+			$connection->rollback();
+			return new JsonResponse([
+				'error' => $ex->getMessage()
+			], 400);
+		}
     }
 }

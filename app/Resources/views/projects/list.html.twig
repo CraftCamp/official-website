@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/projects.css') }}" />
 {% endblock %}
 
 {% block javascripts %}
@@ -11,25 +12,19 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        {{ 'project.list.title' | trans }}
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                        {% for project in projects %}
-                            <li class="list-group-item">{{ project.name }}</li>
-                        {% endfor %}
-                    </ul>
-                    <a class="btn btn-success" href="{{ path('new_project') }}">
-                        {{ 'project.creation.link' | trans }}
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div id="projects" class="module">
+        <header>
+            <h3>{{ 'projects.list.title' | trans }}</h3>
+        </header>
+        <section>
+            {% for project in projects %}
+                <div class="project">{{ project.name }}</div>
+            {% endfor %}
+        </section>
+        <footer>
+            <a class="module-button" href="{{ path('new_project') }}">
+                {{ 'projects.creation.link' | trans }}
+            </a>
+        </footer>
     </div>
 {% endblock %}

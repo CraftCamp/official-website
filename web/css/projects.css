@@ -1,0 +1,15 @@
+#projects {
+    width: 80%;
+    margin: 20px auto;
+}
+
+#projects > section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.project {
+    margin-left: 10px;
+    margin-right: 10px;
+}

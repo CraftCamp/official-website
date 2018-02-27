@@ -1,22 +1,37 @@
 ---
-project:
-    name: 'Nom du projet'
-    list:
-        title: 'Liste des projets'
+projects:
+    name: 'Nom'
+    description: 'Description'
     creation:
+        account_tab_title: 'Votre compte'
+        account_title: 'Création de votre compte'
+        account_subtitle: ''
         link: 'Créer un projet'
-        title: 'Création de votre projet'
-        validate: 'Valider la création'
+        project_tab_title: 'Votre projet'
+        project_title: 'Parlez-nous de votre projet'
+        project_subtitle: ''
+        organization_tab_title: 'Votre organisation'
+        organization_title: 'Votre organisation'
+        organization_subtitle: ''
+        previous: 'Précédent'
+        next: 'Suivant'
+        submit: 'Valider'
+    list:
+        title: 'Projets'
     menu_item: 'Projets'
     return_to_list: 'Retourner à la liste'
 
-organization:
+organizations:
     title: 'Votre organisation'
     name: 'Nom'
     description: 'Description'
+    types:
+        title: 'Type'
+        association: 'Association loi 1901'
+        small_company: 'TPE'
+        medium_company: 'PME'
 
-user:
-    title: 'Informations personnelles'
+users:
     username: 'Nom d''utilisateur'
     email: 'Adresse e-mail'
     plainPassword.first: 'Mot de passe'

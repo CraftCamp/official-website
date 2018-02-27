@@ -32,6 +32,13 @@ class Organization {
      * @ORM\Column(type="string", length=125)
      */
     protected $slug;
+    
+    /**
+     * @var string
+     * 
+     * @ORM\Column(type="string", length=25) 
+     */
+    protected $type;
 
     /**
      * @var string
@@ -53,7 +60,20 @@ class Organization {
      * @ORM\Column(type="datetime")
      */
     protected $updatedAt;
+    
+    const TYPE_ASSOCIATION = 'association';
+    const TYPE_SMALL_COMPANY = 'small_company';
+    const TYPE_MEDIUM_COMPANY = 'medium_company';
 
+    public static function getTypes(): array
+    {
+        return [
+            self::TYPE_ASSOCIATION,
+            self::TYPE_SMALL_COMPANY,
+            self::TYPE_MEDIUM_COMPANY
+        ];
+    }
+    
     /**
      * @ORM\PrePersist()
      */
@@ -117,6 +137,18 @@ class Organization {
      */
     public function getSlug() {
         return $this->slug;
+    }
+    
+    public function setType(string $type): Organization
+    {
+        $this->type = $type;
+        
+        return $this;
+    }
+    
+    public function getType(): string
+    {
+        return $this->type;
     }
 
     /**

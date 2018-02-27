@@ -1,0 +1,5 @@
+liip_functional_test:
+    authentication:
+        username: kern
+        password: test
+    cache_sqlite_db: true

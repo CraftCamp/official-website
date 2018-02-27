@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Projets{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/projects.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="projects" class="module">
+        <header>
+            <h3>{{ 'projects.list.title' | trans }}</h3>
+        </header>
+        <section>
+            {% for project in projects %}
+                <div class="project">{{ project.name }}</div>
+            {% endfor %}
+        </section>
+        <footer>
+            <a class="module-button" href="{{ path('new_project') }}">
+                {{ 'projects.creation.link' | trans }}
+            </a>
+        </footer>
+    </div>
+{% endblock %}

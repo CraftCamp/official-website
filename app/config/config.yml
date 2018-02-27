@@ -75,11 +75,3 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-developtech_agility:
-    user_class: AppBundle\Entity\User\User
-    api:
-        github:
-            api_url: "https://api.github.com/v3"
-            client_id: "%github.client_id%"
-            client_secret: "%github.client_secret%"
-            redirect_uri: "/login/oauth/callback"

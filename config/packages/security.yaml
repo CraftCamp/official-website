@@ -1,0 +1,38 @@
+security:
+    encoders:
+        App\Entity\User\User: sha512
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        developtech_providers_chain:
+            chain:
+                providers:
+                    - developtech_user_provider
+                    - developtech_entity_provider
+        developtech_user_provider:
+            id: App\Security\User\Provider\UserProvider
+        developtech_entity_provider:
+            entity:
+                class: App\Entity\User\User
+                property: username
+                
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+
+            # activate different ways to authenticate
+
+            # http_basic: true
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }

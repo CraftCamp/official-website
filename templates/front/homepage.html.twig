@@ -1,9 +1,10 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{{ parent() }} - Projets{% endblock %}
+{% block title %}{{ parent() }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel='stylesheet' href='{{ asset('css/homepage.css') }}' />
 {% endblock %}
 
 {% block javascripts %}
@@ -11,5 +12,67 @@
 {% endblock %}
 
 {% block body %}
-    
+    <div id="presentation" class="module">
+        <header>
+            <h3>{{ 'homepage.title' | trans }}</h3>
+        </header>
+        <section>
+                <p>{{ 'homepage.description.intro' | trans }}</p>
+                <div class='tab'>
+                    <header>
+                        <div class='icon'>
+                            <img src='{{ asset('images/icons/teamwork.svg') }}' />
+                        </div>
+                        <h4>{{ 'homepage.description.rally.title' | trans }}</h4>
+                    </header>
+                    <section>
+                        {{ 'homepage.description.rally.content' | trans | raw }}
+                    </section>
+                    <footer>
+                        <a href="#" class='module-button'>{{ 'homepage.description.rally.button' | trans }}</a>
+                    </footer>
+                </div>
+                <div class='tab'>
+                    <header>
+                        <div class='icon'>
+                            <img src='{{ asset('images/icons/students.svg') }}' />
+                        </div>
+                        <h4>{{ 'homepage.description.skills.title' | trans }}</h4>
+                    </header>
+                    <section>
+                        {{ 'homepage.description.skills.content' | trans | raw }}
+                    </section>
+                </div>
+                
+                <div class='tab'>
+                    <header>
+                        <div class='icon'>
+                            <img src='{{ asset('images/icons/partnership.svg') }}' />
+                        </div>
+                        <h4>{{ 'homepage.description.partners.title' | trans }}</h4>
+                    </header>
+                    <section>
+                        {{ 'homepage.description.partners.content' | trans | raw }}
+                    </section>
+                    <footer>
+                        <a href="{{ path('new_project') }}" class='module-button'>{{ 'homepage.description.partners.button' | trans }}</a>
+                    </footer>
+                </div>
+                <div class='tab'>
+                    <header>
+                        <div class='icon'>
+                            <img src='{{ asset('images/icons/meetup.svg') }}' />
+                        </div>
+                        <h4>{{ 'homepage.description.vision.title' | trans }}</h4>
+                    </header>
+                    <section>
+                        {{ 'homepage.description.vision.content' | trans | raw }}
+                    </section>
+                </div>
+            </div>
+        </section>
+        <footer>
+                    
+        </footer>
+    </div>
 {% endblock %}

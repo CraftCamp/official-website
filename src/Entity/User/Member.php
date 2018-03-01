@@ -6,8 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="users__developer")
+ * @ORM\Table(name="users__member")
  */
-class Developer extends User {
+class Member extends User
+{
 
 }

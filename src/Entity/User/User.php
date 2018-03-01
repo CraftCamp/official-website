@@ -14,13 +14,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="type", type="string", length=2)
  * @ORM\DiscriminatorMap({
- *     "DE" = "Developer",
+ *     "ME" = "Member",
  *     "PO" = "ProductOwner",
  *     "BT" = "BetaTester"
  * })
  * @ORM\HasLifecycleCallbacks
  */
-abstract class User implements UserInterface {
+abstract class User implements UserInterface, \JsonSerializable
+{
     /**
      * @var integer
      *
@@ -102,7 +103,7 @@ abstract class User implements UserInterface {
      **/
     protected $updatedAt;
 
-    const TYPE_DEVELOPER = 'DE';
+    const TYPE_MEMBER = 'ME';
     const TYPE_PRODUCT_OWNER = 'PO';
     const TYPE_BETA_TESTER = 'BT';
 
@@ -371,5 +372,16 @@ abstract class User implements UserInterface {
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+    
+    public function jsonSerialize()
+    {
+        return  [
+            'id' => $this->id,
+            'username' => $this->username,
+            'is_enabled' => $this->isEnabled,
+            'created_at' => $this->createdAt,
+            'updated_at' => $this->updatedAt
+        ];
     }
 }

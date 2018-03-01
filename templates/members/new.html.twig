@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Projets{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/members.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/members.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="registration" class="module">
+        <header>
+            <h3>{{ 'members.registration.title' | trans }}</h3>
+        </header>
+        <section>
+            <form onsubmit="createMember(event);">
+                <input type="text" name="username" placeholder="{{ 'users.username' | trans }}" />
+                <input type="text" name="email" placeholder="{{ 'users.email' | trans }}" />
+                <input type="password" name="password" placeholder="{{ 'users.plainPassword.first' | trans }}" />
+                <input type="password" name="password_confirmation" placeholder="{{ 'users.plainPassword.second' | trans }}" />
+                <button type="submit" class="module-button">
+                    {{ 'members.registration.validate' | trans }}
+                </button>
+                <div class="form-error"></div>
+            </form>
+        </section>
+    </div>
+{% endblock %}
+

@@ -143,7 +143,7 @@ class UserManager
         $this->em->remove($activationLink);
         $this->em->flush();
 
-        return new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+        return $user;
     }
 
     /**

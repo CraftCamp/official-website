@@ -50,7 +50,10 @@ homepage:
                     Les frais engendrés par l'hébergement des différents outils de l'association seront également amortis par ces fonds.
                 </p>
         
-                
+members:
+    registration:
+        title: 'Rejoindre la communauté'
+        validate: 'S''inscrire'
 
 projects:
     name: 'Nom'
@@ -89,3 +92,6 @@ users:
     email: 'Adresse e-mail'
     plainPassword.first: 'Mot de passe'
     plainPassword.second: 'Confirmation du mot de passe'
+    invalid_username: 'Vous ne pouvez pas prendre ce nom d''utilisateur'
+    invalid_email: 'L''adresse email renseignée n''est pas valide'
+    

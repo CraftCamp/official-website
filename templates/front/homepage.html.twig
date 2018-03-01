@@ -29,7 +29,9 @@
                         {{ 'homepage.description.rally.content' | trans | raw }}
                     </section>
                     <footer>
-                        <a href="#" class='module-button'>{{ 'homepage.description.rally.button' | trans }}</a>
+                        <a href="{{ path('member_registration') }}" class='module-button'>
+                            {{ 'homepage.description.rally.button' | trans }}
+                        </a>
                     </footer>
                 </div>
                 <div class='tab'>
@@ -55,7 +57,9 @@
                         {{ 'homepage.description.partners.content' | trans | raw }}
                     </section>
                     <footer>
-                        <a href="{{ path('new_project') }}" class='module-button'>{{ 'homepage.description.partners.button' | trans }}</a>
+                        <a href="{{ path('new_project') }}" class='module-button'>
+                            {{ 'homepage.description.partners.button' | trans }}
+                        </a>
                     </footer>
                 </div>
                 <div class='tab'>

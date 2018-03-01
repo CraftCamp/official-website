@@ -85,6 +85,10 @@ $("#msform").submit(event => {
     }, {});
     fetch('/projects', {
         method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
             organization: {
                 name: raw["organization_name"],
@@ -101,7 +105,8 @@ $("#msform").submit(event => {
                 name: raw["project_name"],
                 description: raw["project_description"]
             }
-        })
+        }),
+        credentials: 'include'
     }).then(response => response.json())
     .then(data => {
         console.log(data);

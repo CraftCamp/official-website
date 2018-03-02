@@ -117,9 +117,9 @@ class UserManager
     /**
      * @param string $activationHash
      * @throws \InvalidArgumentException
-     * @return UsernamePasswordToken
+     * @return User
      */
-    public function activateUserAccount(string $activationHash): UsernamePasswordToken
+    public function activateUserAccount(string $activationHash): User
     {
         $activationLink = $this->activationLinkManager->findOneByHash($activationHash);
         if($activationLink === null) {

@@ -12,11 +12,9 @@ use Doctrine\ORM\EntityManager;
 
 use Symfony\Component\Form\Form;
 
-use App\Entity\User\{ProductOwner, ActivationLink};
+use App\Entity\User\{ProductOwner, ActivationLink, User};
 
 use Symfony\Component\Translation\Translator;
-
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserManagerTest extends \PHPUnit\Framework\TestCase {
     /** @var \App\Manager\UserManager **/
@@ -62,12 +60,11 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
     }
 
     public function testActivateUserAccount() {
-        $token = $this->manager->activateUserAccount('ibfnf5g6sd1f3f');
+        $user = $this->manager->activateUserAccount('ibfnf5g6sd1f3f');
 
-        $this->assertInstanceOf(UsernamePasswordToken::class, $token);
-        $this->assertCount(2, $token->getRoles());
-        $this->assertTrue($token->isAuthenticated());
-        $this->assertEquals('John Doe', $token->getUsername());
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertCount(2, $user->getRoles());
+        $this->assertEquals('John Doe', $user->getUsername());
     }
 
     public function testSendNewActivationLink() {

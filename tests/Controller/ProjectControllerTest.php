@@ -48,7 +48,9 @@ class ProjectControllerTest extends WebTestCase
     public function testCreateAction()
     {
         $client = $this->makeClient();
-        $client->request('POST', '/projects', [], [], [], json_encode([
+        $client->request('POST', '/projects', [], [], [
+            'CONTENT_TYPE' => 'application/json'
+        ], json_encode([
             'project' => [
                 'name' => 'Chez Gégé',
                 'description' => 'Un bô restaurant !'

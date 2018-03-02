@@ -88,10 +88,13 @@ organizations:
         medium_company: 'PME'
 
 users:
+    identifier: 'Identifiant'
     username: 'Nom d''utilisateur'
     email: 'Adresse e-mail'
     plainPassword.first: 'Mot de passe'
     plainPassword.second: 'Confirmation du mot de passe'
     invalid_username: 'Vous ne pouvez pas prendre ce nom d''utilisateur'
     invalid_email: 'L''adresse email renseignée n''est pas valide'
+    login: 'Connexion'
+    connect: 'Se connecter'
     

@@ -74,3 +74,25 @@ body > nav a {
 .module-button:hover, .module-button:focus {
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 }
+
+.module > section > form {
+    text-align: center;
+}
+
+.module > section > form > input,
+.module > section > form > textarea,
+.module > section > form > select {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+
+.module > section > form > button {
+    width: 150px;
+}

@@ -36,15 +36,7 @@ services:
         public: true
 
     App\Security\Authentication\AuthenticationManager:
-        arguments:
-            - "@request_stack"
-            - "@security.token_storage"
-            - "@security.encoder_factory"
-            - "@security.user_checker.main"
-            - "@session"
-            - '@App\Security\User\Provider\UserProvider'
-            - "@event_dispatcher"
-            - "main"
+        public: true
 
     App\Utils\Mailer:
         arguments:
@@ -54,6 +46,10 @@ services:
             - "%env(resolve:WEBSITE_MAIL)%"
             - "%env(resolve:MAILER_NAME)%"
 
+    App\Subscriber\JsonRequestSubscriber:
+        tags:
+            - {name: kernel.event_subscriber}
+            
     App\Subscriber\ProjectSubscriber:
         tags:
             - {name: kernel.event_subscriber}

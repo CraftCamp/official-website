@@ -1,0 +1,25 @@
+#registration {
+    width: 600px;
+    margin:auto;
+    margin-top: 20px;
+}
+
+#registration > section > form {
+    text-align: center;
+}
+
+#registration > section > form > input {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+
+#registration > section > form > button {
+    width: 150px;
+}

@@ -1,0 +1,58 @@
+#presentation {
+    width: 80%;
+    margin: 20px auto;
+    color: #048;
+}
+
+.tab {
+    margin: 10px 0px;
+}
+
+.tab > header {
+    display: flex;
+    align-items: center;
+}
+
+.tab > header > .icon {
+    display: inline-block;
+    background-color: #EFEFEF;
+    border: 2px solid #08C;
+    border-radius: 80px;
+    padding: 10px;
+    padding-bottom: 6px;
+}
+
+.tab > header > .icon > img {
+    width: 64px;
+    height: 64px;
+}
+
+
+.tab > header > h4 {
+    margin-left: 40px;
+}
+
+.tab > section > p {
+    margin-top: 10px;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.tab > footer {
+    margin-top: 20px;
+    margin-left: 120px;
+    margin-right: 120px;
+    text-align: center;
+}
+
+@media(max-width:600px) {
+    .tab > section > p {
+        margin-left: 10px;
+        margin-right: 10px;
+        text-align: justify;
+    }
+    .tab > footer {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

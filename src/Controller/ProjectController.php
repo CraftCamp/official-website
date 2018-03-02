@@ -15,12 +15,15 @@ use App\Entity\User\ProductOwner;
 use App\Manager\OrganizationManager;
 use App\Manager\UserManager;
 
+use App\Security\Authentication\AuthenticationManager;
+
 class ProjectController extends Controller {
 
     /**
      * @Route("/projects", name="projects_list", methods={"GET"})
      */
-    public function getListAction() {
+    public function getListAction()
+    {
         return $this->render('projects/list.html.twig', [
             'projects' => $this->get('developtech_agility.project_manager')->getProjects()
         ]);
@@ -29,7 +32,8 @@ class ProjectController extends Controller {
     /**
      * @Route("/projects/new", name="new_project", methods={"GET"})
      */
-    public function newAction($form = null) {
+    public function newAction($form = null)
+    {
         return $this->render('projects/new.html.twig', [
             'organization_types' => Organization::getTypes()
         ]);
@@ -38,24 +42,24 @@ class ProjectController extends Controller {
     /**
      * @Route("/projects", name="project_creation", methods={"POST"})
      */
-    public function createAction(Request $request) {
-		$data = json_decode($request->getContent(), true);
-		
+    public function createAction(Request $request)
+    {
         $connection = $this->getDoctrine()->getManager()->getConnection();
         $connection->beginTransaction();
 		try {
-			$organization = $this->get(OrganizationManager::class)->createOrganization($data['organization']);
+			$organization = $this->get(OrganizationManager::class)->createOrganization($request->request->get('organization'));
 			$productOwner = $this->get(UserManager::class)->createUser(
-				$data['product_owner'],
+				$request->request->get('product_owner'),
 				ProductOwner::TYPE_PRODUCT_OWNER,
 				$organization
 			);
 			$project = $this->get('developtech_agility.project_manager')->createProject(
-				$data['project']['name'],
-				$data['project']['description'],
+				$request->request->get('project')['name'],
+				$request->request->get('project')['description'],
 				$productOwner,
-				$data['repository'] ?? []
+				$request->request->get('repository', [])
 			);
+            $this->get(AuthenticationManager::class)->authenticate($request, $productOwner);
 			$connection->commit();
 			return new JsonResponse($project, 201);
 		} catch (\Exception $ex) {

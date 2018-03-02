@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use App\Entity\User\User;
 use App\Entity\User\ProductOwner;
-use App\Entity\User\Developer;
+use App\Entity\User\Member;
 use App\Entity\User\BetaTester;
 use App\Entity\Organization;
 use App\Manager\ActivationLinkManager;
@@ -78,8 +78,8 @@ class UserManager
                     $user->setOrganization($organization);
                 }
 				break;
-			case User::TYPE_DEVELOPER:
-				$user = new Developer();
+			case User::TYPE_MEMBER:
+				$user = new Member();
 				break;
 			case User::TYPE_BETA_TESTER:
 				$user = new BetaTester();
@@ -117,9 +117,9 @@ class UserManager
     /**
      * @param string $activationHash
      * @throws \InvalidArgumentException
-     * @return UsernamePasswordToken
+     * @return User
      */
-    public function activateUserAccount(string $activationHash): UsernamePasswordToken
+    public function activateUserAccount(string $activationHash): User
     {
         $activationLink = $this->activationLinkManager->findOneByHash($activationHash);
         if($activationLink === null) {
@@ -143,7 +143,7 @@ class UserManager
         $this->em->remove($activationLink);
         $this->em->flush();
 
-        return new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+        return $user;
     }
 
     /**

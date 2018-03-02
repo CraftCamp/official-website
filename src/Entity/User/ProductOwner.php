@@ -15,7 +15,7 @@ class ProductOwner extends User {
      * @var Organization
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     protected $organization;
 

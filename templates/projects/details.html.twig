@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ project.name }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/projects.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="project-container">
+        <div id="project" class="module">
+            <header>
+                <h3>{{ project.name }}</h3>
+            </header>
+            <section>
+                <p>{{ project.description }}</p>
+            </section>
+        </div>
+        <div id="project-infos">
+            <div id="project-owner" class="module">
+                <header>
+                    <h3>{{ 'projects.product_owner' | trans }}</h3>
+                    <h4>{{ project.productOwner.username }}</h4>
+                </header>
+                <section>
+                    {% if project.productOwner.organization is not null %}
+                        <h4>Organisation</h4>
+                        <p>{{ project.productOwner.organization.name }}</p>
+                        <p>{{ project.productOwner.organization.description }}</p>
+                    {% endif %}
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

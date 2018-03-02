@@ -13,3 +13,20 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+
+#project-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+#project {
+    width: 60%;
+}
+
+#project-infos {
+    width: 30%;
+}

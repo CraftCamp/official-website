@@ -18,7 +18,7 @@
         </header>
         <section>
             {% for project in projects %}
-                <div class="project">{{ project.name }}</div>
+                <a href="{{ path('project_details', {"slug": project.slug }) }}" class="project">{{ project.name }}</a>
             {% endfor %}
         </section>
         <footer>

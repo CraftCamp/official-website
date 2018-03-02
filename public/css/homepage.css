@@ -56,3 +56,9 @@
         margin-right: 10px;
     }
 }
+
+#login-form {
+    width: 500px;
+    margin:auto;
+    margin-top: 40px;
+}

@@ -30,6 +30,9 @@ body > nav > h1 {
 body > nav a {
     color: #EFEFEF;
     text-decoration: none;
+    font-size: 1.1em;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .module {

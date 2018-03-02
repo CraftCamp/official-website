@@ -16,7 +16,11 @@
                 </h1>
                 <div>
                     <a href="{{ path('projects_list') }}">{{ 'projects.menu_item' | trans }}</a>
-                    <a href="{{ path('login') }}">{{ 'users.login' | trans }}</a>
+                    {% if is_granted("ROLE_USER") %}
+                        <a href="{{ path('member_dashboard') }}">{{ 'users.dashboard' | trans }}</a>
+                    {% else %}
+                        <a href="{{ path('login') }}">{{ 'users.login' | trans }}</a>
+                    {% endif %}
                 </div>
             </nav>
             {% block body %}

@@ -69,4 +69,16 @@ class ProjectController extends Controller {
 			], 400);
 		}
     }
+    
+    /**
+     * @Route("/projects/{slug}", name="project_details", methods={"GET"})
+     */
+    public function getAction(Request $request)
+    {
+        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
+        
+        return $this->render('projects/details.html.twig', [
+            'project' => $project
+        ]);
+    }
 }

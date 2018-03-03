@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="users__product_owner")
  */
-class ProductOwner extends User {
+class ProductOwner extends User
+{
     /**
      * @var Organization
      *

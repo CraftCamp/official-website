@@ -13,7 +13,7 @@ use App\Entity\User\User;
  * @ORM\Table(name="project__members")
  * @ORM\HasLifecycleCallbacks
  */
-class Membership
+class Membership implements \JsonSerializable
 {
     /**
      * @var User
@@ -157,5 +157,17 @@ class Membership
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+    
+    public function jsonSerialize()
+    {
+        return [
+            'user' => $this->user,
+            'project' => $this->project,
+            'is_active' => $this->isActive,
+            'created_at' => $this->createdAt,
+            'updated_at' => $this->updatedAt,
+            
+        ];
     }
 }

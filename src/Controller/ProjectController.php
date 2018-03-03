@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,6 +17,8 @@ use App\Manager\OrganizationManager;
 use App\Manager\UserManager;
 
 use App\Security\Authentication\AuthenticationManager;
+
+use App\Manager\ProjectManager;
 
 class ProjectController extends Controller {
 
@@ -47,7 +50,9 @@ class ProjectController extends Controller {
         $connection = $this->getDoctrine()->getManager()->getConnection();
         $connection->beginTransaction();
 		try {
-			$organization = $this->get(OrganizationManager::class)->createOrganization($request->request->get('organization'));
+            if (($organization = $request->request->get('organization')) !== null) {
+                $organization = $this->get(OrganizationManager::class)->createOrganization($organization);
+            }
 			$productOwner = $this->get(UserManager::class)->createUser(
 				$request->request->get('product_owner'),
 				ProductOwner::TYPE_PRODUCT_OWNER,
@@ -73,12 +78,27 @@ class ProjectController extends Controller {
     /**
      * @Route("/projects/{slug}", name="project_details", methods={"GET"})
      */
-    public function getAction(Request $request)
+    public function getAction(Request $request, ProjectManager $projectManager)
     {
         $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
         
         return $this->render('projects/details.html.twig', [
-            'project' => $project
+            'project' => $project,
+            'members' => $projectManager->getProjectMembers($project),
+            'membership' => ($this->isGranted('ROLE_USER')) ? $projectManager->getProjectMembership($project, $this->getUser()) : null
         ]);
+    }
+    
+    /**
+     * @Route("/projects/{slug}/join", name="project_join", methods={"POST"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function joinAction(Request $request, ProjectManager $projectManager)
+    {
+        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
+        
+        $membership = $projectManager->joinProject($project, $this->getUser());
+        
+        return new JsonResponse($membership, 201);
     }
 }

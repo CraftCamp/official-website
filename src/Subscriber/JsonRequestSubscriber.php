@@ -44,10 +44,10 @@ class JsonRequestSubscriber implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (!$this->isJsonRequest($event)) {
+        $request = $event->getRequest();
+        if (!$this->isJsonRequest($event) || empty($request->getContent())) {
             return;
         }
-        $request = $event->getRequest();
         $request->request->add(json_decode($request->getContent(), true));
     }
     

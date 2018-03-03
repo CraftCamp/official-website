@@ -3,7 +3,6 @@ namespace App\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use App\Entity\User\User;
 use App\Entity\User\ProductOwner;
 use App\Entity\User\Member;

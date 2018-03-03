@@ -90,11 +90,11 @@ $("#msform").submit(event => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            organization: {
+            organization: (raw["organization_name"].length > 0) ? {
                 name: raw["organization_name"],
                 type: raw["organization_type"],
                 description: raw["organization_description"]
-            },
+            } : null,
             product_owner: {
                 username: raw["username"],
                 email: raw["email"],

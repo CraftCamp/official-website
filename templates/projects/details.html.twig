@@ -9,6 +9,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/projects.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -34,6 +35,25 @@
                         <p>{{ project.productOwner.organization.description }}</p>
                     {% endif %}
                 </section>
+            </div>
+            <div id="project-members" class="module">
+                <header>
+                    <h3>{{ 'projects.members' | trans }}</h3>
+                </header>
+                <section>
+                    {% for membership in members %}
+                        <div class="member">
+                            {{ membership.user.username }}
+                        </div>
+                    {% endfor %}
+                </section>
+                <footer>
+                    {% if membership is null %}
+                        <button id="join-button" onclick="joinProject('{{ project.slug }}');" class="module-button">
+                            Rejoindre
+                        </button>
+                    {% endif %}
+                </footer>
             </div>
         </div>
     </div>

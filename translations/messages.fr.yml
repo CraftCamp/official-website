@@ -77,7 +77,9 @@ projects:
     menu_item: 'Projets'
     return_to_list: 'Retourner à la liste'
     join: 'Participer à ce projet'
+    already_joined: 'Vous faites déjà partie de cette équipe'
     product_owner: 'Product Owner'
+    members: 'Membres'
 
 organizations:
     title: 'Votre organisation'

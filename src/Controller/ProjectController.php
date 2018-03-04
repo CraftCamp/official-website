@@ -53,11 +53,14 @@ class ProjectController extends Controller {
             if (($organization = $request->request->get('organization')) !== null) {
                 $organization = $this->get(OrganizationManager::class)->createOrganization($organization);
             }
-			$productOwner = $this->get(UserManager::class)->createUser(
+            if (($productOwnerData = $request->request->get('product_owner')) === null && !$this->isGranted('ROLE_USER')) {
+                throw new BadRequestHttpException('projects.missing_product_owner');
+            }
+			$productOwner = ($productOwnerData !== null) ? $this->get(UserManager::class)->createUser(
 				$request->request->get('product_owner'),
 				ProductOwner::TYPE_PRODUCT_OWNER,
 				$organization
-			);
+			) : $this->getUser();
 			$project = $this->get('developtech_agility.project_manager')->createProject(
 				$request->request->get('project')['name'],
 				$request->request->get('project')['description'],

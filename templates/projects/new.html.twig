@@ -15,43 +15,51 @@
 {% block body %}
     <!-- multistep form -->
 <form id="msform">
-  <!-- progressbar -->
-  <ul id="progressbar">
-    <li class="active">{{ 'projects.creation.project_tab_title' | trans}}</li>
-    <li>{{ 'projects.creation.organization_tab_title' | trans}}</li>
-    <li>{{ 'projects.creation.account_tab_title' | trans}}</li>
-  </ul>
-  <!-- fieldsets -->
-  <fieldset>
-    <h2 class="fs-title">{{ 'projects.creation.project_title' | trans}}</h2>
-    <h3 class="fs-subtitle">{{ 'projects.creation.project_subtitle' | trans}}</h3>
-    <input type="text" name="project_name" placeholder="{{ 'projects.name' | trans }}" />
-    <textarea name="project_description" placeholder="{{ 'projects.description' | trans }}"></textarea>
-    <input type="button" name="previous" class="previous action-button" value="{{ 'projects.creation.previous' | trans}}" />
-    <input type="button" name="next" class="next action-button" value="{{ 'projects.creation.next' | trans}}" />
-  </fieldset>
-  <fieldset>
-    <h2 class="fs-title">{{ 'projects.creation.organization_title' | trans}}</h2>
-    <h3 class="fs-subtitle">{{ 'projects.creation.organization_subtitle' | trans}}</h3>
-    <input type="text" name="organization_name" placeholder="{{ 'organizations.name' | trans }}" />
-    <select name="organization_type" placeholder="{{ 'organizations.name' | trans }}">
-        <option selected>{{ 'organizations.types.title' | trans }}</option>
-        {% for type in organization_types %}
-            <option value="{{ type }}">{{ ('organizations.types.' ~ type) | trans }}</option>
-        {% endfor %}
-    </select>
-    <textarea name="organization_description" placeholder="{{ 'organizations.description' | trans }}"></textarea>
-    <input type="button" name="previous" class="previous action-button" value="{{ 'projects.creation.previous' | trans}}" />
-    <input type="button" name="next" class="next action-button" value="{{ 'projects.creation.next' | trans}}" />
-  </fieldset>
-  <fieldset>
-    <h2 class="fs-title">{{ 'projects.creation.account_title' | trans}}</h2>
-    <h3 class="fs-subtitle">{{ 'projects.creation.account_subtitle' | trans}}</h3>
-    <input type="text" name="username" placeholder="{{ 'users.username' | trans }}" />
-    <input type="text" name="email" placeholder="{{ 'users.email' | trans }}" />
-    <input type="password" name="password" placeholder="{{ 'users.plainPassword.first' | trans }}" />
-    <input type="password" name="password_confirmation" placeholder="{{ 'users.plainPassword.second' | trans }}" />
-    <input type="submit" name="submit" class="submit action-button" value="{{ 'projects.creation.submit' | trans}}" />
-  </fieldset>
+    <!-- progressbar -->
+    <ul id="progressbar">
+        <li class="active">{{ 'projects.creation.project_tab_title' | trans}}</li>
+        <li>{{ 'projects.creation.organization_tab_title' | trans}}</li>
+        {% if app.user is not defined %}
+            <li>{{ 'projects.creation.account_tab_title' | trans}}</li>
+        {% endif %}
+    </ul>
+    <!-- fieldsets -->
+    <fieldset>
+        <h2 class="fs-title">{{ 'projects.creation.project_title' | trans}}</h2>
+        <h3 class="fs-subtitle">{{ 'projects.creation.project_subtitle' | trans}}</h3>
+        <input type="text" name="project_name" placeholder="{{ 'projects.name' | trans }}" />
+        <textarea name="project_description" placeholder="{{ 'projects.description' | trans }}"></textarea>
+        <input type="button" name="previous" class="previous action-button" value="{{ 'projects.creation.previous' | trans}}" />
+        <input type="button" name="next" class="next action-button" value="{{ 'projects.creation.next' | trans}}" />
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">{{ 'projects.creation.organization_title' | trans}}</h2>
+        <h3 class="fs-subtitle">{{ 'projects.creation.organization_subtitle' | trans}}</h3>
+        <input type="text" name="organization_name" placeholder="{{ 'organizations.name' | trans }}" />
+        <select name="organization_type" placeholder="{{ 'organizations.name' | trans }}">
+            <option selected>{{ 'organizations.types.title' | trans }}</option>
+            {% for type in organization_types %}
+                <option value="{{ type }}">{{ ('organizations.types.' ~ type) | trans }}</option>
+            {% endfor %}
+        </select>
+        <textarea name="organization_description" placeholder="{{ 'organizations.description' | trans }}"></textarea>
+        <input type="button" name="previous" class="previous action-button" value="{{ 'projects.creation.previous' | trans}}" />
+        {% if app.user is not defined %}
+            <input type="button" name="next" class="next action-button" value="{{ 'projects.creation.next' | trans}}" />
+        {% else %}
+            <input type="submit" name="submit" class="submit action-button" value="{{ 'projects.creation.submit' | trans}}" />
+        {% endif %}
+    </fieldset>
+    {% if app.user is not defined %}
+        <fieldset>
+            <h2 class="fs-title">{{ 'projects.creation.account_title' | trans}}</h2>
+            <h3 class="fs-subtitle">{{ 'projects.creation.account_subtitle' | trans}}</h3>
+            <input type="text" name="username" placeholder="{{ 'users.username' | trans }}" />
+            <input type="text" name="email" placeholder="{{ 'users.email' | trans }}" />
+            <input type="password" name="password" placeholder="{{ 'users.plainPassword.first' | trans }}" />
+            <input type="password" name="password_confirmation" placeholder="{{ 'users.plainPassword.second' | trans }}" />
+            <input type="submit" name="submit" class="submit action-button" value="{{ 'projects.creation.submit' | trans}}" />
+        </fieldset>
+    {% endif %}
 </form>
 {% endblock %}

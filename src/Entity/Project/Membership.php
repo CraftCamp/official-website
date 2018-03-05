@@ -4,8 +4,6 @@ namespace App\Entity\Project;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Developtech\AgilityBundle\Entity\Project;
-
 use App\Entity\User\User;
 
 /**
@@ -25,7 +23,7 @@ class Membership implements \JsonSerializable
     /**
      * @var Project
      * 
-     * @ORM\ManyToOne(targetEntity="Developtech\AgilityBundle\Entity\Project")
+     * @ORM\ManyToOne(targetEntity="Project")
      * @ORM\Id
      **/
     protected $project;

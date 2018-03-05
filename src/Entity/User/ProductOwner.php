@@ -12,28 +12,4 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProductOwner extends User
 {
-    /**
-     * @var Organization
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    protected $organization;
-
-    /**
-     * @param Organization $organization
-     * @return Customer
-     */
-    public function setOrganization(Organization $organization) {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * @return Organization
-     */
-    public function getOrganization() {
-        return $this->organization;
-    }
 }

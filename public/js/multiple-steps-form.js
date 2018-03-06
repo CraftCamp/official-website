@@ -95,12 +95,12 @@ $("#msform").submit(event => {
                 type: raw["organization_type"],
                 description: raw["organization_description"]
             } : null,
-            product_owner: {
+            product_owner: ("username" in raw) ? {
                 username: raw["username"],
                 email: raw["email"],
                 password: raw["password"],
                 password_confirmation: raw["password_confirmation"]
-            },
+            } : null,
             project: {
                 name: raw["project_name"],
                 description: raw["project_description"]

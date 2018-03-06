@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\{
     ContainerInterface,
     ContainerAwareInterface
 };
-use Developtech\AgilityBundle\Entity\Project;
+use App\Entity\Project\Project;
 
 class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
     /** @var ContainerInterface */

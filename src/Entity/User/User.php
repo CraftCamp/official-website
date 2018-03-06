@@ -6,6 +6,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use App\Entity\Organization;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -82,6 +84,14 @@ abstract class User implements UserInterface, \JsonSerializable
      * @ORM\Column(type="boolean")
      **/
     protected $isLocked;
+    
+    /**
+     * @var Organization
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $organization;
 
     /**
      * @var \App\Entity\ActivationLink
@@ -317,6 +327,25 @@ abstract class User implements UserInterface, \JsonSerializable
     public function getIsLocked()
     {
         return $this->isLocked;
+    }
+
+    /**
+     * @param Organization $organization
+     * @return User
+     */
+    public function setOrganization(Organization $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * @return Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 
     /**

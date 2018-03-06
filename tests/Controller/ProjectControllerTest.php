@@ -5,7 +5,7 @@ namespace Tests\Controller;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 use App\Entity\User\ProductOwner;
-use Developtech\AgilityBundle\Entity\Project;
+use App\Entity\Project\Project;
 use Developtech\AgilityBundle\Entity\BetaTest;
 use App\Entity\Organization;
 

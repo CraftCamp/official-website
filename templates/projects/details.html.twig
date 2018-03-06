@@ -29,10 +29,10 @@
                     <h4>{{ project.productOwner.username }}</h4>
                 </header>
                 <section>
-                    {% if project.productOwner.organization is not null %}
+                    {% if project.organization is not null %}
                         <h4>Organisation</h4>
-                        <p>{{ project.productOwner.organization.name }}</p>
-                        <p>{{ project.productOwner.organization.description }}</p>
+                        <p>{{ project.organization.name }}</p>
+                        <p>{{ project.organization.description }}</p>
                     {% endif %}
                 </section>
             </div>

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Entity\Organization;
+use App\Entity\Project\Project;
 use App\Entity\User\ProductOwner;
 
 use App\Manager\OrganizationManager;
@@ -20,8 +21,8 @@ use App\Security\Authentication\AuthenticationManager;
 
 use App\Manager\ProjectManager;
 
-class ProjectController extends Controller {
-
+class ProjectController extends Controller
+{
     /**
      * @Route("/projects", name="projects_list", methods={"GET"})
      */
@@ -53,17 +54,25 @@ class ProjectController extends Controller {
             if (($organization = $request->request->get('organization')) !== null) {
                 $organization = $this->get(OrganizationManager::class)->createOrganization($organization);
             }
-			$productOwner = $this->get(UserManager::class)->createUser(
+            if (($productOwnerData = $request->request->get('product_owner')) === null && !$this->isGranted('ROLE_USER')) {
+                throw new BadRequestHttpException('projects.missing_product_owner');
+            }
+			$productOwner = ($productOwnerData !== null) ? $this->get(UserManager::class)->createUser(
 				$request->request->get('product_owner'),
 				ProductOwner::TYPE_PRODUCT_OWNER,
 				$organization
-			);
-			$project = $this->get('developtech_agility.project_manager')->createProject(
-				$request->request->get('project')['name'],
-				$request->request->get('project')['description'],
-				$productOwner,
-				$request->request->get('repository', [])
-			);
+			) : $this->getUser();
+			$project = 
+                (new Project())
+				->setName($request->request->get('project')['name'])
+				->setDescription($request->request->get('project')['description'])
+				->setProductOwner($productOwner)
+            ;
+            if ($organization !== null) {
+                $project->setOrganization($organization);
+            }
+            $this->get('developtech_agility.project_manager')->createProject($project, $request->request->get('repository', []));
+            $this->get(ProjectManager::class)->joinProject($project, $productOwner);
             $this->get(AuthenticationManager::class)->authenticate($request, $productOwner);
 			$connection->commit();
 			return new JsonResponse($project, 201);

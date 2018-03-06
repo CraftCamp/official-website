@@ -79,6 +79,7 @@ projects:
     join: 'Participer à ce projet'
     already_joined: 'Vous faites déjà partie de cette équipe'
     product_owner: 'Product Owner'
+    missing_product_owner: 'Vous devez avoir créé un compte pour créer un projet'
     members: 'Membres'
 
 organizations:

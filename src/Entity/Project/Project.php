@@ -4,6 +4,8 @@ namespace App\Entity\Project;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use App\Entity\Organization;
+
 use Developtech\AgilityBundle\Entity\Project as ProjectModel;
 
 /**

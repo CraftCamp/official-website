@@ -19,7 +19,7 @@
     <ul id="progressbar">
         <li class="active">{{ 'projects.creation.project_tab_title' | trans}}</li>
         <li>{{ 'projects.creation.organization_tab_title' | trans}}</li>
-        {% if app.user is not defined %}
+        {% if app.user is null %}
             <li>{{ 'projects.creation.account_tab_title' | trans}}</li>
         {% endif %}
     </ul>
@@ -44,13 +44,13 @@
         </select>
         <textarea name="organization_description" placeholder="{{ 'organizations.description' | trans }}"></textarea>
         <input type="button" name="previous" class="previous action-button" value="{{ 'projects.creation.previous' | trans}}" />
-        {% if app.user is not defined %}
+        {% if app.user is null %}
             <input type="button" name="next" class="next action-button" value="{{ 'projects.creation.next' | trans}}" />
         {% else %}
             <input type="submit" name="submit" class="submit action-button" value="{{ 'projects.creation.submit' | trans}}" />
         {% endif %}
     </fieldset>
-    {% if app.user is not defined %}
+    {% if app.user is null %}
         <fieldset>
             <h2 class="fs-title">{{ 'projects.creation.account_title' | trans}}</h2>
             <h3 class="fs-subtitle">{{ 'projects.creation.account_subtitle' | trans}}</h3>

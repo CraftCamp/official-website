@@ -6,9 +6,10 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-use Developtech\AgilityBundle\Entity\Project;
+use App\Entity\Project\Project;
 use App\Entity\Project\Membership;
 use App\Entity\User\User;
+use App\Entity\Organization;
 
 class ProjectManager
 {

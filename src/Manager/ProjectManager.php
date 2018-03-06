@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Project\Project;
 use App\Entity\Project\Membership;
 use App\Entity\User\User;
-use App\Entity\Organization;
 
 class ProjectManager
 {

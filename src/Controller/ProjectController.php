@@ -72,6 +72,7 @@ class ProjectController extends Controller
                 $project->setOrganization($organization);
             }
             $this->get('developtech_agility.project_manager')->createProject($project, $request->request->get('repository', []));
+            $this->get(ProjectManager::class)->joinProject($project, $productOwner);
             $this->get(AuthenticationManager::class)->authenticate($request, $productOwner);
 			$connection->commit();
 			return new JsonResponse($project, 201);

@@ -110,7 +110,7 @@ $("#msform").submit(event => {
     }).then(response => response.json())
     .then(response => {
         if (!response.error) {
-            console.log(response);
+            window.location = `/projects/${response.slug}`;
             return;
         }
         document.querySelector(".form-error").innerHTML = `<p>${response.error.message}</p>`;

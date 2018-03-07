@@ -78,9 +78,7 @@ class ProjectController extends Controller
 			return new JsonResponse($project, 201);
 		} catch (\Exception $ex) {
 			$connection->rollback();
-			return new JsonResponse([
-				'error' => $ex->getMessage()
-			], 400);
+			throw $ex;
 		}
     }
     

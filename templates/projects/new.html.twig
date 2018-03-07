@@ -48,6 +48,7 @@
             <input type="button" name="next" class="next action-button" value="{{ 'projects.creation.next' | trans}}" />
         {% else %}
             <input type="submit" name="submit" class="submit action-button" value="{{ 'projects.creation.submit' | trans}}" />
+            <div class="form-error"></div>
         {% endif %}
     </fieldset>
     {% if app.user is null %}
@@ -59,6 +60,7 @@
             <input type="password" name="password" placeholder="{{ 'users.plainPassword.first' | trans }}" />
             <input type="password" name="password_confirmation" placeholder="{{ 'users.plainPassword.second' | trans }}" />
             <input type="submit" name="submit" class="submit action-button" value="{{ 'projects.creation.submit' | trans}}" />
+            <div class="form-error"></div>
         </fieldset>
     {% endif %}
 </form>

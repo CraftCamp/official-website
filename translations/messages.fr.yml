@@ -58,6 +58,7 @@ members:
 projects:
     name: 'Nom'
     description: 'Description'
+    existing_name: 'Ce nom de projet est déjà pris'
     creation:
         account_tab_title: 'Votre compte'
         account_title: 'Création de votre compte'

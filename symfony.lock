@@ -204,7 +204,7 @@
         "version": "v6.0.2"
     },
     "symfony/asset": {
-        "version": "v4.0.4"
+        "version": "v4.0.6"
     },
     "symfony/browser-kit": {
         "version": "v4.0.4"

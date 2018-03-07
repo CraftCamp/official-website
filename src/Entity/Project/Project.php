@@ -12,7 +12,7 @@ use Developtech\AgilityBundle\Entity\Project as ProjectModel;
  * @ORM\Entity()
  * @ORM\Table(name="developtech_agility__projects")
  */
-class Project extends ProjectModel
+class Project extends ProjectModel implements \JsonSerializable
 {
     /**
      * @var Organization
@@ -39,5 +39,21 @@ class Project extends ProjectModel
     public function getOrganization()
     {
         return $this->organization;
+    }
+    
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'description' => $this->description,
+            'product_owner' => $this->productOwner,
+            'features' => $this->features,
+            'feedbacks' => $this->feedbacks,
+            'repositories' => $this->repositories,
+            'created_at' => $this->createdAt,
+            'updated_at' => $this->updatedAt
+        ];
     }
 }

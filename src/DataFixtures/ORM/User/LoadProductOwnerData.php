@@ -40,7 +40,7 @@ class LoadProductOwnerData extends AbstractFixture implements OrderedFixtureInte
                 ->setSalt(md5(uniqid(null, true)))
                 ->enable($productOwnerData['is_enabled'])
                 ->setIsLocked($productOwnerData['is_locked'])
-                ->setOrganization($this->getReference("organization-{$productOwnerData['organization_id']}"))
+                ->addOrganization($this->getReference("organization-{$productOwnerData['organization_id']}"))
                 ->setCreatedAt(new \DateTime($productOwnerData['created_at']))
                 ->setUpdatedAt(new \DateTime($productOwnerData['updated_at']))
                 ->setActivationLink(

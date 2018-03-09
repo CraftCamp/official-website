@@ -21,7 +21,7 @@ class ProductOwnerTest extends \PHPUnit\Framework\TestCase {
             ->addRole('ROLE_USER')
             ->addRole('ROLE_ADMIN')
             ->removeRole('ROLE_USER')
-            ->setOrganization((new Organization()))
+            ->addOrganization((new Organization()))
             ->enable(true)
             ->setActivationLink(new ActivationLink())
             ->setIsLocked(false)
@@ -38,7 +38,7 @@ class ProductOwnerTest extends \PHPUnit\Framework\TestCase {
         $this->assertTrue($user->hasRole('ROLE_ADMIN'));
         $this->assertTrue($user->isEnabled());
         $this->assertFalse($user->getIsLocked());
-        $this->assertInstanceOf(Organization::class, $user->getOrganization());
+        $this->assertInstanceOf(Organization::class, $user->getOrganizations()[0]);
         $this->assertTrue($user->eraseCredentials());
         $this->assertInstanceOf(ActivationLink::class, $user->getActivationLink());
         $this->assertInstanceOf('DateTime', $user->getCreatedAt());

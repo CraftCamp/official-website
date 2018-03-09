@@ -73,9 +73,6 @@ class UserManager
 		switch($type) {
 			case User::TYPE_PRODUCT_OWNER: 
 				$user = new ProductOwner();
-                if ($organization !== null) {
-                    $user->setOrganization($organization);
-                }
 				break;
 			case User::TYPE_MEMBER:
 				$user = new Member();
@@ -94,6 +91,10 @@ class UserManager
         $user->addRole('ROLE_USER');
         $user->enable(false);
         $user->setIsLocked(false);
+
+        if ($organization !== null) {
+            $user->addOrganization($organization);
+        }
 
         $this->em->persist($user);
         $this->em->flush();

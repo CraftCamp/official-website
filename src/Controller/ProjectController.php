@@ -70,6 +70,9 @@ class ProjectController extends Controller
             ;
             if ($organization !== null) {
                 $project->setOrganization($organization);
+                if (!$productOwner->hasOrganization($organization)) {
+                    $productOwner->addOrganization($organization);
+                }
             }
             $this->get('developtech_agility.project_manager')->createProject($project, $request->request->get('repository', []));
             $this->get(ProjectManager::class)->joinProject($project, $productOwner);

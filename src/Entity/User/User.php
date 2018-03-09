@@ -86,12 +86,12 @@ abstract class User implements UserInterface, \JsonSerializable
     protected $isLocked;
     
     /**
-     * @var Organization
+     * @var ArrayCollection
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Organization")
+     * @ORM\JoinTable(name="users__organizations")
      */
-    protected $organization;
+    protected $organizations;
 
     /**
      * @var \App\Entity\ActivationLink
@@ -120,18 +120,22 @@ abstract class User implements UserInterface, \JsonSerializable
     /**
      * @ORM\PrePersist()
      */
-    public function prePersist() {
+    public function prePersist()
+    {
         $this->createdAt = $this->updatedAt = new \DateTime();
     }
 
     /**
      * @ORM\PreUpdate()
      */
-    public function preUpdate() {
+    public function preUpdate()
+    {
         $this->updatedAt = new \DateTime();
     }
 
-    public function __construct() {
+    public function __construct()
+    {
+        $this->organizations = new ArrayCollection();
         $this->roles = new ArrayCollection();
     }
 
@@ -333,19 +337,39 @@ abstract class User implements UserInterface, \JsonSerializable
      * @param Organization $organization
      * @return User
      */
-    public function setOrganization(Organization $organization)
+    public function addOrganization(Organization $organization)
     {
-        $this->organization = $organization;
+        $this->organizations->add($organization);
 
         return $this;
     }
+    
+    /**
+     * @param Organization $organization
+     * @return $this
+     */
+    public function removeOrganization(Organization $organization)
+    {
+        $this->organizations->removeElement($organization);
+        
+        return $this;
+    }
+    
+    /**
+     * @param Organization $organization
+     * @return boolean
+     */
+    public function hasOrganization(Organization $organization)
+    {
+        return $this->organizations->contains($organization);
+    }
 
     /**
-     * @return Organization
+     * @return ArrayCollection
      */
-    public function getOrganization()
+    public function getOrganizations()
     {
-        return $this->organization;
+        return $this->organizations;
     }
 
     /**

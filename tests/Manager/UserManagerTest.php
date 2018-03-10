@@ -85,6 +85,30 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
     public function testSendNewActivationLinkWithAlreadyEnabledUser() {
         $this->manager->sendNewActivationLink('already_enabled@example.org');
     }
+    
+    public function testPromoteUser()
+    {
+        $user = $this->manager->promoteUser('Toto', 'lead');
+        
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertTrue($user->hasRole('ROLE_LEAD'));
+    }
+    
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testPromoteUserWithInvalidRole()
+    {
+        $this->manager->promoteUser('Toto', 'invalid_role');
+    }
+    
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
+    public function testPromoteUserWithUnexistingUser()
+    {
+        $this->manager->promoteUser('unknown@example.org', 'lead');
+    }
 
     public function getEntityManagerMock() {
         $entityManagerMock = $this
@@ -123,7 +147,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
                 'checkUsername',
                 'checkEmail',
                 'findOneByActivationLink',
-                'findOneByUsernameOrEmail'
+                'findOneByUsernameOrEmail',
+                'findOneByUsername'
             ])
             ->getMock()
         ;
@@ -145,6 +170,11 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         $repositoryMock
             ->expects($this->any())
             ->method('findOneByUsernameOrEmail')
+            ->willReturnCallback([$this, 'getUserMock'])
+        ;
+        $repositoryMock
+            ->expects($this->any())
+            ->method('findOneByUsername')
             ->willReturnCallback([$this, 'getUserMock'])
         ;
         return $repositoryMock;

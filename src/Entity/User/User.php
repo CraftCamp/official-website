@@ -280,6 +280,17 @@ abstract class User implements UserInterface, \JsonSerializable
         }
         return $this;
     }
+    
+    /**
+     * @param array $roles
+     * @return $this
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = new ArrayCollection($roles);
+        
+        return $this;
+    }
 
     /**
      * @return array

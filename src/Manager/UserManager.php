@@ -113,6 +113,30 @@ class UserManager
         $this->em->persist($user);
         $this->em->flush();
     }
+    
+    /**
+     * @param string $username
+     * @param string $role
+     * @throws UsernameNotFoundException
+     * @throws \InvalidArgumentException
+     * @return User
+     */
+    public function promoteUser(string $username, string $role)
+    {
+        if (($user = $this->em->getRepository(User::class)->findOneByUsername($username)) === null) {
+            throw new UsernameNotFoundException();
+        }
+        $roles = [
+            'lead' => 'ROLE_LEAD',
+            'admin' => 'ROLE_ADMIN',
+        ];
+        if (!isset($roles[$role])) {
+            throw new \InvalidArgumentException();
+        }
+        $user->setRoles([$roles[$role]]);
+        $this->updateUser($user);
+        return $user;
+    }
 
     /**
      * @param string $activationHash

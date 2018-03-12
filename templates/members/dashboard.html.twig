@@ -13,7 +13,31 @@
 {% endblock %}
 
 {% block body %}
-    {{ app.user.username }}
+    <div id="dashboard">
+        <div id="profile-card" class="module">
+            <header>
+                <h3>{{ app.user.username }}</h3>
+            </header>
+            <section>
+
+            </section>
+        </div>
+        <div id="communities-card" class="module">
+            <header>
+                <h3>{{ 'communities.mine' | trans }}</h3>
+            </header>
+            <section>
+
+            </section>
+            <footer>
+                {% if is_granted('ROLE_LEAD') %}
+                    <a href="{{ path('new_community') }}" class="module-button">
+                        {{ 'communities.creation.title' | trans }}
+                    </a>
+                {% endif %}
+            </footer>
+        </div>
+    </div>
 {% endblock %}
 
 

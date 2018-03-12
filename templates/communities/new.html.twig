@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/communities.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/communities.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="creation-form" class="module">
+        <header>
+            <h3>{{ 'communities.creation.title' | trans }}</h3>
+        </header>
+        <section>
+            <form onsubmit="createCommunity(event);">
+                <div id="community-form-title">
+                    <div id="community-picture">
+                        <label for="picture">
+                            <img src="{{ asset('images/icons/add_image.svg') }}" />
+                        </label>
+                        <input id="picture" type="file" name="picture" onchange="previewPicture(event);" />
+                    </div>
+                    <div id="community-name">
+                        <input type="text" name="name" placeholder="{{ 'communities.name' | trans }}" />
+                    </div>
+                </div>
+                <button type="submit" class="module-button">
+                    {{ 'communities.creation.validate' | trans }}
+                </button>
+                <div class="form-error"></div>
+            </form>
+        </section>
+    </div>
+{% endblock %}
+
+

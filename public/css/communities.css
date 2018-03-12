@@ -1,0 +1,58 @@
+#creation-form {
+    width: 600px;
+    margin: auto;
+}
+
+#community-form-title {
+    display: flex;
+    align-items: center;
+}
+
+#community-picture > label {
+    display: block;
+    width: 96px;
+    height: 96px;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 50px;
+    border: 2px solid #08C;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out;
+    overflow: hidden;
+}
+
+#community-picture > label:hover {
+    background-color: rgba(0,0,0,0.9);
+}
+
+#community-picture > label > img {
+    width: 48px;
+    height: 48px;
+    margin-top: 26px;
+}
+
+#community-picture > label > img.preview {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+
+#community-picture input {
+    display: none;
+}
+
+#community-name {
+    margin-left: 40px;
+    flex-grow: 1;
+}
+
+#community-name input {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}

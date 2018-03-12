@@ -1,4 +1,12 @@
 ---
+
+communities:
+    name: 'Nom'
+    mine: 'Mes communautés'
+    creation:
+        title: 'Créer une communauté'
+        validate: 'Valider'
+
 homepage:
     title: 'Faire du Web votre Univers'
     description:

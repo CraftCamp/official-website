@@ -26,3 +26,6 @@ composer.lock
 ###> phpunit/phpunit ###
 /phpunit.xml
 ###< phpunit/phpunit ###
+
+public/images/uploads/*
+!public/images/uploads/.gitkeep

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @ORM\Table(name="pictures")
  * @ORM\HasLifecycleCallbacks()
  */
-class Picture
+class Picture implements \JsonSerializable
 {
     const UPLOAD_DIR = 'images/uploads';
     /**

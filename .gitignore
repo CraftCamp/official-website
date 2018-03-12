@@ -29,3 +29,4 @@ composer.lock
 
 public/images/uploads/*
 !public/images/uploads/.gitkeep
+!public/images/uploads/community-test-picture.jpeg

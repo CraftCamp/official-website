@@ -62,7 +62,7 @@ body > nav a {
 
 /*buttons*/
 .module-button {
-	width: 100px;
+    display: inline-block;
 	/* background: #27AE60;*/
     background-color: #08C;
 	font-weight: bold;

@@ -35,4 +35,14 @@ class CommunityController extends Controller
         );
         return new JsonResponse($community, 201);
     }
+    
+    /**
+     * @Route("/communities", name="communities_list", methods={"GET"})
+     */
+    public function getAllAction(CommunityManager $communityManager)
+    {
+        return $this->render('communities/list.html.twig', [
+            'communities' => $communityManager->getAll()
+        ]);
+    }
 }

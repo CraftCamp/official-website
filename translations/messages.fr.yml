@@ -1,6 +1,8 @@
 ---
 
 communities:
+    list: 'Toutes les communautés'
+    title: 'Communautés'
     name: 'Nom'
     mine: 'Mes communautés'
     creation:

@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ 'communities.creation.title' | trans }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/communities.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/communities.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="communities" class="module">
+        <header>
+            <h3>{{ 'communities.title' | trans }}</h3>
+        </header>
+        <section>
+            {% for community in communities %}
+                <a href="#" class="community">
+                    <header>
+                        <img src="{{ asset(community.picture.getWebPath()) }}"/>
+                        <h4>{{ community.name }}</h4>
+                    </header>
+                </a>
+            {% endfor %}
+        </section>
+        <footer>
+            
+        </footer>
+    </div>
+{% endblock %}
+
+

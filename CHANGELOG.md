@@ -1,3 +1,12 @@
+## [0.1.3] - 2018-03-23
+### Added
+- User promotion command
+- Community creation
+- Communities list
+
+### Changed
+- Website name
+
 ## [0.1.2] - 2018-03-09
 ### Added
 - Redirect user to project details after creation

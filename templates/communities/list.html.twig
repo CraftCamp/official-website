@@ -21,7 +21,9 @@
             {% for community in communities %}
                 <a href="#" class="community">
                     <header>
-                        <img src="{{ asset(community.picture.getWebPath()) }}"/>
+                        {% if community.picture is not null %}
+                            <img src="{{ asset(community.picture.getWebPath()) }}"/>
+                        {% endif %}
                         <h4>{{ community.name }}</h4>
                     </header>
                 </a>

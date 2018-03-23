@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}DevelopTech{% endblock %}</title>
+        <title>{% block title %}{{ 'website.name' | trans }}{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
         {% endblock %}
@@ -12,7 +12,7 @@
         {% block wrapper %}
             <nav>
                 <h1>
-                    <a href="{{ path('homepage') }}">DevelopTech</a>
+                    <a href="{{ path('homepage') }}">{{ 'website.name' | trans }}</a>
                 </h1>
                 <div>
                     <a href="{{ path('projects_list') }}">{{ 'projects.menu_item' | trans }}</a>

@@ -12,7 +12,7 @@ communities:
 homepage:
     title: 'Faire du Web votre Univers'
     description:
-        intro: 'DevelopTech est une association ayant plusieurs objectifs'
+        intro: 'CraftCamp est une association ayant plusieurs objectifs'
         rally:
             title: 'Rassembler les personnes souhaitant s''initier au secteur informatique'
             content: >
@@ -22,7 +22,7 @@ homepage:
                     que ce soit en programmation, en design, ou en gestion de projet.
                     Cependant, pour obtenir une première embauche,
                     il faut souvent justifier d'une expérience qu'il est difficile de trouver lorsqu'on débute.
-                    DevelopTech propose donc aux amateurs de se réunir pour avancer au stade suivant.
+                    CraftCamp propose donc aux amateurs de se réunir pour avancer au stade suivant.
                 </p>
             button: 'Rejoindre la communauté'
         skills:
@@ -46,16 +46,16 @@ homepage:
                     qui pourtant seraient utiles à la bonne conduite de leur activité.
                 </p>
                 <p>
-                    DevelopTech se propose d'accompagner ces entités dans leur projet
+                    CraftCamp se propose d'accompagner ces entités dans leur projet
                     et d'en assurer bénévolement la production, sous réserve que le projet soit accepté par la communauté.
-                    A tout moment, les bénéficiaires de ce bénévolat peuvent faire un don à DevelopTech ou aux contributeurs du projet.
+                    A tout moment, les bénéficiaires de ce bénévolat peuvent faire un don à CraftCamp ou aux contributeurs du projet.
                 </p>
             button: 'Proposer votre projet'
         vision:
             title: 'Voir plus loin !'
             content: > 
                 <p>
-                    Les dons perçus par DevelopTech serviront à financer la participation de la communauté à des conférences et meetups.
+                    Les dons perçus par CraftCamp serviront à financer la participation de la communauté à des conférences et meetups.
                     A terme, ces fonds pourront également servir à organiser nos propres événements, qu'il s'agisse de meetups, de hackatons et autres rassemblements.
                     Les frais engendrés par l'hébergement des différents outils de l'association seront également amortis par ces fonds.
                 </p>
@@ -115,3 +115,5 @@ users:
     login: 'Connexion'
     connect: 'Se connecter'
     
+website:
+    name: CraftCamp

@@ -6,8 +6,17 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+use App\DataFixtures\ORM\Community\LoadCommunityData;
+
 class CommunityControllerTest extends WebTestCase
 {
+    public function setUp()
+    {
+        $this->loadFixtures([
+            LoadCommunityData::class
+        ]);
+    }
+    
     public function testNewAction()
     {
         $client = $this->makeClient(true);
@@ -41,8 +50,17 @@ class CommunityControllerTest extends WebTestCase
         
         $data = json_decode($content, true);
         
-        $this->assertEquals(1, $data['id']);
+        $this->assertEquals(6, $data['id']);
         $this->assertEquals('Test', $data['name']);
         $this->assertEquals('test', $data['slug']);
+    }
+    
+    public function testGetAllAction()
+    {
+        $client = $this->makeClient();
+        $crawler = $client->request('GET', '/communities');
+        
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('Symfony', $crawler->filter('.community')->text());
     }
 }

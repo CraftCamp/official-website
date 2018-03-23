@@ -128,7 +128,7 @@ class Community implements \JsonSerializable
     /**
      * @return Picture
      */
-    public function getPicture(): Picture
+    public function getPicture(): ?Picture
     {
         return $this->picture;
     }

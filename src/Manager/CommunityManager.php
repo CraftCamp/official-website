@@ -25,7 +25,7 @@ class CommunityManager
         $this->slugger = $slugger;
     }
     
-    public function createCommunity(string $name, $picture = null)
+    public function createCommunity(string $name, $picture = null): Community
     {
         $community =
             (new Community())
@@ -42,5 +42,10 @@ class CommunityManager
         $this->em->persist($community);
         $this->em->flush($community);
         return $community;
+    }
+    
+    public function getAll()
+    {
+        return $this->em->getRepository(Community::class)->findAll();
     }
 }

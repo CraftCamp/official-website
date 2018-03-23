@@ -56,3 +56,35 @@
 	color: #2C3E50;
 	font-size: 13px;
 }
+
+#communities {
+    width: 80%;
+    margin: auto;
+}
+
+.community {
+    display: inline-block;
+    color: #08C;
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+}
+
+.community:hover {
+    color: #048;
+}
+
+.community > header {
+    text-align: center;
+}
+
+.community > header > img {
+    width: 76px;
+    height: 76px;
+    border: 2px solid #08C;
+    border-radius: 50px;
+    transition: border-color 0.2s ease-out;
+}
+
+.community:hover > header > img {
+    border: 2px solid #048;
+}

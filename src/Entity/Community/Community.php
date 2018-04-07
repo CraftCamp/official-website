@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Picture;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\Community\CommunityRepository")
  * @ORM\Table(name="communities__community")
  * @ORM\HasLifecycleCallbacks
  */

@@ -24,6 +24,14 @@ class ProjectManager
     }
     
     /**
+     * @return int
+     */
+    public function countAll()
+    {
+        return $this->em->getRepository(Project::class)->countAll();
+    }
+    
+    /**
      * @param Project $project
      * @param User $user
      * @return Membership

@@ -44,6 +44,11 @@ class CommunityManager
         return $community;
     }
     
+    public function countAll()
+    {
+        return $this->em->getRepository(Community::class)->countAll();
+    }
+    
     public function getAll()
     {
         return $this->em->getRepository(Community::class)->findAll();

@@ -31,14 +31,14 @@
 	width: 100%;
 	box-sizing: border-box;
 	font-family: montserrat;
-	color: #2C3E50;
+	color: #FF9050;
 	font-size: 13px;
 }
 /*buttons*/
 #msform .action-button {
 	width: 100px;
 	/* background: #27AE60;*/
-    background-color: #08C;
+    background-color: #FF9050;
 	font-weight: bold;
 	color: white;
 	border: 0 none;
@@ -54,8 +54,7 @@
 .fs-title {
 	font-size: 15px;
 	text-transform: uppercase;
-	color: #2C3E50;
-    color: #08C;
+	color: #FF9050;
 	margin-bottom: 10px;
 }
 .fs-subtitle {
@@ -73,7 +72,7 @@
 }
 #progressbar li {
 	list-style-type: none;
-	color: white;
+	color: #FF9050;
 	text-transform: uppercase;
 	font-size: 9px;
 	width: 33.33%;
@@ -97,7 +96,7 @@
 	content: '';
 	width: 100%;
 	height: 2px;
-	background: white;
+	background: #EFEFEF;
 	position: absolute;
 	left: -50%;
 	top: 9px;
@@ -110,7 +109,6 @@
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
-	background: #27AE60;
-    background-color: #08C;
+    background-color: #FF9050;
 	color: white;
 }

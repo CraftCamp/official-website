@@ -9,74 +9,82 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/homepage.js') }}"></script>
 {% endblock %}
 
 {% block body %}
-    <div id="presentation" class="module">
-        <header>
-            <h3>{{ 'homepage.title' | trans }}</h3>
-        </header>
-        <section>
-                <p>{{ 'homepage.description.intro' | trans }}</p>
-                <div class='tab'>
-                    <header>
-                        <div class='icon'>
-                            <img src='{{ asset('images/icons/teamwork.svg') }}' />
-                        </div>
-                        <h4>{{ 'homepage.description.rally.title' | trans }}</h4>
-                    </header>
-                    <section>
-                        {{ 'homepage.description.rally.content' | trans | raw }}
-                    </section>
-                    <footer>
-                        <a href="{{ path('member_registration') }}" class='module-button'>
-                            {{ 'homepage.description.rally.button' | trans }}
-                        </a>
-                    </footer>
-                </div>
-                <div class='tab'>
-                    <header>
-                        <div class='icon'>
-                            <img src='{{ asset('images/icons/students.svg') }}' />
-                        </div>
-                        <h4>{{ 'homepage.description.skills.title' | trans }}</h4>
-                    </header>
-                    <section>
-                        {{ 'homepage.description.skills.content' | trans | raw }}
-                    </section>
-                </div>
-                
-                <div class='tab'>
-                    <header>
-                        <div class='icon'>
-                            <img src='{{ asset('images/icons/partnership.svg') }}' />
-                        </div>
-                        <h4>{{ 'homepage.description.partners.title' | trans }}</h4>
-                    </header>
-                    <section>
-                        {{ 'homepage.description.partners.content' | trans | raw }}
-                    </section>
-                    <footer>
-                        <a href="{{ path('new_project') }}" class='module-button'>
-                            {{ 'homepage.description.partners.button' | trans }}
-                        </a>
-                    </footer>
-                </div>
-                <div class='tab'>
-                    <header>
-                        <div class='icon'>
-                            <img src='{{ asset('images/icons/meetup.svg') }}' />
-                        </div>
-                        <h4>{{ 'homepage.description.vision.title' | trans }}</h4>
-                    </header>
-                    <section>
-                        {{ 'homepage.description.vision.content' | trans | raw }}
-                    </section>
-                </div>
+    <div id="home">
+        <h1>{{ 'homepage.title' | trans | raw }}</h1>
+        <div class="image-container">
+            <img src="{{ asset('images/camping.svg') }}">
+        </div>
+        <div class="stat-container">
+            <div class="stat">
+                <span>{{ nb_camps }}</span>
+                <p>{{ 'homepage.nb_camps' | transchoice(nb_camps) }}
             </div>
+            <div class="stat">
+                <span>{{ nb_members }}</span>
+                <p>{{ 'homepage.nb_members' | transchoice(nb_members) }}
+            </div>
+            <div class="stat">
+                <span>{{ nb_projects }}</span>
+                <p>{{ 'homepage.nb_projects' | transchoice(nb_projects) }}
+            </div>
+        </div>
+    </div>
+    <div id="discover">
+        <p>{{ 'homepage.discover' | trans }}</p>
+        <button class="button" onclick="scrollToPresentation();"><i class="fas fa-lg fa-chevron-down"></i></button>
+    </div>
+    <div id="presentation">
+        <section>
+            <h2>
+                <span class="number">1.</span>
+                <span>{{ 'presentation.rally.title' | trans | raw }}</span>
+            </h2>
+            <article>
+                <section>
+                    {{ 'presentation.rally.content' | trans | raw }}
+                    <a href="{{ path('member_registration') }}" class='button'>
+                        {{ 'presentation.rally.button' | trans }}
+                    </a>
+                </section>
+                <img src="{{ asset('images/rally.jpg') }}">
+            </article>
+        </section>
+        <section>
+            <h2>
+                <span class="number">2.</span>
+                <span>{{ 'presentation.skills.title' | trans | raw }}</span>
+            </h2>
+            <article>
+                <img src="{{ asset('images/rally.jpg') }}">
+                <section>
+                    {{ 'presentation.skills.content' | trans | raw }}
+                </section>
+            </article>
+        </section>
+        <section>
+            <h2>
+                <span class="number">3.</span>
+                <span>{{ 'presentation.partners.title' | trans | raw }}</span>
+            </h2>
+            <article>
+                <section>
+                    {{ 'presentation.partners.content' | trans | raw }}
+                    <a href="{{ path('new_project') }}" class='button'>
+                        {{ 'presentation.partners.button' | trans }}
+                    </a>
+                </section>
+                <img src="{{ asset('images/rally.jpg') }}">
+            </article>
         </section>
         <footer>
-                    
+            <h2>Et puis...</h2>
+            <h3>{{ 'presentation.vision.title' | trans }}</h3>
+            {{ 'presentation.vision.content' | trans | raw }}
+            <button class="button" onclick="doScrollTo(0);"><i class="fas fa-lg fa-chevron-up"></i></button>
         </footer>
     </div>
 {% endblock %}

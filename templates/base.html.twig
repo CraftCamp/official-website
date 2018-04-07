@@ -6,20 +6,23 @@
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
         {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}" />
+        <script defer src="{{ asset('fontawesome-free-5.0.9/svg-with-js/js/fontawesome-all.min.js') }}"></script>
     </head>
     <body>
         {% block wrapper %}
             <nav>
                 <h1>
-                    <a href="{{ path('homepage') }}">{{ 'website.name' | trans }}</a>
+                    <a href="{{ path('homepage') }}">
+                        <img src="{{ asset('images/big_logo.png') }}">
+                    </a>
                 </h1>
                 <div>
                     <a href="{{ path('projects_list') }}">{{ 'projects.menu_item' | trans }}</a>
                     {% if is_granted("ROLE_USER") %}
-                        <a href="{{ path('member_dashboard') }}">{{ 'users.dashboard' | trans }}</a>
+                        <a href="{{ path('member_dashboard') }}" class="button">{{ 'users.dashboard' | trans }}</a>
                     {% else %}
-                        <a href="{{ path('login') }}">{{ 'users.login' | trans }}</a>
+                        <a href="{{ path('login') }}" class="button">{{ 'users.login' | trans }}</a>
                     {% endif %}
                 </div>
             </nav>
@@ -30,8 +33,6 @@
 
         {% block javascripts %}
             <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('js/jquery-easing.min.js') }}"></script>
         {% endblock %}
     </body>
 </html>

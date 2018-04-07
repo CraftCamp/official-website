@@ -14,7 +14,7 @@
 
 {% block body %}
     <div id="dashboard">
-        <div id="profile-card" class="module">
+        <div id="profile-card">
             <header>
                 <h3>{{ app.user.username }}</h3>
             </header>
@@ -22,7 +22,7 @@
 
             </section>
         </div>
-        <div id="communities-card" class="module">
+        <div id="communities-card">
             <header>
                 <h3>{{ 'communities.mine' | trans }}</h3>
             </header>
@@ -31,11 +31,11 @@
             </section>
             <footer>
                 {% if is_granted('ROLE_LEAD') %}
-                    <a href="{{ path('new_community') }}" class="module-button">
+                    <a href="{{ path('new_community') }}" class="button">
                         {{ 'communities.creation.title' | trans }}
                     </a>
                 {% endif %}
-                <a href="{{ path('communities_list') }}" class="module-button">
+                <a href="{{ path('communities_list') }}" class="button">
                     {{ 'communities.list' | trans }}
                 </a>
             </footer>

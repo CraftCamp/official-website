@@ -30,6 +30,10 @@ security:
 
             provider: developtech_user_provider
 
+            logout:
+                path: /logout
+                target: /
+
             form_login:
                 login_path: login
                 check_path: login

@@ -10,56 +10,60 @@ communities:
         validate: 'Valider'
 
 homepage:
-    title: 'Faire du Web votre Univers'
-    description:
-        intro: 'CraftCamp est une association ayant plusieurs objectifs'
-        rally:
-            title: 'Rassembler les personnes souhaitant s''initier au secteur informatique'
-            content: >
-                <p>
-                    Aujourd'hui, nombreuses sont les personnes qui désirent se tourner vers les métiers de l'informatique.
-                    Par le biais de cours en ligne ou par auto-formation, chacun progresse à son rythme pour consolider ses connaissances,
-                    que ce soit en programmation, en design, ou en gestion de projet.
-                    Cependant, pour obtenir une première embauche,
-                    il faut souvent justifier d'une expérience qu'il est difficile de trouver lorsqu'on débute.
-                    CraftCamp propose donc aux amateurs de se réunir pour avancer au stade suivant.
-                </p>
-            button: 'Rejoindre la communauté'
-        skills:
-            title: 'Monter en compétences ensemble'
-            content: >
-                <p>
-                    Chaque membre de l'association, qu'il/elle soit développeur en herbe, UI/UX designer, Product Owner, Scrum Master,
-                    peut venir cultiver ses compétences sur des projets non-lucratifs, en équipe.
-                    Pour cela, l'idée est de mettre en relation dans un premier temps les personnes intéressées avec des leads issus du milieu,
-                    et de travailler ensemble, en apprenant au contact des autres.
-                    Ensuite, l'association pourra participer à différents événements (conférences, meetups...) qui permettront
-                    à la communauté d'approfondir de nombreux sujets et de solidifier ses connaissances.
-                </p>
-        partners:
-            title: 'Dynamiser les associations et petites entreprises'
-            content: >
-                <p>
-                    Les projets mentionnés visent les associations, commerçants, artisans et autres petites entités.
-                    Ils consistent à leur fournir bénévolement des outils numériques leur permettant d'améliorer leur activité.
-                    Pour ces structures, il est ardu de rassembler les moyens nécessaires au financement de ces outils,
-                    qui pourtant seraient utiles à la bonne conduite de leur activité.
-                </p>
-                <p>
-                    CraftCamp se propose d'accompagner ces entités dans leur projet
-                    et d'en assurer bénévolement la production, sous réserve que le projet soit accepté par la communauté.
-                    A tout moment, les bénéficiaires de ce bénévolat peuvent faire un don à CraftCamp ou aux contributeurs du projet.
-                </p>
-            button: 'Proposer votre projet'
-        vision:
-            title: 'Voir plus loin !'
-            content: > 
-                <p>
-                    Les dons perçus par CraftCamp serviront à financer la participation de la communauté à des conférences et meetups.
-                    A terme, ces fonds pourront également servir à organiser nos propres événements, qu'il s'agisse de meetups, de hackatons et autres rassemblements.
-                    Les frais engendrés par l'hébergement des différents outils de l'association seront également amortis par ces fonds.
-                </p>
-        
+    title: 'Faire<br>du Web<br>votre<br>Univers'
+    nb_camps: 'camp|camps'
+    nb_members: 'campeur|campeurs'
+    nb_projects: 'projet|projets'
+    discover: 'Découvrir l''association'
+
+presentation:
+    rally:
+        title: 'Rassembler<br>les passions'
+        content: >
+            <p>
+                Aujourd'hui, nombreuses sont les personnes qui désirent se tourner vers les métiers de l'informatique.
+                Par le biais de cours en ligne ou par auto-formation, chacun progresse à son rythme pour consolider ses connaissances,
+                que ce soit en programmation, en design, ou en gestion de projet.
+                Cependant, pour obtenir une première embauche,
+                il faut souvent justifier d'une expérience qu'il est difficile de trouver lorsqu'on débute.
+                CraftCamp propose donc aux amateurs de se réunir pour avancer au stade suivant.
+            </p>
+        button: 'Rejoindre la communauté'
+    skills:
+        title: 'Apprendre<br>des autres'
+        content: >
+            <p>
+                Chaque membre de l'association, qu'il/elle soit développeur en herbe, UI/UX designer, Product Owner, Scrum Master,
+                peut venir cultiver ses compétences sur des projets non-lucratifs, en équipe.
+                Pour cela, l'idée est de mettre en relation dans un premier temps les personnes intéressées avec des leads issus du milieu,
+                et de travailler ensemble, en apprenant au contact des autres.
+                Ensuite, l'association pourra participer à différents événements (conférences, meetups...) qui permettront
+                à la communauté d'approfondir de nombreux sujets et de solidifier ses connaissances.
+            </p>
+    partners:
+        title: 'Dynamiser<br>les associations<br>et petites entreprises'
+        content: >
+            <p>
+                Les projets mentionnés visent les associations, commerçants, artisans et autres petites entités.
+                Ils consistent à leur fournir bénévolement des outils numériques leur permettant d'améliorer leur activité.
+                Pour ces structures, il est ardu de rassembler les moyens nécessaires au financement de ces outils,
+                qui pourtant seraient utiles à la bonne conduite de leur activité.
+            </p>
+            <p>
+                CraftCamp se propose d'accompagner ces entités dans leur projet
+                et d'en assurer bénévolement la production, sous réserve que le projet soit accepté par la communauté.
+                A tout moment, les bénéficiaires de ce bénévolat peuvent faire un don à CraftCamp ou aux contributeurs du projet.
+            </p>
+        button: 'Proposer votre projet'
+    vision:
+        title: 'Voir plus loin !'
+        content: > 
+            <p>
+                Les dons perçus par CraftCamp serviront à financer la participation de la communauté à des conférences et meetups.
+                A terme, ces fonds pourront également servir à organiser nos propres événements, qu'il s'agisse de meetups, de hackatons et autres rassemblements.
+                Les frais engendrés par l'hébergement des différents outils de l'association seront également amortis par ces fonds.
+            </p>
+
 members:
     registration:
         title: 'Rejoindre la communauté'

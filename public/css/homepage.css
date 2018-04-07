@@ -1,64 +1,192 @@
-#presentation {
+#home {
     width: 80%;
-    margin: 20px auto;
-    color: #048;
-}
-
-.tab {
-    margin: 10px 0px;
-}
-
-.tab > header {
+    margin: auto;
+    margin-top: 100px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-.tab > header > .icon {
-    display: inline-block;
-    background-color: #EFEFEF;
-    border: 2px solid #08C;
-    border-radius: 80px;
-    padding: 10px;
-    padding-bottom: 6px;
-}
-
-.tab > header > .icon > img {
-    width: 64px;
-    height: 64px;
-}
-
-
-.tab > header > h4 {
-    margin-left: 40px;
-}
-
-.tab > section > p {
-    margin-top: 10px;
-    margin-left: 120px;
-    margin-right: 120px;
-}
-
-.tab > footer {
-    margin-top: 20px;
-    margin-left: 120px;
-    margin-right: 120px;
+#home > .image-container {
+    flex-grow: 2;
+    flex-basis: 20%;
     text-align: center;
 }
 
-@media(max-width:600px) {
-    .tab > section > p {
-        margin-left: 10px;
-        margin-right: 10px;
-        text-align: justify;
-    }
-    .tab > footer {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+#home > .image-container > img {
+    width: 140px;
+}
+
+#home > h1 {
+    font-size: 5.0em;
+    font-family: Eczar;
+    color: #FFA05A;
+    flex-grow: 1;
+    flex-basis: 40%;
+}
+
+#home > .stat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-grow: 1;
+    flex-basis: 40%;
+    text-align: right;
+}
+
+#home > .stat-container > .stat {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#home > .stat-container > .stat > span {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #FFA05A;
+    color: #FFA05A;
+    border-radius: 40px;
+    font-size: 2.0em;
+    padding: 10px;
+    text-align:center;
+    font-weight: bold;
+}
+
+#home > .stat-container > .stat > p {
+    margin-left: 40px;
+    font-size: 1.6em;
+}
+
+#discover {
+    text-align: center;
+    font-weight: bold;
+}
+
+#discover > button,
+#presentation > footer > button {
+    width: 80px;
+    height: 80px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    font-size: 2.0em;
+    text-align: center;
+}
+
+#presentation > section > h2 {
+    display: flex;
+    align-items: center;
+    font-size: 4.0em;
+    color: #FFA05A;
+    font-family: Eczar;
+    margin-left: 10%;
+}
+
+#presentation > section:nth-child(even) > h2 {
+    margin-left: 20%;
+}
+
+#presentation > section > h2 > span.number {
+    font-size: 5.0em;
+    color: #AAA;
+    line-height: 100%;
+}
+
+#presentation > section > h2 > span:not(.number) {
+    padding-left: 50px;
+}
+
+#presentation > section > article {
+    display: flex;
+}
+
+#presentation > section:nth-child(even) > article {
+    margin-right: 10%;
+}
+
+#presentation > section:nth-child(odd) > article {
+    margin-left: 20%;
+}
+
+#presentation > section > article > section {
+    text-align:center;
+}
+
+#presentation > section > article > section > p {
+    text-align: justify;
+}
+#presentation > section > article > section > .button {
+    height: 40px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#presentation > section > article > img {
+    margin: 50px 100px;
+    box-shadow: 0px 0px 25px rgba(0,0,0,0.3);
+}
+
+#presentation > footer > h2 {
+    font-size: 5.0em;
+    color: #FFA05A;
+    font-family: Eczar;
+    margin-left: 10%;
+}
+
+#presentation > footer > h2 {
+    font-size: 8.0em;
+    color: #AAA;
+    line-height: 100%;
+}
+
+#presentation > footer > h3 {
+    font-size: 4.0em;
+    font-family: Eczar;
+    text-align: center;
+    color: #FF9050;
+}
+
+#presentation > footer > p {
+    width: 300px;
+    text-align: justify;
+    margin:auto;
+    margin-top: 20px;
+}
+
+#presentation > footer > button {
+    display: block;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 #login-form {
     width: 500px;
     margin:auto;
     margin-top: 40px;
+}
+
+#login-form > header {
+    text-align: center;
+    color: #FF9050;
+}
+
+#login-form > section {
+    text-align: center;
+}
+
+#login-form > section > form > input {
+    display: block;
+    height: 35px;
+    margin: 10px auto;
+    border: none;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+#login-form > section > form > input:focus {
+    border-bottom: 1px solid #FF9050;
+    color: #FF9050;
 }

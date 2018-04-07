@@ -14,7 +14,7 @@
     height: 96px;
     background-color: rgba(0,0,0,0.7);
     border-radius: 50px;
-    border: 2px solid #08C;
+    border: 2px solid #FF9050;
     cursor: pointer;
     transition: background-color 0.2s ease-out;
     overflow: hidden;
@@ -53,7 +53,7 @@
 	width: 100%;
 	box-sizing: border-box;
 	font-family: montserrat;
-	color: #2C3E50;
+	color: #FF9050;
 	font-size: 13px;
 }
 
@@ -64,13 +64,14 @@
 
 .community {
     display: inline-block;
-    color: #08C;
+    color: #FFA55A;
     text-decoration: none;
     transition: color 0.2s ease-out;
+    margin: 10px;
 }
 
 .community:hover {
-    color: #048;
+    color: #FF9050;
 }
 
 .community > header {
@@ -80,11 +81,11 @@
 .community > header > img {
     width: 76px;
     height: 76px;
-    border: 2px solid #08C;
+    border: 2px solid #FFA55A;
     border-radius: 50px;
     transition: border-color 0.2s ease-out;
 }
 
 .community:hover > header > img {
-    border: 2px solid #048;
+    border: 2px solid #FF9050;
 }

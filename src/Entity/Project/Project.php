@@ -9,7 +9,7 @@ use App\Entity\Organization;
 use Developtech\AgilityBundle\Entity\Project as ProjectModel;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\Project\ProjectRepository")
  * @ORM\Table(name="developtech_agility__projects")
  */
 class Project extends ProjectModel implements \JsonSerializable

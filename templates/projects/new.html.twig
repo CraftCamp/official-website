@@ -9,6 +9,8 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-easing.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/multiple-steps-form.js') }}"></script>
 {% endblock %}
 

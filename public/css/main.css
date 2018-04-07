@@ -1,5 +1,5 @@
 /*custom font*/
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url('https://fonts.googleapis.com/css?family=Eczar|Muli');
 /*basic reset*/
 * {margin: 0; padding: 0;}
 
@@ -9,10 +9,7 @@ html {
 
 body {
     min-height: 100%;
-	background: linear-gradient(rgba(0, 125, 225, 0.6), rgba(100, 180, 255, 0));
-    background-color: rgba(100, 180, 255, 0.4);
-    background-repeat: no-repeat;
-	font-family: montserrat, arial, verdana;
+	font-family: Muli, arial, verdana;
     margin: 0px;
 }
 
@@ -25,77 +22,37 @@ body > nav {
 
 body > nav > h1 {
     margin: 10px;
+    height: 52px;
+}
+
+body > nav > h1 > a > img {
+    max-width: 200px;
 }
 
 body > nav a {
-    color: #EFEFEF;
+    color: #000;
     text-decoration: none;
-    font-size: 1.1em;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.module {
-	background: white;
-	border: 0 none;
-	border-radius: 3px;
-	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-	padding: 20px 30px;
-}
-
-.module > header {
-    padding-bottom: 20px;
-}
-
-.module > header > h3 {
-    margin: 0px;
-    color: #08C;
-}
-
-.module > section {
-    padding-bottom: 20px;
-}
-
-.module > footer {
-    padding-top: 20px;
+    font-size: 1.2em;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
 }
 
 /*buttons*/
-.module-button {
+.button {
     display: inline-block;
-	/* background: #27AE60;*/
-    background-color: #08C;
+    background-color: #FFA05A;
 	font-weight: bold;
 	color: white;
 	border: 0 none;
 	border-radius: 1px;
 	cursor: pointer;
-	padding: 10px 5px;
+	padding: 10px 20px;
 	margin: 10px 5px;
     text-decoration: none;
+    border-radius: 50px;
+    transition: background-color 0.2s ease-out;
 }
-.module-button:hover, .module-button:focus {
-	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
-}
-
-.module > section > form {
-    text-align: center;
-}
-
-.module > section > form > input,
-.module > section > form > textarea,
-.module > section > form > select {
-	padding: 15px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	margin-bottom: 10px;
-	width: 100%;
-	box-sizing: border-box;
-	font-family: montserrat;
-	color: #2C3E50;
-	font-size: 13px;
-}
-
-.module > section > form > button {
-    width: 150px;
+.button:hover, .button:focus {
+	background-color: #FF9050;
 }

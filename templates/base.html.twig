@@ -21,6 +21,9 @@
                     <a href="{{ path('projects_list') }}">{{ 'projects.menu_item' | trans }}</a>
                     {% if is_granted("ROLE_USER") %}
                         <a href="{{ path('member_dashboard') }}" class="button">{{ 'users.dashboard' | trans }}</a>
+                        <a href="{{ path('logout') }}">
+                            <i class="fas fa-sign-out-alt fa-2x" style="color: #FFA05A;"></i>
+                        </a>
                     {% else %}
                         <a href="{{ path('login') }}" class="button">{{ 'users.login' | trans }}</a>
                     {% endif %}

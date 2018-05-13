@@ -9,6 +9,7 @@ use App\Entity\User\User;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="communities__member")
+ * @ORM\HasLifecycleCallbacks
  */
 class Member
 {
@@ -31,12 +32,15 @@ class Member
      */
     protected $joinedAt;
     
+    /**
+     * @ORM\PrePersist()
+     */
     public function prePersist()
     {
         $this->joinedAt = new \DateTime();
     }
     
-    public function setCommunity(Community $community): CommunityMember
+    public function setCommunity(Community $community): Member
     {
         $this->community = $community;
         
@@ -48,7 +52,7 @@ class Member
         return $this->community;
     }
     
-    public function setUser(User $user): CommunityMember
+    public function setUser(User $user): Member
     {
         $this->user = $user;
         
@@ -60,7 +64,7 @@ class Member
         return $this->user;
     }
     
-    public function setIsLead(bool $isLead): CommunityMember
+    public function setIsLead(bool $isLead): Member
     {
         $this->isLead = $isLead;
         
@@ -72,7 +76,7 @@ class Member
         return $this->isLead;
     }
     
-    public function setJoinedAt(\DateTime $joinedAt): CommunityMember
+    public function setJoinedAt(\DateTime $joinedAt): Member
     {
         $this->joinedAt = $joinedAt;
         

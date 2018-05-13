@@ -3,26 +3,36 @@
 namespace App\Manager\Community;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 use App\Entity\Community\Community;
 use App\Entity\Picture;
+use App\Entity\User\User;
 
 use App\Utils\Slugger;
+
+use App\Event\Community\CommunityCreationEvent;
 
 class CommunityManager
 {
     /** @var EntityManagerInterface **/
     protected $em;
+    /** @var EventDispatcherInterface **/
+    protected $eventDispatcher;
+    /** @var MemberManager **/
+    protected $memberManager;
     /** @var Slugger **/
     protected $slugger;
     
-    public function __construct(EntityManagerInterface $entityManager, Slugger $slugger)
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, MemberManager $memberManager, Slugger $slugger)
     {
         $this->em = $entityManager;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->memberManager = $memberManager;
         $this->slugger = $slugger;
     }
     
-    public function createCommunity(string $name, $picture = null): Community
+    public function createCommunity(User $founder, string $name, $picture = null): Community
     {
         $community =
             (new Community())
@@ -38,6 +48,8 @@ class CommunityManager
         }
         $this->em->persist($community);
         $this->em->flush($community);
+        $this->memberManager->createMembership($community, $founder, true, false);
+        $this->eventDispatcher->dispatch(CommunityCreationEvent::NAME, new CommunityCreationEvent($community, $founder));
         return $community;
     }
     

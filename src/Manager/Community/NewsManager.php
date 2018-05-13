@@ -23,4 +23,17 @@ class NewsManager
     {
         return $this->em->getRepository(News::class)->findByCommunity($community, ['createdAt' => 'DESC']);
     }
+    
+    public function create(Community $community, string $category, array $data): News
+    {
+        $news =
+            (new News())
+            ->setCommunity($community)
+            ->setCategory($category)
+            ->setData($data)
+        ;
+        $this->em->persist($news);
+        $this->em->flush();
+        return $news;
+    }
 }

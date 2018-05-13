@@ -35,6 +35,7 @@ class CommunityController extends Controller
     public function createAction(Request $request, CommunityManager $communityManager)
     {
         return new JsonResponse($communityManager->createCommunity(
+            $this->getUser(),
             $request->request->get('name'),
             $request->files->get('picture')
         ), 201);

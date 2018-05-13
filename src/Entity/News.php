@@ -28,9 +28,9 @@ abstract class News
      */
     protected $category;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="array")
      */
-    protected $title;
+    protected $data;
     /**
      * @ORM\Column(type="datetime")
      */
@@ -73,16 +73,16 @@ abstract class News
         return $this->category;
     }
     
-    public function setTitle(string $title): News
+    public function setData(array $data): News
     {
-        $this->title = $title;
+        $this->data = $data;
         
         return $this;
     }
     
-    public function getTitle(): string
+    public function getData(): array
     {
-        return $this->title;
+        return $this->data;
     }
     
     public function setCreatedAt(\DateTime $createdAt): News

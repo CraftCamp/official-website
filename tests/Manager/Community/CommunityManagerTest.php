@@ -2,7 +2,7 @@
 
 namespace Tests\Manager;
 
-use App\Manager\CommunityManager;
+use App\Manager\Community\CommunityManager;
 
 use App\Utils\Slugger;
 
@@ -18,7 +18,11 @@ class CommunityManagerTest extends \PHPUnit\Framework\TestCase
     
     public function setUp()
     {
-        $this->manager = new CommunityManager($this->getEntityManagerMock(), new Slugger());
+        $this->manager = new CommunityManager(
+            $this->getEntityManagerMock(),
+            $this->getEventDispatcherMock(),
+            $this->getMemberManagerMock(),
+            new Slugger());
     }
     
     public function testGetAll()
@@ -81,5 +85,35 @@ class CommunityManagerTest extends \PHPUnit\Framework\TestCase
             ->setName('React')
             ->setSlug('react')
         ];
+    }
+    
+    public function getEventDispatcherMock()
+    {
+        $eventDispatcherMock = $this
+            ->getMockBuilder(\Symfony\Component\EventDispatcher\EventDispatcherInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+        $eventDispatcherMock
+            ->expects($this->any())
+            ->method('dispatch')
+            ->willReturn(true)
+        ;
+        return $eventDispatcherMock;
+    }
+    
+    public function getMemberManagerMock()
+    {
+        $memberManagerMock = $this
+            ->getMockBuilder(\App\Manager\Community\MemberManager::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+        $memberManagerMock
+            ->expects($this->any())
+            ->method('createMembership')
+            ->willReturn(true)
+        ;
+        return $memberManagerMock;
     }
 }

@@ -35,11 +35,12 @@
         "symfony/validator": "^4.0",
         "symfony/yaml": "^4.0",
         "symfony/security-bundle": "^4.0",
-        "symfony/asset": "^4.0"
+        "symfony/asset": "^4.0",
+        "twig/extensions": "^1.5"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "liip/functional-test-bundle": "^2.0@dev",
+        "liip/functional-test-bundle": "~2.0@alpha",
         "phpunit/phpunit": "^6.0",
         "symfony/css-selector": "^4.0",
         "symfony/dotenv": "^4.0",

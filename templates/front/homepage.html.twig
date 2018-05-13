@@ -19,18 +19,18 @@
             <img src="{{ asset('images/camping.svg') }}">
         </div>
         <div class="stat-container">
-            <div class="stat">
+            <a href="{{ path('communities_list') }}" class="stat">
                 <span>{{ nb_camps }}</span>
-                <p>{{ 'homepage.nb_camps' | transchoice(nb_camps) }}
-            </div>
-            <div class="stat">
+                <p>{{ 'homepage.nb_camps' | transchoice(nb_camps) }}</p>
+            </a>
+            <a href="#" class="stat">
                 <span>{{ nb_members }}</span>
-                <p>{{ 'homepage.nb_members' | transchoice(nb_members) }}
-            </div>
-            <div class="stat">
+                <p>{{ 'homepage.nb_members' | transchoice(nb_members) }}</p>
+            </a>
+            <a href="{{ path('projects_list') }}" class="stat">
                 <span>{{ nb_projects }}</span>
-                <p>{{ 'homepage.nb_projects' | transchoice(nb_projects) }}
-            </div>
+                <p>{{ 'homepage.nb_projects' | transchoice(nb_projects) }}</p>
+            </a>
         </div>
     </div>
     <div id="discover">

@@ -10,6 +10,6 @@ class FrontControllerTest extends WebTestCase {
         $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('DevelopTech', $crawler->filter('body > nav')->text());
+        $this->assertContains('Projets', $crawler->filter('body > nav')->text());
     }
 }

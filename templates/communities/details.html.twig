@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ community.name }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/communities.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/communities.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="community" class="module">
+        <header>
+            <h1>
+                <img src="{{ asset(community.picture.getWebPath()) }}"/>
+                {{ community.name }}
+            </h1>
+        </header>
+        <section>
+            <div>
+                <h3>{{ 'communities.news.title' | trans }}</h3>
+                {% for new in news %}
+                    <div class="news">
+                        {{ new | news_icon('fa-2x') }}
+                        <div>
+                            <p>{{ ('communities.news.' ~ new.category) | trans(new.data) }}</p>
+                            <span>{{ new.createdAt | date('website.full_date' | trans) }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                <div id="members">
+                    <header>
+                        <h3>{{ 'communities.members' | trans }}</h3>
+                    </header>
+                    <section>
+                        {% for member in members %}
+                            <div class="member">
+                                <header>
+
+                                </header>
+                                <section>
+                                    {{ member.user.username }}
+                                </section>
+                            </div>
+                        {% endfor %}
+                    </section>
+                    <footer></footer>
+                </div>
+                <div id="projects">
+                    <header>
+                        <h3>{{ 'communities.projects' | trans }}</h3>
+                    </header>
+                    <section>
+                        {% for project in projects %}
+                            <div class="project">
+                                <header></header>
+                                <section>
+                                    {{ project.name }}
+                                </section>
+                            </div>
+                        {% endfor %}
+                    </section>
+                    <footer></footer>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+

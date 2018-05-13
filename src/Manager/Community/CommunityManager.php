@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Manager;
+namespace App\Manager\Community;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -16,9 +16,6 @@ class CommunityManager
     /** @var Slugger **/
     protected $slugger;
     
-    /**
-     * @param EntityManagerInterface $entityManager
-     */
     public function __construct(EntityManagerInterface $entityManager, Slugger $slugger)
     {
         $this->em = $entityManager;
@@ -44,13 +41,18 @@ class CommunityManager
         return $community;
     }
     
-    public function countAll()
+    public function countAll(): int
     {
         return $this->em->getRepository(Community::class)->countAll();
     }
     
-    public function getAll()
+    public function getAll(): array
     {
         return $this->em->getRepository(Community::class)->findAll();
+    }
+    
+    public function get(string $slug): Community
+    {
+        return $this->em->getRepository(Community::class)->findOneBySlug($slug);
     }
 }

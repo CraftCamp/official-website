@@ -17,6 +17,7 @@ class News extends NewsModel
      */
     protected $community;
     
+    const CATEGORY_COMMUNITY_CREATION = 'community_creation';
     const CATEGORY_NEW_MEMBER = 'new_member';
     const CATEGORY_NEW_PROJECT = 'new_project';
     

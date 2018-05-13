@@ -7,7 +7,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\Project\Project;
-use App\Entity\Project\Membership;
+use App\Entity\Project\Member;
 use App\Entity\User\User;
 
 class ProjectManager
@@ -15,34 +15,23 @@ class ProjectManager
     /** @var EntityManagerInterface **/
     protected $em;
     
-    /**
-     * @param EntityManagerInterface $em
-     */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
     }
     
-    /**
-     * @return int
-     */
-    public function countAll()
+    public function countAll(): int
     {
         return $this->em->getRepository(Project::class)->countAll();
     }
     
-    /**
-     * @param Project $project
-     * @param User $user
-     * @return Membership
-     */
-    public function joinProject(Project $project, User $user)
+    public function joinProject(Project $project, User $user): Member
     {
-        if ($this->getProjectMembership($project, $user) !== null) {
+        if ($this->getProjectMember($project, $user) !== null) {
             throw new BadRequestHttpException('projects.already_joined');
         }
         $membership =
-            (new Membership())
+            (new Member())
             ->setUser($user)
             ->setProject($project)
             ->setIsActive(true)
@@ -52,23 +41,14 @@ class ProjectManager
         return $membership;
     }
     
-    /**
-     * @param Project $project
-     * @return array
-     */
-    public function getProjectMembers(Project $project)
+    public function getProjectMembers(Project $project): array
     {
-        return $this->em->getRepository(Membership::class)->findByProject($project);
+        return $this->em->getRepository(Member::class)->findByProject($project);
     }
     
-    /**
-     * @param Project $project
-     * @param User $user
-     * @return Membership
-     */
-    public function getProjectMembership(Project $project, User $user)
+    public function getProjectMember(Project $project, User $user): ?Member
     {
-        return $this->em->getRepository(Membership::class)->findOneBy([
+        return $this->em->getRepository(Member::class)->findOneBy([
             'project' => $project,
             'user' => $user
         ]);

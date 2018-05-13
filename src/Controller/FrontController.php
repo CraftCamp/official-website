@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use App\Manager\CommunityManager;
+use App\Manager\Community\CommunityManager;
 use App\Manager\MemberManager;
 use App\Manager\ProjectManager;
 

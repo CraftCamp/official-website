@@ -95,7 +95,7 @@ class ProjectController extends Controller
         return $this->render('projects/details.html.twig', [
             'project' => $project,
             'members' => $projectManager->getProjectMembers($project),
-            'membership' => ($this->isGranted('ROLE_USER')) ? $projectManager->getProjectMembership($project, $this->getUser()) : null
+            'membership' => ($this->isGranted('ROLE_USER')) ? $projectManager->getProjectMember($project, $this->getUser()) : null
         ]);
     }
     

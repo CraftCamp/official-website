@@ -10,7 +10,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-use App\Manager\CommunityManager;
+use App\Manager\Community\{
+    CommunityManager,
+    MemberManager,
+    NewsManager,
+    ProjectManager
+};
 
 class CommunityController extends Controller
 {
@@ -29,11 +34,10 @@ class CommunityController extends Controller
      */
     public function createAction(Request $request, CommunityManager $communityManager)
     {
-        $community = $communityManager->createCommunity(
+        return new JsonResponse($communityManager->createCommunity(
             $request->request->get('name'),
             $request->files->get('picture')
-        );
-        return new JsonResponse($community, 201);
+        ), 201);
     }
     
     /**
@@ -43,6 +47,20 @@ class CommunityController extends Controller
     {
         return $this->render('communities/list.html.twig', [
             'communities' => $communityManager->getAll()
+        ]);
+    }
+
+    /**
+     * @Route("/communities/{slug}", name="community_details", methods={"GET"})
+     */
+    public function getAction(string $slug, CommunityManager $communityManager, MemberManager $memberManager, NewsManager $newsManager, ProjectManager $projectManager)
+    {
+        $community = $communityManager->get($slug);
+        return $this->render('communities/details.html.twig', [
+            'community' => $community,
+            'members' => $memberManager->getCommunityMembers($community),
+            'news' => $newsManager->getCommunityNews($community),
+            'projects' => $projectManager->getCommunityProjects($community),
         ]);
     }
 }

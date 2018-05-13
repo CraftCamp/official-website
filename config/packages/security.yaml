@@ -25,7 +25,7 @@ security:
 
             # activate different ways to authenticate
 
-            # http_basic: true
+            http_basic: ~
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
             provider: developtech_user_provider

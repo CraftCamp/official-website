@@ -6,14 +6,20 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+use App\DataFixtures\ORM\LoadOrganizationData;
 use App\DataFixtures\ORM\Community\LoadCommunityData;
+use App\DataFixtures\ORM\User\LoadActivationLinkData;
+use App\DataFixtures\ORM\User\LoadProductOwnerData;
 
 class CommunityControllerTest extends WebTestCase
 {
     public function setUp()
     {
         $this->loadFixtures([
-            LoadCommunityData::class
+            LoadActivationLinkData::class,
+            LoadOrganizationData::class,
+            LoadProductOwnerData::class,
+            LoadCommunityData::class,
         ]);
     }
     

@@ -7,7 +7,7 @@ use App\Manager\ProjectManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
-use App\Entity\Project\Membership;
+use App\Entity\Project\Member;
 use App\Entity\Project\Project;
 use App\Entity\User\ProductOwner;
 
@@ -25,7 +25,7 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
     {
         $membership = $this->manager->joinProject((new Project())->setId(1), (new ProductOwner())->setId(1));
         
-        $this->assertInstanceOf(Membership::class, $membership);
+        $this->assertInstanceOf(Member::class, $membership);
         $this->assertInstanceOf(Project::class, $membership->getProject());
         $this->assertInstanceOf(ProductOwner::class, $membership->getUser());
         $this->assertTrue($membership->getIsActive());
@@ -45,11 +45,11 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(2, $this->manager->getProjectMembers((new Project())->setId(1)));
     }
     
-    public function testGetProjectMembership()
+    public function testGetProjectMember()
     {
-        $membership = $this->manager->getProjectMembership((new Project())->setId(2), (new ProductOwner())->setId(1));
+        $membership = $this->manager->getProjectMember((new Project())->setId(2), (new ProductOwner())->setId(1));
         
-        $this->assertInstanceOf(Membership::class, $membership);
+        $this->assertInstanceOf(Member::class, $membership);
     }
     
     public function getEntityManagerMock()
@@ -88,23 +88,23 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
         $repositoryMock
             ->expects($this->any())
             ->method('findOneBy')
-            ->willReturnCallback([$this, 'getMembershipMock'])
+            ->willReturnCallback([$this, 'getMemberMock'])
         ;
         $repositoryMock
             ->expects($this->any())
             ->method('findByProject')
-            ->willReturnCallback([$this, 'getMembershipsMock'])
+            ->willReturnCallback([$this, 'getMembersMock'])
         ;
         return $repositoryMock;
     }
     
-    public function getMembershipMock($criterias)
+    public function getMemberMock($criterias)
     {
         if ($criterias['project']->getId() === 1) {
             return null;
         }
         return
-            (new Membership())
+            (new Member())
             ->setProject($criterias['project'])
             ->setUser($criterias['user'])
             ->setCreatedAt(new \DateTime())
@@ -113,16 +113,16 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
         ;
     }
     
-    public function getMembershipsMock(Project $project)
+    public function getMembersMock(Project $project)
     {
         return [
             
-            (new Membership())
+            (new Member())
             ->setProject($project)
             ->setCreatedAt(new \DateTime())
             ->setUpatedAt(new \DateTime())
             ->setIsActive(true),
-            (new Membership())
+            (new Member())
             ->setProject($project)
             ->setCreatedAt(new \DateTime())
             ->setUpatedAt(new \DateTime())

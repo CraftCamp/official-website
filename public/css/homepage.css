@@ -40,6 +40,8 @@
     align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    text-decoration: none;
+    color: #000;
 }
 
 #home > .stat-container > .stat > span {

@@ -8,6 +8,13 @@ communities:
     creation:
         title: 'Créer une communauté'
         validate: 'Valider'
+    members: 'Membres'
+    projects: 'Projets'
+    news:
+        title: 'Dernières actualités'
+        community_creation: '%username% a créé la communauté'
+        new_member: '%username% a rejoint la communauté !'
+        new_project: 'La communauté a rejoint le projet %project%'
 
 homepage:
     title: 'Faire<br>du Web<br>votre<br>Univers'
@@ -120,4 +127,6 @@ users:
     connect: 'Se connecter'
     
 website:
+    full_date: 'd/m/Y à H:i'
+    date: 'd/m/y'
     name: CraftCamp

@@ -78,7 +78,9 @@
     text-align: center;
 }
 
-.community > header > img {
+.community > header > img,
+#community > header > h1 > img 
+{
     width: 76px;
     height: 76px;
     border: 2px solid #FFA55A;
@@ -88,4 +90,50 @@
 
 .community:hover > header > img {
     border: 2px solid #FF9050;
+}
+
+#community {
+    width: 90%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+#community > header > h1 {
+    display: flex;
+    align-items: center;
+}
+
+#community > header > h1 > img {
+    margin-right: 20px;
+}
+
+#community > section {
+    display: flex;
+    justify-content: space-around;
+}
+
+#community h3 {
+    color: #FF9050;
+    font-family: Eczar;
+}
+
+#community .news {
+    display: flex;
+    align-items: center;
+    margin: 20px 0px;
+}
+
+#community .news > svg {
+    width: 60px;
+    text-align: center;
+    margin-right: 20px;
+    color: #ccc;
+}
+
+#community .news > div {
+    font-size: 1.2em;
+}
+
+#community .news > div > span {
+    color: #ccc;
 }

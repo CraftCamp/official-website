@@ -11,7 +11,7 @@ use App\Entity\User\User;
  * @ORM\Table(name="project__members")
  * @ORM\HasLifecycleCallbacks
  */
-class Membership implements \JsonSerializable
+class Member implements \JsonSerializable
 {
     /**
      * @var User

@@ -10,7 +10,7 @@ use App\Entity\User\User;
  * @ORM\Entity()
  * @ORM\Table(name="communities__member")
  */
-class CommunityMember
+class Member
 {
     /**
      * @ORM\Id

@@ -4,14 +4,14 @@ namespace App\Entity\Community;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Entity\Project\Project;
+use App\Entity\Project\Project as ProjectModel;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="communities__project")
  * @ORM\HasLifecycleCallbacks
  */
-class CommunityProject
+class Project
 {
     /**
      * @ORM\Id
@@ -28,7 +28,7 @@ class CommunityProject
      */
     protected $joinedAt;
     
-    public function setCommunity(Community $community): CommunityProject
+    public function setCommunity(Community $community): Project
     {
         $this->community = $community;
         
@@ -40,19 +40,19 @@ class CommunityProject
         return $this->community;
     }
     
-    public function setProject(Project $project): CommunityProject
+    public function setProject(ProjectModel $project): Project
     {
         $this->project = $project;
         
         return $this;
     }
     
-    public function getProject(): Project
+    public function getProject(): ProjectModel
     {
         return $this->project;
     }
     
-    public function setJoinedAt(\DateTime $joinedAt): CommunityProject
+    public function setJoinedAt(\DateTime $joinedAt): Project
     {
         $this->joinedAt = $joinedAt;
         

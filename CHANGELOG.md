@@ -1,3 +1,15 @@
+## [0.1.4] - 2018-05-14
+### Added
+- New design chart
+- New homepage desktop template
+- Logout button
+- Community news feed
+- Community members and projects model
+- Community details page
+
+### Changed
+- Community's founder is now registered as the community's lead
+
 ## [0.1.3] - 2018-03-23
 ### Added
 - User promotion command

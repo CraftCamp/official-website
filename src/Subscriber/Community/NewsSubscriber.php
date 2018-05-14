@@ -34,14 +34,14 @@ class NewsSubscriber implements EventSubscriberInterface
     public function onCommunityCreation(CommunityCreationEvent $event)
     {
         $this->newsManager->create($event->getCommunity(), News::CATEGORY_COMMUNITY_CREATION, [
-            'username' => $event->getFounder()->getUsername()
+            '%username%' => $event->getFounder()->getUsername()
         ]);
     }
     
     public function onNewMember(NewMemberEvent $event)
     {
         $this->newsManager->create($event->getCommunity(), News::CATEGORY_NEW_MEMBER, [
-            'username' => $event->getUser()->getUsername()
+            '%username%' => $event->getUser()->getUsername()
         ]);
     }
 }

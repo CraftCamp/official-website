@@ -20,6 +20,7 @@ use App\Manager\UserManager;
 use App\Security\Authentication\AuthenticationManager;
 
 use App\Manager\ProjectManager;
+use App\Manager\Project\NewsManager;
 
 class ProjectController extends Controller
 {
@@ -75,7 +76,7 @@ class ProjectController extends Controller
                 }
             }
             $this->get('developtech_agility.project_manager')->createProject($project, $request->request->get('repository', []));
-            $this->get(ProjectManager::class)->joinProject($project, $productOwner);
+            $this->get(ProjectManager::class)->joinProject($project, $productOwner, false);
             $this->get(AuthenticationManager::class)->authenticate($request, $productOwner);
 			$connection->commit();
 			return new JsonResponse($project, 201);
@@ -88,12 +89,13 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{slug}", name="project_details", methods={"GET"})
      */
-    public function getAction(Request $request, ProjectManager $projectManager)
+    public function getAction(Request $request, ProjectManager $projectManager, NewsManager $newsManager)
     {
         $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
         
         return $this->render('projects/details.html.twig', [
             'project' => $project,
+            'news' => $newsManager->getProjectNews($project),
             'members' => $projectManager->getProjectMembers($project),
             'membership' => ($this->isGranted('ROLE_USER')) ? $projectManager->getProjectMember($project, $this->getUser()) : null
         ]);

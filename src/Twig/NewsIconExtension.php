@@ -32,6 +32,7 @@ class NewsIconExtension extends AbstractExtension
             case CommunityNews::CATEGORY_NEW_MEMBER: return 'fas fa-user-plus';
             case CommunityNews::CATEGORY_NEW_PROJECT: return 'fas fa-paper-plane';
             case ProjectNews::CATEGORY_NEW_COMMUNITY: return 'fas fa-users';
+            case ProjectNews::CATEGORY_NEW_MEMBER: return 'fas fa-user-plus';
             case ProjectNews::CATEGORY_NEW_RELEASE: return 'fas fa-rocket';
             case ProjectNews::CATEGORY_NEW_REPOSITORY: return 'fas fa-cogs';
         }

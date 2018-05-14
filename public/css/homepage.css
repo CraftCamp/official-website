@@ -112,6 +112,8 @@
 }
 
 #presentation > section > article > section {
+    min-width: 400px;
+    max-width: 400px;
     text-align:center;
 }
 
@@ -171,9 +173,11 @@
     margin-top: 40px;
 }
 
-#login-form > header {
+#login-form > header > h3 {
     text-align: center;
     color: #FF9050;
+    font-family: Eczar;
+    font-size: 2.0em;
 }
 
 #login-form > section {

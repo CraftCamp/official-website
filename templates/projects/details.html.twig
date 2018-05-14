@@ -14,16 +14,28 @@
 
 {% block body %}
     <div id="project-container">
-        <div id="project" class="module">
+        <div id="project">
             <header>
-                <h3>{{ project.name }}</h3>
+                <h1>{{ project.name }}</h1>
+                <p>{{ project.description }}</p>
             </header>
             <section>
-                <p>{{ project.description }}</p>
+                <div>
+                    <h3>{{ 'projects.news.title' | trans }}</h3>
+                    {% for new in news %}
+                        <div class="news">
+                            {{ new | news_icon('fa-2x') }}
+                            <div>
+                                <p>{{ ('projects.news.' ~ new.category) | trans(new.data) }}</p>
+                                <span>{{ new.createdAt | date('website.full_date' | trans) }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </section>
         </div>
         <div id="project-infos">
-            <div id="project-owner" class="module">
+            <div id="project-owner">
                 <header>
                     <h3>{{ 'projects.product_owner' | trans }}</h3>
                     <h4>{{ project.productOwner.username }}</h4>
@@ -36,7 +48,7 @@
                     {% endif %}
                 </section>
             </div>
-            <div id="project-members" class="module">
+            <div id="project-members">
                 <header>
                     <h3>{{ 'projects.members' | trans }}</h3>
                 </header>

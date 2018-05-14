@@ -18,7 +18,10 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
     
     public function setUp()
     {
-        $this->manager = new ProjectManager($this->getEntityManagerMock());
+        $this->manager = new ProjectManager(
+            $this->getEntityManagerMock(),
+            $this->getEventDispatcherMock()
+        );
     }
     
     public function testJoinProject()
@@ -116,7 +119,6 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
     public function getMembersMock(Project $project)
     {
         return [
-            
             (new Member())
             ->setProject($project)
             ->setCreatedAt(new \DateTime())
@@ -128,5 +130,20 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
             ->setUpatedAt(new \DateTime())
             ->setIsActive(true)
         ];
+    }
+    
+    public function getEventDispatcherMock()
+    {
+        $eventDispatcherMock = $this
+            ->getMockBuilder(\Symfony\Component\EventDispatcher\EventDispatcherInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+        $eventDispatcherMock
+            ->expects($this->any())
+            ->method('dispatch')
+            ->willReturn(true)
+        ;
+        return $eventDispatcherMock;
     }
 }

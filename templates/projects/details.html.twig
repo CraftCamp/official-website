@@ -48,8 +48,8 @@
                     {% endfor %}
                 </section>
                 <footer>
-                    {% if membership is null %}
-                        <button id="join-button" onclick="joinProject('{{ project.slug }}');" class="module-button">
+                    {% if membership is null and app.user is not null %}
+                        <button id="join-button" onclick="joinProject('{{ project.slug }}');" class="button">
                             Rejoindre
                         </button>
                     {% endif %}

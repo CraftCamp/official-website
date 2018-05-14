@@ -1,3 +1,13 @@
+## [0.1.5] - 2018-05-14
+### Added
+- Project news feed
+
+### Fixed
+- Homepage presentation pictures
+- Community news data
+- Join button in project details template
+- Login and registration form design
+
 ## [0.1.4] - 2018-05-14
 ### Added
 - New design chart

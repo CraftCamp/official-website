@@ -49,6 +49,10 @@ services:
     App\Subscriber\Community\NewsSubscriber:
         tags:
             - {name: kernel.event_subscriber}
+            
+    App\Subscriber\Project\NewsSubscriber:
+        tags:
+            - {name: kernel.event_subscriber}
 
     App\Subscriber\JsonRequestSubscriber:
         tags:

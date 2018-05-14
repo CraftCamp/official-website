@@ -31,7 +31,7 @@ presentation:
                 Aujourd'hui, nombreuses sont les personnes qui désirent se tourner vers les métiers de l'informatique.
                 Par le biais de cours en ligne ou par auto-formation, chacun progresse à son rythme pour consolider ses connaissances,
                 que ce soit en programmation, en design, ou en gestion de projet.
-                Cependant, pour obtenir une première embauche,
+                Mais, pour obtenir une première embauche,
                 il faut souvent justifier d'une expérience qu'il est difficile de trouver lorsqu'on débute.
                 CraftCamp propose donc aux amateurs de se réunir pour avancer au stade suivant.
             </p>
@@ -40,7 +40,7 @@ presentation:
         title: 'Apprendre<br>des autres'
         content: >
             <p>
-                Chaque membre de l'association, qu'il/elle soit développeur en herbe, UI/UX designer, Product Owner, Scrum Master,
+                Chaque membre de l'association, qu'il/elle soit développeur(se) en herbe, UI/UX designer, Product Owner, Scrum Master,
                 peut venir cultiver ses compétences sur des projets non-lucratifs, en équipe.
                 Pour cela, l'idée est de mettre en relation dans un premier temps les personnes intéressées avec des leads issus du milieu,
                 et de travailler ensemble, en apprenant au contact des autres.
@@ -103,6 +103,12 @@ projects:
     product_owner: 'Product Owner'
     missing_product_owner: 'Vous devez avoir créé un compte pour créer un projet'
     members: 'Membres'
+    news:
+        title: 'Dernières actualités'
+        new_community: 'La communauté %name% a rejoint le projet !'
+        new_member: '%username% a rejoint le projet !'
+        new_release: 'La version %version% est sortie !'
+        new_repository: 'Le dépôt %name% a été créé'
 
 organizations:
     title: 'Votre organisation'

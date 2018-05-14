@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block body %}
-    <div id="registration" class="module">
+    <div id="registration">
         <header>
             <h3>{{ 'members.registration.title' | trans }}</h3>
         </header>
@@ -23,7 +23,7 @@
                 <input type="text" name="email" placeholder="{{ 'users.email' | trans }}" />
                 <input type="password" name="password" placeholder="{{ 'users.plainPassword.first' | trans }}" />
                 <input type="password" name="password_confirmation" placeholder="{{ 'users.plainPassword.second' | trans }}" />
-                <button type="submit" class="module-button">
+                <button type="submit" class="button">
                     {{ 'members.registration.validate' | trans }}
                 </button>
                 <div class="form-error"></div>

@@ -1,6 +1,31 @@
 #registration {
     width: 600px;
     margin:auto;
+    margin-top: 50px;
+}
+
+#registration > header > h3 {
+    color: #FFA05A;
+    font-family: Eczar;
+    text-align: center;
+    font-size: 2.0em;
+}
+
+#registration > section > form {
+    
+}
+
+#registration > section > form > input {
+    display: block;
+    height: 35px;
+    margin: 10px auto;
+    border: none;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+#registration > section > form > .button {
+    display: block;
+    margin: auto;
     margin-top: 20px;
 }
 

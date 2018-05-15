@@ -31,6 +31,10 @@ services:
         resource: '../src/Manager'
         public: true
         
+    App\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+        
     App\Utils\:
         resource: '../src/Utils'
         public: true

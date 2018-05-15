@@ -32,6 +32,11 @@ class MemberManager
         return $this->em->getRepository(Member::class)->findByCommunity($community);
     }
     
+    public function getMemberCommunities(User $user): array
+    {
+        return $this->em->getRepository(Member::class)->findByUser($user);
+    }
+    
     public function createMembership(Community $community, User $user, bool $isLead = false, bool $isNews = true): Member
     {
         $membership =

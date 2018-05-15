@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Manager;
+namespace Tests\Manager\Community;
 
 use App\Manager\Community\CommunityManager;
 

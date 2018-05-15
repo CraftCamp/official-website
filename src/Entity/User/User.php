@@ -117,6 +117,8 @@ abstract class User implements UserInterface, \JsonSerializable
     const TYPE_PRODUCT_OWNER = 'PO';
     const TYPE_BETA_TESTER = 'BT';
 
+    abstract public function getType(): string;
+    
     /**
      * @ORM\PrePersist()
      */
@@ -443,6 +445,9 @@ abstract class User implements UserInterface, \JsonSerializable
         return  [
             'id' => $this->id,
             'username' => $this->username,
+            'type' => $this->getType(),
+            'organizations' => $this->organizations,
+            'roles' => $this->roles,
             'is_enabled' => $this->isEnabled,
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt

@@ -2,8 +2,6 @@
 
 namespace App\Entity\User;
 
-use App\Entity\Organization;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,4 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProductOwner extends User
 {
+    public function getType(): string
+    {
+        return self::TYPE_PRODUCT_OWNER;
+    }
 }

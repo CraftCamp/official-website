@@ -10,5 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Member extends User
 {
-
+    public function getType(): string
+    {
+        return self::TYPE_MEMBER;
+    }
 }

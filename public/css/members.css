@@ -45,3 +45,33 @@
     width: 300px;
     margin-top: 40px;
 }
+
+.community {
+    display: inline-block;
+    color: #FFA55A;
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+    margin: 10px;
+}
+
+.community:hover {
+    color: #FF9050;
+}
+
+.community > header {
+    text-align: center;
+}
+
+.community > header > img,
+#community > header > h1 > img 
+{
+    width: 76px;
+    height: 76px;
+    border: 2px solid #FFA55A;
+    border-radius: 50px;
+    transition: border-color 0.2s ease-out;
+}
+
+.community:hover > header > img {
+    border: 2px solid #FF9050;
+}

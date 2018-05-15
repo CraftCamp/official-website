@@ -14,15 +14,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use App\Security\Authentication\AuthenticationManager;
 
+use App\Manager\Community\MemberManager as CommunityMemberManager;
+
 class MemberController extends Controller
 {
     /**
      * @Route("/members/dashboard", name="member_dashboard", methods={"GET"})
      * @IsGranted("ROLE_USER")
      */
-    public function dashboardAction()
+    public function dashboardAction(CommunityMemberManager $communityMemberManager)
     {
-        return $this->render('members/dashboard.html.twig');
+        return $this->render('members/dashboard.html.twig', [
+            'communities' => $communityMemberManager->getMemberCommunities($this->getUser()),
+        ]);
     }
     
     /**

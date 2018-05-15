@@ -27,7 +27,17 @@
                 <h3>{{ 'communities.mine' | trans }}</h3>
             </header>
             <section>
-
+                {% for communityMembership in communities %}
+                    {% set community = communityMembership.community %}
+                    <a href="{{ path('community_details', {"slug": community.slug}) }}" class="community">
+                        <header>
+                            {% if community.picture is not null %}
+                                <img src="{{ asset(community.picture.getWebPath()) }}"/>
+                            {% endif %}
+                            <h4>{{ community.name }}</h4>
+                        </header>
+                    </a>
+                {% endfor %}
             </section>
             <footer>
                 {% if is_granted('ROLE_LEAD') %}

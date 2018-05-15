@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -20,10 +19,10 @@ class MemberController extends Controller
 {
     /**
      * @Route("/members/dashboard", name="member_dashboard", methods={"GET"})
-     * @IsGranted("ROLE_USER")
      */
     public function dashboardAction(CommunityMemberManager $communityMemberManager)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('members/dashboard.html.twig', [
             'communities' => $communityMemberManager->getMemberCommunities($this->getUser()),
         ]);
@@ -40,14 +39,11 @@ class MemberController extends Controller
     /**
      * @Route("/members", name="member_creation", methods={"POST"})
      */
-    public function createMember(Request $request)
+    public function createMember(Request $request, UserManager $userManager, AuthenticationManager $authenticationManager)
     {
-        $member = $this->get(UserManager::class)->createUser(
-            $request->request->all(),
-            Member::TYPE_MEMBER
-        );
+        $member = $userManager->createUser($request->request->all(), Member::TYPE_MEMBER);
         
-        $this->get(AuthenticationManager::class)->authenticate($request, $member);
+        $authenticationManager->authenticate($request, $member);
         
         return new JsonResponse($member, 201);
     }

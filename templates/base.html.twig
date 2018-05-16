@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{{ 'website.name' | trans }}{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
@@ -32,6 +33,41 @@
             {% block body %}
 
             {% endblock %}
+            <nav id="bottom-menu">
+                {% if is_granted("ROLE_USER") %}
+                    <a href="{{ path('member_dashboard') }}">
+                        <i class="fas fa-user fa-2x"></i>
+                        {{ 'users.dashboard' | trans }}
+                    </a>
+                {% else %}
+                    <a href="{{ path('login') }}">
+                        <i class="fas fa-user fa-2x"></i>
+                        {{ 'users.login' | trans }}
+                    </a>
+                {% endif %}
+                <a href="{{ path('projects_list') }}">
+                    <i class="fas fa-briefcase fa-2x"></i>
+                    {{ 'projects.menu_item' | trans }}
+                </a>
+                <a href="{{ path('communities_list') }}">
+                    <i>
+                        <img src='{{ asset('images/icons/camping-tent.svg') }}' />
+                    </i>
+                    Camps
+                </a>
+                    
+                {% if is_granted("ROLE_USER") %}
+                    <a href="{{ path('logout') }}">
+                        <i class="fas fa-sign-out-alt fa-2x"></i>
+                        Déconnexion
+                    </a>
+                {% else %}
+                    <a href="{{ path('new_member') }}">
+                        <i class="fas fa-sign-in-alt fa-2x"></i>
+                        S'inscrire
+                    </a>
+                {% endif %}
+            </nav>
         {% endblock %}
 
         {% block javascripts %}

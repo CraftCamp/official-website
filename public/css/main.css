@@ -17,7 +17,6 @@ body > nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 40px;
 }
 
 body > nav > h1 {
@@ -32,6 +31,7 @@ body > nav > h1 > a > img {
 body > nav > div {
     display: flex;
     align-items: center;
+    margin-right: 40px;
 }
 
 body > nav > div > a {
@@ -61,4 +61,50 @@ body > nav > div > a {
 }
 .button:hover, .button:focus {
 	background-color: #FF9050;
+}
+
+#bottom-menu {
+    display: none;
+}
+
+@media (max-width: 400px) {
+    body {
+        margin-bottom: 100px;
+    }
+    body > nav > h1 {
+        margin: auto;
+        margin-top: 10px;
+    }
+    body > nav > div {
+        display: none;
+    }
+    #bottom-menu {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0px;
+        background: #FF9050;
+        z-index: 1000;
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.8);
+    }
+    #bottom-menu > a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        color: #FFF;
+        font-size: 1.1em;
+    }
+    #bottom-menu > a > i,
+    #bottom-menu > a > i > img {
+        width: 36px;
+        height: 36px;
+    }
+    .sf-minitoolbar {
+        display: none !important;
+    }
 }

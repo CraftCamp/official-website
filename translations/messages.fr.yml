@@ -17,7 +17,7 @@ communities:
         new_project: 'La communauté a rejoint le projet %project%'
 
 homepage:
-    title: 'Faire<br>du Web<br>votre<br>Univers'
+    title: 'Faire <br>du Web <br>votre <br>Univers'
     nb_camps: 'camp|camps'
     nb_members: 'campeur|campeurs'
     nb_projects: 'projet|projets'

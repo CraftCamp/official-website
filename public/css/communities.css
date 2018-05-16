@@ -3,6 +3,18 @@
     margin: auto;
 }
 
+#creation-form > header > h3 {
+    font-size: 1.5em;
+    font-family: Eczar;
+    color: #FF9050;
+}
+
+#creation-form > section > form > .button {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
 #community-form-title {
     display: flex;
     align-items: center;
@@ -28,6 +40,7 @@
     width: 48px;
     height: 48px;
     margin-top: 26px;
+    margin-left: 24px;
 }
 
 #community-picture > label > img.preview {
@@ -172,5 +185,24 @@
     #community > section h3 {
         text-align: center;
         margin-top: 20px;
+    }
+    
+    #creation-form {
+        width: auto;
+        margin-top: 20px;
+    }
+    
+    #creation-form > header > h3 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    #community-form-title {
+        flex-direction: column;
+    }
+    
+    #community-name {
+        margin-left: 0px;
+        margin-top: 10px;
     }
 }

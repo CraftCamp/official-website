@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block body %}
-    <div id="creation-form" class="module">
+    <div id="creation-form">
         <header>
             <h3>{{ 'communities.creation.title' | trans }}</h3>
         </header>
@@ -30,7 +30,7 @@
                         <input type="text" name="name" placeholder="{{ 'communities.name' | trans }}" />
                     </div>
                 </div>
-                <button type="submit" class="module-button">
+                <button type="submit" class="button">
                     {{ 'communities.creation.validate' | trans }}
                 </button>
                 <div class="form-error"></div>

@@ -112,3 +112,10 @@
     background-color: #FF9050;
 	color: white;
 }
+
+@media (max-width: 400px) {
+    #msform {
+        width: 350px;
+        margin-top: 20px;
+    }
+}

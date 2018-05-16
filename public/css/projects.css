@@ -3,6 +3,18 @@
     margin: 20px auto;
 }
 
+#projects > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#projects > header > h3 {
+    color: #FF9050;
+    font-size: 1.4em;
+    font-family: Eczar;
+}
+
 #projects > section {
     display: flex;
     align-items: center;
@@ -78,4 +90,12 @@
 
 #project .news > div > span {
     color: #ccc;
+}
+@media (max-width: 400px) {
+    #projects > header {
+        flex-direction: column;
+    }
+    #projects > section {
+        justify-content: center;
+    }
 }

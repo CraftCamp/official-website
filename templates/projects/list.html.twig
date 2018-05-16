@@ -15,6 +15,9 @@
     <div id="projects">
         <header>
             <h3>{{ 'projects.list.title' | trans }}</h3>
+            <a class="button" href="{{ path('new_project') }}">
+                {{ 'projects.creation.link' | trans }}
+            </a>
         </header>
         <section>
             {% for project in projects %}
@@ -28,10 +31,5 @@
                 </div>
             {% endfor %}
         </section>
-        <footer>
-            <a class="button" href="{{ path('new_project') }}">
-                {{ 'projects.creation.link' | trans }}
-            </a>
-        </footer>
     </div>
 {% endblock %}

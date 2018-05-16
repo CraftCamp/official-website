@@ -1,6 +1,7 @@
 ---
 
 communities:
+    menu_item: 'Camps'
     list: 'Toutes les communautés'
     title: 'Communautés'
     name: 'Nom'

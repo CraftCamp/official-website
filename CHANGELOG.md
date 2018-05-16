@@ -1,3 +1,11 @@
+## [0.1.6] - 2018-05-16
+### Added
+- Responsive design for mobile devices
+- User's communities list on dashboard
+
+### Fixed
+- Community creation form picture field
+
 ## [0.1.5] - 2018-05-14
 ### Added
 - Project news feed

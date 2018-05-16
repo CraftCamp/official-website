@@ -196,3 +196,79 @@
     border-bottom: 1px solid #FF9050;
     color: #FF9050;
 }
+
+@media (max-width: 400px) {
+    #home {
+        margin-top: 40px;
+        flex-direction: column;
+    }
+    #home > h1 {
+        font-size: 1.2em;
+    }
+    #home > h1 > br:before {
+        content: ' ';
+        width: 100px;
+    }
+    #home > h1 > br {
+        display: none;
+    }
+    #home > .image-container {
+        margin-top: 40px;
+    }
+    #home > .stat-container {
+        display: none;
+    }
+    
+    #discover {
+        margin-top: 80px;
+    }
+    
+    #presentation > section > h2 {
+        font-size: 1.2em;
+        margin-left: 0px;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    #presentation > section:nth-child(2n) > h2 {
+        margin-left: 0px;
+    }
+    #presentation > section > h2 > span:not(.number) {
+        padding-left: 20px;
+    }
+    #presentation > section:nth-child(2n+1) > article {
+        margin-left: 0px;
+    }
+    #presentation > section:nth-child(2n) > article {
+        margin-right: 0px;
+    }
+    #presentation > section > article {
+        margin: auto;
+    }
+    #presentation > section > article > section {
+        min-width: 250px;
+        max-width: 250px;
+        margin: auto;
+    }
+    #presentation > section > article > img {
+        display: none;
+    }
+    #presentation > section > article > section > .button {
+        margin-top: 20px;
+    }
+    #presentation > footer > h2 {
+        margin-left: 10px;
+        margin-top: 20px;
+        font-size: 4.0em;
+    }
+    #presentation > footer > h3 {
+        font-size: 3.0em;
+    }
+    #presentation > footer > button {
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+    #login-form {
+        width: auto;
+    }
+}

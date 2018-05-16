@@ -63,14 +63,11 @@ body > nav > div > a {
 	background-color: #FF9050;
 }
 
-#bottom-menu {
+#bottom-menu, #end-page {
     display: none;
 }
 
 @media (max-width: 400px) {
-    body {
-        margin-bottom: 100px;
-    }
     body > nav > h1 {
         margin: auto;
         margin-top: 10px;
@@ -103,6 +100,10 @@ body > nav > div > a {
     #bottom-menu > a > i > img {
         width: 36px;
         height: 36px;
+    }
+    #end-page {
+        display: block;
+        margin-bottom: 100px;
     }
     .sf-minitoolbar {
         display: none !important;

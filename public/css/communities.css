@@ -62,6 +62,21 @@
     margin: auto;
 }
 
+#communities > header > h3 {
+    text-align: center;
+    margin-top: 20px;
+    color: #FF9050;
+    font-family: Eczar;
+    font-size: 1.2em;
+}
+
+#communities > section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .community {
     display: inline-block;
     color: #FFA55A;

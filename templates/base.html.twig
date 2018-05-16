@@ -33,6 +33,7 @@
             {% block body %}
 
             {% endblock %}
+            <div id="end-page"></div>
             <nav id="bottom-menu">
                 {% if is_granted("ROLE_USER") %}
                     <a href="{{ path('member_dashboard') }}">

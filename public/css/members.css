@@ -75,3 +75,10 @@
 .community:hover > header > img {
     border: 2px solid #FF9050;
 }
+
+@media (max-width: 400px) {
+    #registration {
+        width: auto;
+        margin-top: 20px;
+    }
+}

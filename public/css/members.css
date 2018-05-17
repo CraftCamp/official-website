@@ -34,14 +34,15 @@
     margin: auto;
     margin-top: 40px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#profile-card {
+#profile {
     width: 300px;
 }
 
-#communities-card {
+#communities {
     width: 300px;
     margin-top: 40px;
 }

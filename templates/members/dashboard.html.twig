@@ -14,15 +14,7 @@
 
 {% block body %}
     <div id="dashboard">
-        <div id="profile-card">
-            <header>
-                <h3>{{ app.user.username }}</h3>
-            </header>
-            <section>
-
-            </section>
-        </div>
-        <div id="communities-card">
+        <div id="communities">
             <header>
                 <h3>{{ 'communities.mine' | trans }}</h3>
             </header>
@@ -49,6 +41,19 @@
                     {{ 'communities.list' | trans }}
                 </a>
             </footer>
+        </div>
+        <div id="profile">
+            <div>
+                <header>
+                    <h3>{{ app.user.username }}</h3>
+                </header>
+                <section>
+
+                </section>
+            </div>
+            <div>
+                <iframe src="https://discordapp.com/widget?id=446593317254332416&theme=dark" width="300" height="400" allowtransparency="true" frameborder="0"></iframe>
+            </div>
         </div>
     </div>
 {% endblock %}

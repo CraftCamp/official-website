@@ -1,3 +1,15 @@
+## [0.1.7] - 2018-05-24
+### Added
+- Discord widget in member dashboard
+- Default images for communities
+- Link from login form to registration form
+- Travis CI
+- Scrutinizer CI
+- CI badges
+
+### Changed
+- Members are now allowed to create communities
+
 ## [0.1.6] - 2018-05-16
 ### Added
 - Responsive design for mobile devices

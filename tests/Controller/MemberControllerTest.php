@@ -30,7 +30,7 @@ class MemberControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/members/dashboard');
         
         $this->assertStatusCode(200, $client);
-        $this->assertContains('Mes communautés', $crawler->filter('#communities-card > header > h3')->text());
+        $this->assertContains('Mes communautés', $crawler->filter('#communities > header > h3')->text());
     }
     
     public function testDashboardActionWithAnonymousToken()

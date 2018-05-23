@@ -197,6 +197,13 @@
     color: #FF9050;
 }
 
+#login-form > section > form > h4 {
+    border-top: 1px solid #E0E0E0;
+    margin-top: 20px;
+    padding-top: 20px;
+    margin-bottom: 10px;
+}
+
 @media (max-width: 400px) {
     #home {
         margin-top: 40px;

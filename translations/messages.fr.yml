@@ -74,6 +74,8 @@ presentation:
 
 members:
     registration:
+        catchphrase: 'Pas encore de compte ?'
+        link: 'S''inscrire'
         title: 'Rejoindre la communauté'
         validate: 'S''inscrire'
 

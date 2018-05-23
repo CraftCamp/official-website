@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use App\Manager\Community\{
     CommunityManager,
@@ -21,7 +20,6 @@ class CommunityController extends Controller
 {
     /**
      * @Route("/communities/new", name="new_community", methods={"GET"})
-     * @IsGranted("ROLE_LEAD")
      */
     public function newAction()
     {
@@ -30,7 +28,6 @@ class CommunityController extends Controller
     
     /**
      * @Route("/communities", name="create_community", methods={"POST"})
-     * @IsGranted("ROLE_LEAD")
      */
     public function createAction(Request $request, CommunityManager $communityManager)
     {

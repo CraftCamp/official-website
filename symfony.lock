@@ -302,6 +302,9 @@
     "symfony/options-resolver": {
         "version": "v4.0.4"
     },
+    "symfony/polyfill-ctype": {
+        "version": "v1.8.0"
+    },
     "symfony/polyfill-php72": {
         "version": "v1.7.0"
     },

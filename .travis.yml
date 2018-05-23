@@ -5,6 +5,9 @@ sudo: false
 
 php:
   - 7.1
+  
+env:
+  - DATABASE_URL=sqlite:///${PWD}/var/craftcamp_test.db
 
 matrix:
   allow_failures:

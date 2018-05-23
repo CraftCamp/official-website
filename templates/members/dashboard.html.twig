@@ -23,20 +23,16 @@
                     {% set community = communityMembership.community %}
                     <a href="{{ path('community_details', {"slug": community.slug}) }}" class="community">
                         <header>
-                            {% if community.picture is not null %}
-                                <img src="{{ asset(community.picture.getWebPath()) }}"/>
-                            {% endif %}
+                            <img src="{{ community.picture is not null ? asset(community.picture.getWebPath()) : asset('images/icons/community-default.svg') }}"/>
                             <h4>{{ community.name }}</h4>
                         </header>
                     </a>
                 {% endfor %}
             </section>
             <footer>
-                {% if is_granted('ROLE_LEAD') %}
-                    <a href="{{ path('new_community') }}" class="button">
-                        {{ 'communities.creation.title' | trans }}
-                    </a>
-                {% endif %}
+                <a href="{{ path('new_community') }}" class="button">
+                    {{ 'communities.creation.title' | trans }}
+                </a>
                 <a href="{{ path('communities_list') }}" class="button">
                     {{ 'communities.list' | trans }}
                 </a>

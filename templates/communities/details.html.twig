@@ -16,7 +16,7 @@
     <div id="community">
         <header>
             <h1>
-                <img src="{{ asset(community.picture.getWebPath()) }}"/>
+                <img src="{{ community.picture is not null ? asset(community.picture.getWebPath()) : asset('images/icons/community-default.svg') }}"/>
                 {{ community.name }}
             </h1>
         </header>

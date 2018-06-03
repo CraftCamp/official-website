@@ -102,6 +102,16 @@ class ProjectController extends Controller
     }
     
     /**
+     * @Route("/projects/{slug}/workspace", name="project_workspace", methods={"GET"})
+     */
+    public function getWorkspaceAction(Request $request)
+    {
+        return $this->render('projects/workspace.html.twig', [
+            'project' => $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'))
+        ]);
+    }
+    
+    /**
      * @Route("/projects/{slug}/join", name="project_join", methods={"POST"})
      * @IsGranted("ROLE_USER")
      */

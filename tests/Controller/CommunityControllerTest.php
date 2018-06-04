@@ -46,7 +46,6 @@ class CommunityControllerTest extends WebTestCase
                 123
             )
         ]);
-        unlink('./public/images/uploads/community-test.jpeg');
         
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
         
@@ -59,6 +58,7 @@ class CommunityControllerTest extends WebTestCase
         $this->assertEquals(6, $data['id']);
         $this->assertEquals('Test', $data['name']);
         $this->assertEquals('test', $data['slug']);
+        unlink('./public/images/uploads/community-test.jpeg');
     }
     
     public function testGetAllAction()

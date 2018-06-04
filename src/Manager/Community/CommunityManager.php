@@ -47,7 +47,7 @@ class CommunityManager
             );
         }
         $this->em->persist($community);
-        $this->em->flush($community);
+        $this->em->flush();
         $this->memberManager->createMembership($community, $founder, true, false);
         $this->eventDispatcher->dispatch(CommunityCreationEvent::NAME, new CommunityCreationEvent($community, $founder));
         return $community;

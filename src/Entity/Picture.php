@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="pictures")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\HasLifecycleCallbacks
  */
 class Picture implements \JsonSerializable
 {
@@ -108,8 +108,6 @@ class Picture implements \JsonSerializable
             // store the old name to delete after the update
             $this->temp = $this->getAbsolutePath();
             $this->path = null;
-        } else {
-            $this->path = 'initial';
         }
         return $this;
     }

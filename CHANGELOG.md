@@ -1,3 +1,8 @@
+## [Unreleased]
+### Added
+- Project workspace
+- Project details edition
+
 ## [0.1.7] - 2018-05-24
 ### Added
 - Discord widget in member dashboard

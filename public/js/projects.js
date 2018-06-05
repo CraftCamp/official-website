@@ -15,3 +15,19 @@ const joinProject = slug => fetch(`/projects/${slug}/join`, {
     
     document.querySelector('#project-members > footer').removeChild(document.querySelector('#join-button'));
 });
+
+const putProjectDetails = slug => fetch(`/projects/${slug}/details`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        need_description: editors.needDescription.getData(),
+        target_description: editors.targetDescription.getData(),
+        goal_description: editors.goalDescription.getData()
+    }),
+    credentials: 'include'
+}).then(response => response.json())
+.then(data => {
+    window.location = `/projects/${slug}/workspace`;
+});

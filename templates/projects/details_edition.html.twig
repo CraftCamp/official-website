@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ project.name }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/projects.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/projects.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/classic/ckeditor.js"></script>
+    <script>
+        var editors = {
+            needDescription: null,
+            targetDescription: null,
+            goalDescription: null
+        };
+        ClassicEditor
+            .create( document.querySelector( '#need-description' ) )
+            .then(editor => { editors.needDescription = editor; })
+            .catch( error => {
+                console.error( error );
+            } );
+        ClassicEditor
+            .create( document.querySelector( '#target-description' ) )
+            .then(editor => { editors.targetDescription = editor; })
+            .catch( error => {
+                console.error( error );
+            } );
+        ClassicEditor
+            .create( document.querySelector( '#goal-description' ) )
+            .then(editor => { editors.goalDescription = editor; })
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div id="project-details">
+        <header>
+            <h1>{{ project.name }}</h1>
+            <h3>{{ 'projects.descriptions.title' | trans }}</h3>
+        </header>
+        <section>
+            <div class="project-description">
+                <h4>{{ 'projects.descriptions.categories.need' | trans }}</h4>
+                <p>{{ 'projects.descriptions.categories.need_wording' | trans }}</p>
+                <div id="need-description">{{ details is not null ? details.needDescription | raw : '' }}</div>
+            </div>
+            <div class="project-description">
+                <h4>{{ 'projects.descriptions.categories.target' | trans }}</h4>
+                <p>{{ 'projects.descriptions.categories.target_wording' | trans }}</p>
+                <div id="target-description">{{ details is not null ? details.targetDescription | raw : '' }}</div>
+            </div>
+            <div class="project-description">
+                <h4>{{ 'projects.descriptions.categories.goal' | trans }}</h4>
+                <p>{{ 'projects.descriptions.categories.goal_wording' | trans }}</p>
+                <div id="goal-description">{{ details is not null ? details.goalDescription | raw : '' }}</div>
+            </div> 
+        </section>
+        <footer>
+            <button class='button' onclick="putProjectDetails('{{ project.slug }}');">{{ 'projects.descriptions.save' | trans }}</button>
+        </footer>
+    </div>
+{% endblock %}
+
+
+

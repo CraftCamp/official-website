@@ -14,10 +14,53 @@
 
 {% block body %}
     <div id="project-container">
-        <div id="project">
+        <div id="project-infos">
             <header>
                 <h1>{{ project.name }}</h1>
             </header>
+            <section>
+                <div id="descriptions">
+                    <header>
+                        <h3>{{ 'projects.descriptions.title' | trans }}</h3>
+                        <p>{{ 'projects.descriptions.wording' | trans }}</p>
+                        {% if details is null %}
+                            <a href="{{ path('project_details', {"slug": project.slug})}}" class="indicator orange">
+                                {{ 'projects.descriptions.indicators.create' | trans }}
+                            </a>
+                        {% elseif details.needDescription | length < 20 or details.targetDescription | length < 20 or details.goalDescription | length < 20 %}
+                            <a href="{{ path('project_details', {"slug": project.slug})}}" class="indicator red">
+                                {{ 'projects.descriptions.indicators.incomplete' | trans }}
+                            </a>
+                        {% else %}
+                            <a href="{{ path('project_details', {"slug": project.slug})}}" class="indicator green">
+                                {{ 'projects.descriptions.indicators.complete' | trans }}
+                            </a>
+                        {% endif %}
+                    </header>
+                    {% if details is not null %}
+                        <section>
+                            {% for key, title in {
+                                'need': 'projects.descriptions.categories.need' | trans,
+                                'target': 'projects.descriptions.categories.target' | trans,
+                                'goal': 'projects.descriptions.categories.goal' | trans
+                            } %}
+                                <div class="description">
+                                    <strong>{{ title }}</strong>
+                                    {% if attribute(details, key ~ 'Description') | length < 20 %}
+                                        <a href="{{ path('project_details', {"slug": project.slug})}}" class="indicator red">
+                                            {{ 'projects.descriptions.indicators.incomplete' | trans }}
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('project_details', {"slug": project.slug})}}" class="indicator green">
+                                            {{ 'projects.descriptions.indicators.complete' | trans }}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </section>
+                    {% endif %}
+                </div>
+            </section>
         </div>
     </div>
 {% endblock %}

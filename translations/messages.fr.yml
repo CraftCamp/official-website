@@ -80,6 +80,7 @@ members:
         validate: 'S''inscrire'
 
 projects:
+    access_denied: 'Vous n''avez pas accès à cette partie du projet'
     name: 'Nom'
     description: 'Description'
     existing_name: 'Ce nom de projet est déjà pris'
@@ -97,6 +98,27 @@ projects:
         previous: 'Précédent'
         next: 'Suivant'
         submit: 'Valider'
+    descriptions:
+        title: 'Fiche projet'
+        save: 'Sauvegarder'
+        wording: |
+            Afin de soumettre votre projet à la communauté pour le faire adopter, vous devez préparer votre fiche projet.
+            Celle-ci contient les informations quant à votre besoin, votre objectif, et votre cible, pour que chacun puisse en savoir plus sur votre projet.
+        indicators:
+            create: 'À créer'
+            incomplete: 'Incomplet'
+            complete: 'Complet'
+        categories:
+            need: 'Besoin'
+            need_wording: 'Décrivez ici l''utilité du projet, ce à quoi il va vous servir.'
+            target: 'Cible'
+            target_wording: |
+                Quelles catégories de personnes utiliseront le produit du projet ?
+                Sont-elles des personnes internes à votre organisation ?
+                Des visiteurs que vous devez convaincre ?
+            goal: 'Objectif'
+            goal_wording: ''
+        
     list:
         title: 'Projets'
     menu_item: 'Projets'

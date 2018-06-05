@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,6 +22,7 @@ use App\Manager\UserManager;
 use App\Security\Authentication\AuthenticationManager;
 
 use App\Manager\ProjectManager;
+use App\Manager\Project\DetailsManager;
 use App\Manager\Project\NewsManager;
 
 class ProjectController extends Controller
@@ -104,16 +107,50 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{slug}/workspace", name="project_workspace", methods={"GET"})
      */
-    public function getWorkspaceAction(Request $request)
+    public function getWorkspaceAction(Request $request, DetailsManager $detailsManager)
     {
+        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
         return $this->render('projects/workspace.html.twig', [
-            'project' => $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'))
+            'project' => $project,
+            'details' => $detailsManager->getProjectDetails($project)
         ]);
     }
     
     /**
+     * @Route("/projects/{slug}/details", name="project_details", methods={"GET"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function getDetailsAction(Request $request, DetailsManager $detailsManager)
+    {
+        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
+        $user = $this->getUser();
+        if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
+            throw new AccessDeniedHttpException('projects.access_denied');
+        }
+        return $this->render('projects/details_edition.html.twig', [
+            'project' => $project,
+            'details' => $detailsManager->getProjectDetails($project)
+        ]);
+    }
+    
+    /**
+     * @Route("/projects/{slug}/details", name="put_project_details", methods={"PUT"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function putDetailsAction(Request $request, DetailsManager $detailsManager)
+    {
+        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
+        $user = $this->getUser();
+        if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
+            throw new AccessDeniedHttpException('projects.access_denied');
+        }
+        $details = $detailsManager->putProjectDetails($project, $request->request->all());
+        return new JsonResponse($details, ($details->getCreatedAt() === $details->getUpdatedAt()) ? 201 : 200);
+    }
+    
+    /**
      * @Route("/projects/{slug}/join", name="project_join", methods={"POST"})
-     * @IsGranted("ROLE_USER")
+     * @Security("has_role('ROLE_USER')")
      */
     public function joinAction(Request $request, ProjectManager $projectManager)
     {

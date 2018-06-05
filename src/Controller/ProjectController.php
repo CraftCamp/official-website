@@ -90,7 +90,7 @@ class ProjectController extends Controller
     }
     
     /**
-     * @Route("/projects/{slug}", name="project_details", methods={"GET"})
+     * @Route("/projects/{slug}", name="project_page", methods={"GET"})
      */
     public function getAction(Request $request, ProjectManager $projectManager, NewsManager $newsManager)
     {

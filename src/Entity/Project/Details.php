@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="project__details")
  * @ORM\HasLifecycleCallbacks
  */
-class Details
+class Details implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -123,5 +123,17 @@ class Details
     public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
+    }
+    
+    public function jsonSerialize(): array
+    {
+        return [
+            'project' => $this->project,
+            'need_description' => $this->needDescription,
+            'target_description' => $this->targetDescription,
+            'goal_description' => $this->goalDescription,
+            'created_at' => $this->createdAt,
+            'updated_at' => $this->updatedAt
+        ];
     }
 }

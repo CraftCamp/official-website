@@ -34,6 +34,10 @@ services:
     App\EventListener\ExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+            
+    App\EventListener\JsonRequestListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
         
     App\Utils\:
         resource: '../src/Utils'

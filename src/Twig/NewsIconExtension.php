@@ -25,7 +25,7 @@ class NewsIconExtension extends AbstractExtension
         return "<i class='{$this->getIconClass($news->getCategory())} {$size}'></i>";
     }
 
-    public function getIconClass(string $category): string
+    protected function getIconClass(string $category): string
     {
         switch($category) {
             case CommunityNews::CATEGORY_COMMUNITY_CREATION: return 'fas fa-plus-circle';

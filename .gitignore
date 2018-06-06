@@ -14,7 +14,6 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-composer.lock
 /nbproject/
 ###> symfony/framework-bundle ###
 .env

@@ -32,8 +32,8 @@ class ProjectControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/projects');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $crawler->filter('.project'));
-        $this->assertContains('Site officiel DevelopTech', $crawler->filter('.project')->text());
+        $this->assertCount(2, $crawler->filter('.project'));
+        $this->assertContains('Site officiel DevelopTech', $crawler->filter('.project:first-child')->text());
     }
 
     public function testNewAction()
@@ -69,101 +69,79 @@ class ProjectControllerTest extends WebTestCase
         ]));
         $this->assertEquals(201, $client->getResponse()->getStatusCode());
     }
-
-    public function getOrganizationManagerMock()
+    
+    public function testGetWorkspaceAction()
     {
-        $organizationManagerMock = $this
-            ->getMockBuilder('App\Manager\OrganizationManager')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-        $organizationManagerMock
-            ->expects($this->any())
-            ->method('createOrganization')
-            ->willReturnCallback([$this, 'createOrganizationMock'])
-        ;
-        return $organizationManagerMock;
+        $client = $this->makeClient(true);
+        $crawler = $client->request('GET', '/projects/site-officiel-developtech/workspace');
+        
+        $this->assertStatusCode(200, $client);
+        $this->assertContains('Fiche projet', $crawler->filter('#descriptions > header')->text());
     }
-
-    /**
-     * @param Organization &$organization
-     */
-    public function createOrganizationMock(Organization &$organization)
+    
+    public function testGetDetailsAction()
     {
-        $organization
-            ->setId(1)
-            ->setSlug()
-        ;
+        $client = $this->makeClient();
+        $client->request('GET', '/projects/site-officiel-developtech/details');
+        
+        $this->assertStatusCode(302, $client);
+        
+        $client = $this->makeClient(true);
+        $client->request('GET', '/projects/doctrine-backup-bundle/details');
+        
+        $this->assertStatusCode(403, $client);
+        
+        $client = $this->makeClient(true);
+        $crawler = $client->request('GET', '/projects/site-officiel-developtech/details');
+        
+        $this->assertStatusCode(200, $client);
+        $this->assertContains('Sauvegarder', $crawler->filter('#project-details > footer')->text());
     }
-
-    public function getProjectManagerMock()
+    
+    public function testPutDetailsAction()
     {
-        $projectManagerMock = $this
-            ->getMockBuilder('Developtech\AgilityBundle\Manager\ProjectManager')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-        $projectManagerMock
-            ->expects($this->any())
-            ->method('createProject')
-            ->willReturnCallback([$this, 'getProjectMock'])
-        ;
-        $projectManagerMock
-            ->expects($this->any())
-            ->method('getProjects')
-            ->willReturnCallback([$this, 'getProjectsMock'])
-        ;
-        return $projectManagerMock;
-    }
-
-    public function getProjectMock()
-    {
-        return
-            (new Project())
-            ->setId(1)
-            ->setName('Free chicken')
-            ->setSlug('free-chicken')
-            ->addBetaTest(
-                (new BetaTest())
-                ->setId(1)
-                ->setName('First Beta !')
-                ->setSlug('first-beta')
-            )
-            ->setProductOwner((new ProductOwner()))
-            ->setCreatedAt(new \DateTime())
-        ;
-    }
-
-    public function getProjectsMock()
-    {
-        return [
-            (new Project())
-            ->setId(1)
-            ->setName('Free chicken')
-            ->setSlug('free-chicken')
-            ->setProductOwner((new ProductOwner()))
-            ->setCreatedAt(new \DateTime()),
-            (new Project())
-            ->setId(2)
-            ->setName('Free bacon')
-            ->setSlug('free-bacon')
-            ->setProductOwner((new ProductOwner()))
-            ->setCreatedAt(new \DateTime())
-        ];
-    }
-
-    public function getUserManagerMock()
-    {
-        $userManagerMock = $this
-            ->getMockBuilder('App\Manager\UserManager')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-        $userManagerMock
-            ->expects($this->any())
-            ->method('createUser')
-            ->willReturn(true)
-        ;
-        return $userManagerMock;
+        $client = $this->makeClient();
+        $client->request('PUT', '/projects/site-officiel-developtech/details', [], [], [
+            'CONTENT_TYPE' => 'application/json'
+        ], json_encode([
+            'need_description' => 'I need a really great website !',
+            'target_description' => 'The whole world !',
+            'goal_description' => 'Have the first page on Google with every possible keyword'
+        ]));
+        
+        $this->assertStatusCode(302, $client);
+        
+        $client = $this->makeClient(true);
+        $client->request('PUT', '/projects/doctrine-backup-bundle/details', [], [], [
+            'CONTENT_TYPE' => 'application/json'
+        ], json_encode([
+            'need_description' => 'I need a really great website !',
+            'target_description' => 'The whole world !',
+            'goal_description' => 'Have the first page on Google with every possible keyword'
+        ]));
+        
+        $this->assertStatusCode(403, $client);
+        
+        $client = $this->makeClient(true);
+        $client->request('PUT', '/projects/site-officiel-developtech/details', [], [], [
+            'CONTENT_TYPE' => 'application/json'
+        ], json_encode([
+            'need_description' => 'I need a really great website !',
+            'target_description' => 'The whole world !',
+            'goal_description' => 'Have the first page on Google with every possible keyword'
+        ]));
+        
+        $this->assertStatusCode(201, $client);
+        
+        $content = $client->getResponse()->getContent();
+        
+        $this->assertJson($content);
+        
+        $data = json_decode($content, true);
+        
+        $this->assertEquals(1, $data['project']['id']);
+        $this->assertEquals($data['need_description'], 'I need a really great website !');
+        $this->assertEquals($data['target_description'], 'The whole world !');
+        $this->assertEquals($data['goal_description'], 'Have the first page on Google with every possible keyword');
     }
 }

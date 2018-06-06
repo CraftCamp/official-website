@@ -21,26 +21,18 @@ class Picture implements \JsonSerializable
      */
     protected $id;
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      */
     protected $name;
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      */
     protected $path;
-    /**
-     * @var UploadedFile
-     */
+    /** @var File */
     protected $file;
     /** @var resource **/
     protected $temp;
 
-    /**
-     * @param int $id
-     * @return \App\Model\PictureModel
-     */
     public function setId(int $id): Picture
     {
         $this->id = $id;
@@ -48,18 +40,11 @@ class Picture implements \JsonSerializable
         return $this;
     }
     
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
     
-    /**
-     * @param string $name
-     * @return \App\Model\PictureModel
-     */
     public function setName(string $name): Picture
     {
         $this->name = $name;
@@ -67,18 +52,11 @@ class Picture implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
     
-    /**
-     * @param string $path
-     * @return \App\Model\PictureModel
-     */
     public function setPath(string $path): Picture
     {
         $this->path = $path;
@@ -86,20 +64,11 @@ class Picture implements \JsonSerializable
         return $this;
     }
     
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
     
-    /**
-     * Sets file.
-     *
-     * @param UploadedFile $file
-     * @return Picture
-     */
     public function setFile(UploadedFile $file = null): Picture
     {
         $this->file = $file;
@@ -112,9 +81,6 @@ class Picture implements \JsonSerializable
         return $this;
     }
     
-    /**
-     * @return UploadedFile
-     */
     public function getFile(): UploadedFile
     {
         return $this->file;
@@ -177,9 +143,6 @@ class Picture implements \JsonSerializable
         }
     }
     
-    /**
-     * @return string
-     */
     public function getAbsolutePath()
     {
         return
@@ -189,9 +152,6 @@ class Picture implements \JsonSerializable
         ;
     }
     
-    /**
-     * @return string
-     */
     public function getWebPath()
     {
         return 
@@ -201,9 +161,6 @@ class Picture implements \JsonSerializable
         ;
     }
     
-    /**
-     * @return string
-     */
     public function getUploadDir(): string
     {
         // the absolute directory path where uploaded
@@ -216,9 +173,6 @@ class Picture implements \JsonSerializable
         return __DIR__ . '/../../public/' . self::UPLOAD_DIR;
     }
     
-    /**
-     * @return array
-     */
     public function jsonSerialize(): array
     {
         return [

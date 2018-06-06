@@ -42,8 +42,7 @@ class CommunityControllerTest extends WebTestCase
             'picture' => new UploadedFile(
                 './public/images/uploads/community-test-picture-copy.jpeg',
                 'community-test-picture-copy.jpeg',
-                'image/jpeg',
-                123
+                'image/jpeg'
             )
         ]);
         

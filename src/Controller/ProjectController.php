@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -118,10 +117,10 @@ class ProjectController extends Controller
     
     /**
      * @Route("/projects/{slug}/details", name="project_details", methods={"GET"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function getDetailsAction(Request $request, DetailsManager $detailsManager)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
         $user = $this->getUser();
         if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
@@ -135,10 +134,10 @@ class ProjectController extends Controller
     
     /**
      * @Route("/projects/{slug}/details", name="put_project_details", methods={"PUT"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function putDetailsAction(Request $request, DetailsManager $detailsManager)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
         $user = $this->getUser();
         if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
@@ -150,10 +149,10 @@ class ProjectController extends Controller
     
     /**
      * @Route("/projects/{slug}/join", name="project_join", methods={"POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function joinAction(Request $request, ProjectManager $projectManager)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
         
         $membership = $projectManager->joinProject($project, $this->getUser());

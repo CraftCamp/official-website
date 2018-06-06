@@ -32,8 +32,8 @@ class ProjectControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/projects');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $crawler->filter('.project'));
-        $this->assertContains('Site officiel DevelopTech', $crawler->filter('.project')->text());
+        $this->assertCount(2, $crawler->filter('.project'));
+        $this->assertContains('Site officiel DevelopTech', $crawler->filter('.project:first-child')->text());
     }
 
     public function testNewAction()
@@ -84,6 +84,11 @@ class ProjectControllerTest extends WebTestCase
         $client = $this->makeClient();
         $client->request('GET', '/projects/site-officiel-developtech/details');
         
+        $this->assertStatusCode(302, $client);
+        
+        $client = $this->makeClient(true);
+        $client->request('GET', '/projects/doctrine-backup-bundle/details');
+        
         $this->assertStatusCode(403, $client);
         
         $client = $this->makeClient(true);
@@ -97,6 +102,17 @@ class ProjectControllerTest extends WebTestCase
     {
         $client = $this->makeClient();
         $client->request('PUT', '/projects/site-officiel-developtech/details', [], [], [
+            'CONTENT_TYPE' => 'application/json'
+        ], json_encode([
+            'need_description' => 'I need a really great website !',
+            'target_description' => 'The whole world !',
+            'goal_description' => 'Have the first page on Google with every possible keyword'
+        ]));
+        
+        $this->assertStatusCode(302, $client);
+        
+        $client = $this->makeClient(true);
+        $client->request('PUT', '/projects/doctrine-backup-bundle/details', [], [], [
             'CONTENT_TYPE' => 'application/json'
         ], json_encode([
             'need_description' => 'I need a really great website !',

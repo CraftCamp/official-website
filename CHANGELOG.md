@@ -1,7 +1,15 @@
-## [Unreleased]
+## [0.1.8] - 2018-06-06
 ### Added
 - Project workspace
 - Project details edition
+- JSON request listener
+- Migration to Symfony 4.1
+
+### Changed
+- Product owner is now redirected to his project workspace after login
+
+### Fixed
+- Community picture storing at creation
 
 ## [0.1.7] - 2018-05-24
 ### Added

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Project\NewsRepository")
- * @ORM\Table(name="projects__news")
+ * @ORM\Table(name="project__news")
  */
 class News extends NewsModel
 {

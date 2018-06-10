@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use App\Model\News as NewsModel;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
  * @ORM\Table(name="news")
@@ -15,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * })
  * @ORM\HasLifecycleCallbacks
  */
-abstract class News
+abstract class News extends NewsModel
 {
     /**
      * @ORM\Id
@@ -36,11 +38,6 @@ abstract class News
      */
     protected $createdAt;
     
-    const TYPE_COMMUNITY = 'CO';
-    const TYPE_PROJECT = 'PR';
-    
-    abstract public function getType(): string;
-    
     /**
      * @ORM\PrePersist()
      */
@@ -59,41 +56,5 @@ abstract class News
     public function getId(): int
     {
         return $this->id;
-    }
-    
-    public function setCategory(string $category): News
-    {
-        $this->category = $category;
-        
-        return $this;
-    }
-    
-    public function getCategory(): string
-    {
-        return $this->category;
-    }
-    
-    public function setData(array $data): News
-    {
-        $this->data = $data;
-        
-        return $this;
-    }
-    
-    public function getData(): array
-    {
-        return $this->data;
-    }
-    
-    public function setCreatedAt(\DateTime $createdAt): News
-    {
-        $this->createdAt = $createdAt;
-        
-        return $this;
-    }
-    
-    public function getCreatedAt(): \DateTime
-    {
-        return $this->createdAt;
     }
 }

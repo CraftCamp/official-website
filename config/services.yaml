@@ -31,14 +31,6 @@ services:
         resource: '../src/Manager'
         public: true
         
-    App\EventListener\ExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception }
-            
-    App\EventListener\JsonRequestListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.request }
-        
     App\Utils\:
         resource: '../src/Utils'
         public: true
@@ -63,10 +55,6 @@ services:
             - {name: kernel.event_subscriber}
 
     App\Subscriber\JsonRequestSubscriber:
-        tags:
-            - {name: kernel.event_subscriber}
-            
-    App\Subscriber\ProjectSubscriber:
         tags:
             - {name: kernel.event_subscriber}
             

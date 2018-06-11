@@ -1,9 +1,0 @@
----
-developtech_agility:
-    user_class: App\Entity\User\User
-    api:
-        github:
-            api_url: "https://api.github.com/v3"
-            client_id: "%env(resolve:GITHUB_CLIENT_ID)%"
-            client_secret: "%env(resolve:GITHUB_CLIENT_SECRET)%"
-            redirect_uri: "/login/oauth/callback"

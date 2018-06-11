@@ -4,11 +4,6 @@ namespace Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
-use App\Entity\User\ProductOwner;
-use App\Entity\Project\Project;
-use Developtech\AgilityBundle\Entity\BetaTest;
-use App\Entity\Organization;
-
 use App\DataFixtures\ORM\User\LoadActivationLinkData;
 use App\DataFixtures\ORM\User\LoadProductOwnerData;
 use App\DataFixtures\ORM\LoadOrganizationData;

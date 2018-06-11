@@ -4,12 +4,14 @@ namespace App\Entity\Project;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use App\Model\Project\Repository as RepositoryModel;
+
 /**
  * @ORM\Entity()
  * @ORM\Table(name="project__repositories")
  * @ORM\HasLifecycleCallbacks
  */
-class Repository
+abstract class Repository extends RepositoryModel
 {
     /**
      * @ORM\Id
@@ -37,4 +39,32 @@ class Repository
      * @ORM\Column(type="datetime")
      */
     protected $updatedAt;
+    
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        $this->createdAt = $this->updatedAt = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+    
+    public function setId(int $id): Repository 
+    {
+        $this->id = $id;
+        
+        return this;
+    }
+    
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

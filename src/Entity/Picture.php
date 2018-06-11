@@ -4,14 +4,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Model\Picture as PictureModel;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="pictures")
  * @ORM\HasLifecycleCallbacks
  */
-class Picture implements \JsonSerializable
+class Picture extends PictureModel
 {
     const UPLOAD_DIR = 'images/uploads';
     /**
@@ -28,10 +28,6 @@ class Picture implements \JsonSerializable
      * @ORM\Column(type="string", length=255)
      */
     protected $path;
-    /** @var File */
-    protected $file;
-    /** @var resource **/
-    protected $temp;
 
     public function setId(int $id): Picture
     {
@@ -44,48 +40,6 @@ class Picture implements \JsonSerializable
     {
         return $this->id;
     }
-    
-    public function setName(string $name): Picture
-    {
-        $this->name = $name;
-        
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-    
-    public function setPath(string $path): Picture
-    {
-        $this->path = $path;
-        
-        return $this;
-    }
-    
-    public function getPath(): string
-    {
-        return $this->path;
-    }
-    
-    public function setFile(UploadedFile $file = null): Picture
-    {
-        $this->file = $file;
-        // check if we have an old image path
-        if (is_file($this->getAbsolutePath())) {
-            // store the old name to delete after the update
-            $this->temp = $this->getAbsolutePath();
-            $this->path = null;
-        }
-        return $this;
-    }
-    
-    public function getFile(): UploadedFile
-    {
-        return $this->file;
-    }
-    
     
     /**
      * @ORM\PrePersist()
@@ -142,42 +96,4 @@ class Picture implements \JsonSerializable
             unlink($this->temp);
         }
     }
-    
-    public function getAbsolutePath()
-    {
-        return
-            (null === $this->path)
-            ? null
-            : $this->getUploadRootDir().'/'.$this->id.'.'.$this->path
-        ;
-    }
-    
-    public function getWebPath()
-    {
-        return 
-            (null === $this->path)
-            ? null
-            : $this->getUploadDir().'/'.$this->path
-        ;
-    }
-    
-    public function getUploadDir(): string
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return '/' . self::UPLOAD_DIR;
-    }
-    
-    public function getUploadRootDir(): string
-    {
-        return __DIR__ . '/../../public/' . self::UPLOAD_DIR;
-    }
-    
-    public function jsonSerialize(): array
-    {
-        return [
-            'path' => $this->getWebPath()
-        ];
-    }
-    
 }

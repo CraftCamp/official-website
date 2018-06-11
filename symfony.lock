@@ -2,9 +2,6 @@
     "clue/stream-filter": {
         "version": "v1.4.0"
     },
-    "developtech/agility-bundle": {
-        "version": "dev-feature/86/github-api-configuration"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

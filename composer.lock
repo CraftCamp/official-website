@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ce18fc2f72313df1317338548144754",
+    "content-hash": "3dffa4f9406caef8e5e0e7d8a7b58274",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -57,53 +57,6 @@
                 "stream_filter_register"
             ],
             "time": "2017-08-18T09:54:01+00:00"
-        },
-        {
-            "name": "developtech/agility-bundle",
-            "version": "dev-feature/86/github-api-configuration",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DevelopTech/AgilityBundle.git",
-                "reference": "fbab996f65ab35d8f19bad6700eeb477679440b6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DevelopTech/AgilityBundle/zipball/fbab996f65ab35d8f19bad6700eeb477679440b6",
-                "reference": "fbab996f65ab35d8f19bad6700eeb477679440b6",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~6.0",
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "~1.1",
-                "doctrine/orm": "~2.3",
-                "liip/functional-test-bundle": "dev-master"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Developtech\\AgilityBundle\\": "./"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Axel Venet",
-                    "email": "kern046@gmail.com",
-                    "role": "Lead Developer"
-                }
-            ],
-            "description": "Bundle implementing agile project management features in your project",
-            "keywords": [
-                "agility",
-                "project-management"
-            ],
-            "time": "2018-03-07T13:07:16+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -873,16 +826,16 @@
         },
         {
             "name": "doctrine/migrations",
-            "version": "v1.7.2",
+            "version": "v1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "3e7656c5adfd9b7d0d8757aa1e9e8daf43a6f200"
+                "reference": "215438c0eef3e5f9b7da7d09c6b90756071b43e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/3e7656c5adfd9b7d0d8757aa1e9e8daf43a6f200",
-                "reference": "3e7656c5adfd9b7d0d8757aa1e9e8daf43a6f200",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/215438c0eef3e5f9b7da7d09c6b90756071b43e6",
+                "reference": "215438c0eef3e5f9b7da7d09c6b90756071b43e6",
                 "shasum": ""
             },
             "require": {
@@ -910,17 +863,18 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "v1.7.x-dev"
+                    "dev-master": "v1.8.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\DBAL\\Migrations\\": "lib/Doctrine/DBAL/Migrations"
+                    "Doctrine\\DBAL\\Migrations\\": "lib/Doctrine/DBAL/Migrations",
+                    "Doctrine\\Migrations\\": "lib/Doctrine/Migrations"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1"
+                "MIT"
             ],
             "authors": [
                 {
@@ -937,12 +891,12 @@
                 }
             ],
             "description": "Database Schema migrations using Doctrine DBAL",
-            "homepage": "http://www.doctrine-project.org",
+            "homepage": "https://www.doctrine-project.org/projects/migrations.html",
             "keywords": [
                 "database",
                 "migrations"
             ],
-            "time": "2018-05-09T21:04:56+00:00"
+            "time": "2018-06-06T21:00:30+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -7279,7 +7233,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "developtech/agility-bundle": 20,
         "symfony/lts": 20,
         "liip/functional-test-bundle": 15
     },

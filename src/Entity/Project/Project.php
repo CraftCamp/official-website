@@ -4,56 +4,92 @@ namespace App\Entity\Project;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use App\Entity\Organization;
-
-use Developtech\AgilityBundle\Entity\Project as ProjectModel;
+use App\Model\Project\Project as ProjectModel;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Project\ProjectRepository")
- * @ORM\Table(name="developtech_agility__projects")
+ * @ORM\Table(name="project__projects")
+ * @ORM\HasLifecycleCallbacks()
  */
-class Project extends ProjectModel implements \JsonSerializable
+class Project extends ProjectModel
 {
     /**
-     * @var Organization
-     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
+    /**
+     * @ORM\Column(name="name", type="string", length=125, unique=true)
+     */
+    protected $name;
+    /**
+     * @ORM\Column(name="slug", type="string", length=125, unique=true)
+     */
+    protected $slug;
+    /**
+     * @ORM\Column(name="description", type="text")
+     */
+    protected $description;
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $createdAt;
+    /**
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\ProductOwner")
+     */
+    protected $productOwner;
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Organization")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $organization;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project\BetaTest", mappedBy="project")
+     */
+    protected $betaTests;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project\Feature", mappedBy="project")
+     */
+    protected $features;
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project\Feedback", mappedBy="project")
+     */
+    protected $feedbacks;
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\Project\Repository", mappedBy="project")
+	 */
+	protected $repositories;
 
     /**
-     * @param Organization $organization
-     * @return Customer
+     * @ORM\PrePersist()
      */
-    public function setOrganization(Organization $organization)
+    public function prePersist()
     {
-        $this->organization = $organization;
+        $this->createdAt = $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    public function setId(int $id): Project
+    {
+        $this->id = $id;
 
         return $this;
     }
-
-    /**
-     * @return Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
-    }
     
-    public function jsonSerialize()
+    public function getId(): int
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'description' => $this->description,
-            'product_owner' => $this->productOwner,
-            'features' => $this->features,
-            'feedbacks' => $this->feedbacks,
-            'repositories' => $this->repositories,
-            'created_at' => $this->createdAt,
-            'updated_at' => $this->updatedAt
-        ];
+        return $this->id;
     }
 }

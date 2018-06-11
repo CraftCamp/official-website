@@ -16,11 +16,13 @@ use App\Entity\User\{ProductOwner, ActivationLink, User};
 
 use Symfony\Component\Translation\Translator;
 
-class UserManagerTest extends \PHPUnit\Framework\TestCase {
-    /** @var \App\Manager\UserManager **/
+class UserManagerTest extends \PHPUnit\Framework\TestCase
+{
+    /** @var UserManager **/
     protected $manager;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->manager = new UserManager(
             $this->getEntityManagerMock(),
             $this->getEncoderMock(),
@@ -29,7 +31,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         );
     }
 
-    public function testCreateUser() {
+    public function testCreateUser()
+    {
         $user = $this->manager->createUser([
             'username' => 'John Doe',
             'email' => 'john_doe@gmail.com',
@@ -46,7 +49,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
      * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedMessage users.invalid_username
      */
-    public function testInvalidCreateUser() {
+    public function testInvalidCreateUser()
+    {
         $user = $this->manager->createUser([
             'username' => 'Toto',
             'email' => 'toto@gmail.com',
@@ -55,11 +59,13 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         ], ProductOwner::TYPE_PRODUCT_OWNER);
     }
 
-    public function testUpdateUser() {
+    public function testUpdateUser()
+    {
         $this->assertNull($this->manager->updateUser((new ProductOwner())->setUsername('Toto')));
     }
 
-    public function testActivateUserAccount() {
+    public function testActivateUserAccount()
+    {
         $user = $this->manager->activateUserAccount('ibfnf5g6sd1f3f');
 
         $this->assertInstanceOf(User::class, $user);
@@ -67,14 +73,16 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertEquals('John Doe', $user->getUsername());
     }
 
-    public function testSendNewActivationLink() {
+    public function testSendNewActivationLink()
+    {
         $this->assertTrue($this->manager->sendNewActivationLink('valid_email@example.org'));
     }
 
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
      */
-    public function testSendNewActivationLinkWithUnknownEmail() {
+    public function testSendNewActivationLinkWithUnknownEmail()
+    {
         $this->manager->sendNewActivationLink('unknown@example.org');
     }
 
@@ -82,7 +90,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
      * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedMessage users.activation_link.user_already_enabled
      */
-    public function testSendNewActivationLinkWithAlreadyEnabledUser() {
+    public function testSendNewActivationLinkWithAlreadyEnabledUser()
+    {
         $this->manager->sendNewActivationLink('already_enabled@example.org');
     }
     
@@ -110,7 +119,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         $this->manager->promoteUser('unknown@example.org', 'lead');
     }
 
-    public function getEntityManagerMock() {
+    public function getEntityManagerMock()
+    {
         $entityManagerMock = $this
             ->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
@@ -139,7 +149,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         return $entityManagerMock;
     }
 
-    public function getRepositoryMock() {
+    public function getRepositoryMock()
+    {
         $repositoryMock = $this
             ->getMockBuilder(UserRepository::class)
             ->disableOriginalConstructor()
@@ -180,7 +191,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         return $repositoryMock;
     }
 
-    public function getUserByActivationLinkMock(ActivationLink $activationLink) {
+    public function getUserByActivationLinkMock(ActivationLink $activationLink)
+    {
         return
             (new ProductOwner())
             ->setUsername('John Doe')
@@ -191,44 +203,29 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         ;
     }
 
-    public function getUserMock($identifier) {
+    public function getUserMock($identifier)
+    {
         if($identifier === 'unknown@example.org') {
             return null;
-        } elseif($identifier === 'already_enabled@example.org') {
-            return
-                (new ProductOwner())
-                ->enable(true)
-            ;
         }
         return
             (new ProductOwner())
-            ->enable(false)
+            ->enable(($identifier === 'already_enabled@example.org'))
         ;
     }
 
-    /**
-     * @param string $username
-     * @return boolean
-     */
-    public function getCheckUsernameMock($username) {
-        if($username === 'Toto') {
-            return false;
-        }
-        return true;
+    public function getCheckUsernameMock(string $username): bool
+    {
+        return $username !== 'Toto';
     }
 
-    /**
-     * @param string $email
-     * @return boolean
-     */
-    public function getCheckEmailMock($email) {
-        if($email === 'toto@gmail.com') {
-            return false;
-        }
-        return true;
+    public function getCheckEmailMock(string $email): bool
+    {
+        return $email !== 'toto@gmail.com';
     }
 
-    public function getEncoderMock() {
+    public function getEncoderMock()
+    {
         $encoderMock = $this
             ->getMockBuilder(UserPasswordEncoder::class)
             ->disableOriginalConstructor()
@@ -242,7 +239,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         return $encoderMock;
     }
 
-    public function getActivationLinkManagerMock() {
+    public function getActivationLinkManagerMock()
+    {
         $activationLinkManagerMock = $this
             ->getMockBuilder(ActivationLinkManager::class)
             ->disableOriginalConstructor()
@@ -266,7 +264,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         return $activationLinkManagerMock;
     }
 
-    public function getActivationLinkMock() {
+    public function getActivationLinkMock()
+    {
         return
             (new ActivationLink())
             ->setId(1)
@@ -275,7 +274,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         ;
     }
 
-    public function getFormMock() {
+    public function getFormMock()
+    {
         $formMock = $this
             ->getMockBuilder(Form::class)
             ->disableOriginalConstructor()
@@ -294,7 +294,8 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         return $formMock;
     }
 
-    public function getTranslatorMock() {
+    public function getTranslatorMock()
+    {
         $translatorMock = $this
             ->getMockBuilder(Translator::class)
             ->disableOriginalConstructor()
@@ -308,11 +309,11 @@ class UserManagerTest extends \PHPUnit\Framework\TestCase {
         return $translatorMock;
     }
 
-    public function getTranslationMock($translation) {
-        $translations = [
+    public function getTranslationMock($translation)
+    {
+        return [
             'users.registration.username_already_taken' => 'Ce nom d\utilisateur est déjà utilisé',
             'users.registration.email_already_taken' => 'Cette adresse e-mail est déjà utilisée'
-        ];
-        return $translations[$translation];
+        ][$translation];
     }
 }

@@ -43,12 +43,10 @@ class LoadProductOwnerData extends AbstractFixture implements OrderedFixtureInte
                 ->addOrganization($this->getReference("organization-{$productOwnerData['organization_id']}"))
                 ->setCreatedAt(new \DateTime($productOwnerData['created_at']))
                 ->setUpdatedAt(new \DateTime($productOwnerData['updated_at']))
-                ->setActivationLink(
-                    ($this->hasReference("activation-link-{$productOwnerData['activation_link_id']}"))
-                    ? $this->getReference("activation-link-{$productOwnerData['activation_link_id']}")
-                    : null
-                )
             ;
+            if ($this->hasReference("activation-link-{$productOwnerData['activation_link_id']}")) {
+                $productOwner->setActivationLink($this->getReference("activation-link-{$productOwnerData['activation_link_id']}"));
+            }
             foreach($productOwnerData['roles'] as $role) {
                 $productOwner->addRole($role);
             }

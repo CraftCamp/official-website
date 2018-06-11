@@ -20,7 +20,7 @@ use App\Manager\UserManager;
 
 use App\Security\Authentication\AuthenticationManager;
 
-use App\Manager\ProjectManager;
+use App\Manager\Project\ProjectManager;
 use App\Manager\Project\DetailsManager;
 use App\Manager\Project\NewsManager;
 
@@ -29,10 +29,10 @@ class ProjectController extends Controller
     /**
      * @Route("/projects", name="projects_list", methods={"GET"})
      */
-    public function getListAction()
+    public function getListAction(ProjectManager $projectManager)
     {
         return $this->render('projects/list.html.twig', [
-            'projects' => $this->get('developtech_agility.project_manager')->getProjects()
+            'projects' => $projectManager->getAll()
         ]);
     }
 
@@ -49,37 +49,33 @@ class ProjectController extends Controller
     /**
      * @Route("/projects", name="project_creation", methods={"POST"})
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, ProjectManager $projectManager, AuthenticationManager $authenticationManager, UserManager $userManager, OrganizationManager $organizationManager)
     {
         $connection = $this->getDoctrine()->getManager()->getConnection();
         $connection->beginTransaction();
 		try {
             if (($organization = $request->request->get('organization')) !== null) {
-                $organization = $this->get(OrganizationManager::class)->createOrganization($organization);
+                $organization = $organizationManager->createOrganization($organization);
             }
             if (($productOwnerData = $request->request->get('product_owner')) === null && !$this->isGranted('ROLE_USER')) {
                 throw new BadRequestHttpException('projects.missing_product_owner');
             }
-			$productOwner = ($productOwnerData !== null) ? $this->get(UserManager::class)->createUser(
+			$productOwner = ($productOwnerData !== null) ? $userManager->createUser(
 				$request->request->get('product_owner'),
 				ProductOwner::TYPE_PRODUCT_OWNER,
 				$organization
 			) : $this->getUser();
-			$project = 
-                (new Project())
-				->setName($request->request->get('project')['name'])
-				->setDescription($request->request->get('project')['description'])
-				->setProductOwner($productOwner)
-            ;
-            if ($organization !== null) {
-                $project->setOrganization($organization);
-                if (!$productOwner->hasOrganization($organization)) {
-                    $productOwner->addOrganization($organization);
-                }
+            $project = $projectManager->createProject(
+                $request->request->get('project')['name'],
+                $request->request->get('project')['description'],
+                $productOwner,
+                $organization
+            );
+            if ($organization !== null && !$productOwner->hasOrganization($organization)) {
+                $productOwner->addOrganization($organization);
             }
-            $this->get('developtech_agility.project_manager')->createProject($project, $request->request->get('repository', []));
-            $this->get(ProjectManager::class)->joinProject($project, $productOwner, false);
-            $this->get(AuthenticationManager::class)->authenticate($request, $productOwner);
+            $projectManager->joinProject($project, $productOwner, false);
+            $authenticationManager->authenticate($request, $productOwner);
 			$connection->commit();
 			return new JsonResponse($project, 201);
 		} catch (\Exception $ex) {
@@ -93,7 +89,7 @@ class ProjectController extends Controller
      */
     public function getAction(Request $request, ProjectManager $projectManager, NewsManager $newsManager)
     {
-        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
+        $project = $projectManager->get($request->attributes->get('slug'));
         
         return $this->render('projects/details.html.twig', [
             'project' => $project,
@@ -106,9 +102,9 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{slug}/workspace", name="project_workspace", methods={"GET"})
      */
-    public function getWorkspaceAction(Request $request, DetailsManager $detailsManager)
+    public function getWorkspaceAction(Request $request, ProjectManager $projectManager, DetailsManager $detailsManager)
     {
-        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
+        $project = $projectManager->get($request->attributes->get('slug'));
         return $this->render('projects/workspace.html.twig', [
             'project' => $project,
             'details' => $detailsManager->getProjectDetails($project)
@@ -118,10 +114,10 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{slug}/details", name="project_details", methods={"GET"})
      */
-    public function getDetailsAction(Request $request, DetailsManager $detailsManager)
+    public function getDetailsAction(Request $request, ProjectManager $projectManager, DetailsManager $detailsManager)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
+        $project = $projectManager->get($request->attributes->get('slug'));
         $user = $this->getUser();
         if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
             throw new AccessDeniedHttpException('projects.access_denied');
@@ -135,10 +131,10 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{slug}/details", name="put_project_details", methods={"PUT"})
      */
-    public function putDetailsAction(Request $request, DetailsManager $detailsManager)
+    public function putDetailsAction(Request $request, ProjectManager $projectManager, DetailsManager $detailsManager)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
+        $project = $projectManager->get($request->attributes->get('slug'));
         $user = $this->getUser();
         if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
             throw new AccessDeniedHttpException('projects.access_denied');
@@ -153,7 +149,7 @@ class ProjectController extends Controller
     public function joinAction(Request $request, ProjectManager $projectManager)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-        $project = $this->get('developtech_agility.project_manager')->getProject($request->attributes->get('slug'));
+        $project = $projectManager->get($request->attributes->get('slug'));
         
         $membership = $projectManager->joinProject($project, $this->getUser());
         

@@ -10,32 +10,41 @@ use App\Entity\User\{ProductOwner, ActivationLink};
 
 use App\Utils\Mailer;
 
-class ActivationLinkManagerTest extends \PHPUnit\Framework\TestCase {
-    /** @var \App\Manager\ActivationLinkManager **/
+class ActivationLinkManagerTest extends \PHPUnit\Framework\TestCase
+{
+    /** @var ActivationLinkManager **/
     protected $manager;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->manager = new ActivationLinkManager(
             $this->getEntityManagerMock(),
             $this->getMailerMock()
         );
     }
 
-    public function testCreateActivationLink() {
-        $user = new ProductOwner();
+    public function testCreateActivationLink()
+    {
+        $user = (new ProductOwner())->setEmail('test@example.org');
         $this->manager->createActivationLink($user);
 
         $this->assertInstanceOf(ActivationLink::class, $user->getActivationLink());
     }
 
-    public function testSendValidationMail() {
-        $user = new ProductOwner();
+    public function testSendValidationMail()
+    {
+        $user =
+            (new ProductOwner())
+            ->setEmail('test@example.org')
+            ->setUsername('tester')
+        ;
         $this->manager->createActivationLink($user);
 
         $this->assertTrue($this->manager->sendValidationMail($user));
     }
 
-    public function testFindOneByHash() {
+    public function testFindOneByHash()
+    {
         $activationLink = $this->manager->findOneByHash('test-hash');
 
         $this->assertInstanceOf(ActivationLink::class, $activationLink);
@@ -44,7 +53,8 @@ class ActivationLinkManagerTest extends \PHPUnit\Framework\TestCase {
         $this->assertInstanceOf(\DateTime::class, $activationLink->getCreatedAt());
     }
 
-    public function getEntityManagerMock() {
+    public function getEntityManagerMock()
+    {
         $entityManagerMock = $this
             ->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
@@ -68,7 +78,8 @@ class ActivationLinkManagerTest extends \PHPUnit\Framework\TestCase {
         return $entityManagerMock;
     }
 
-    public function getRepositoryMock() {
+    public function getRepositoryMock()
+    {
         $repositoryMock = $this
             ->getMockBuilder('App\Repository\ActivationLinkRepository')
             ->disableOriginalConstructor()
@@ -83,7 +94,8 @@ class ActivationLinkManagerTest extends \PHPUnit\Framework\TestCase {
         return $repositoryMock;
     }
 
-    public function getActivationLinkMock() {
+    public function getActivationLinkMock()
+    {
         return
             (new ActivationLink())
             ->setId(1)
@@ -92,7 +104,8 @@ class ActivationLinkManagerTest extends \PHPUnit\Framework\TestCase {
         ;
     }
 
-    public function getMailerMock() {
+    public function getMailerMock()
+    {
         $mailerMock = $this
             ->getMockBuilder(Mailer::class)
             ->disableOriginalConstructor()

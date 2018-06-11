@@ -58,10 +58,6 @@ services:
         tags:
             - {name: kernel.event_subscriber}
             
-    App\Subscriber\ProjectSubscriber:
-        tags:
-            - {name: kernel.event_subscriber}
-            
     App\Twig\NewsIconExtension:
         tags:
             - {name: twig.extension}

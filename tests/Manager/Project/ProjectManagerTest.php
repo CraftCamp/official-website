@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Manager;
+namespace Tests\Manager\Project;
 
-use App\Manager\ProjectManager;
+use App\Manager\Project\ProjectManager;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -10,6 +10,8 @@ use Doctrine\ORM\EntityRepository;
 use App\Entity\Project\Member;
 use App\Entity\Project\Project;
 use App\Entity\User\ProductOwner;
+
+use App\Utils\Slugger;
 
 class ProjectManagerTest extends \PHPUnit\Framework\TestCase
 {
@@ -20,7 +22,8 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
     {
         $this->manager = new ProjectManager(
             $this->getEntityManagerMock(),
-            $this->getEventDispatcherMock()
+            $this->getEventDispatcherMock(),
+            new Slugger()
         );
     }
     

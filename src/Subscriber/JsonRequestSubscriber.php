@@ -39,9 +39,6 @@ class JsonRequestSubscriber implements EventSubscriberInterface
         ];
     }
     
-    /**
-     * @param GetResponseEvent $event
-     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
@@ -51,9 +48,6 @@ class JsonRequestSubscriber implements EventSubscriberInterface
         $request->request->add(json_decode($request->getContent(), true));
     }
     
-    /**
-     * @param GetResponseForExceptionEvent $event
-     */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         if (!$this->isJsonRequest($event)) {
@@ -61,15 +55,13 @@ class JsonRequestSubscriber implements EventSubscriberInterface
         }
         $exception = $event->getException();
         $event->setResponse(new JsonResponse([
-            'error' => [
-                'message' => $this->translator->trans($exception->getMessage())
-            ]
+            'message' => $this->translator->trans($exception->getMessage())
         ], ($exception instanceof HttpException) ? $exception->getStatusCode(): 500));
         $event->stopPropagation();
     }
     
-    protected function isJsonRequest(KernelEvent $event)
+    protected function isJsonRequest(KernelEvent $event): bool
     {
-        return ($event->getRequest()->headers->get('content-type') === 'application/json');
+        return ($event->getRequest()->getContentType() === 'json');
     }
 }

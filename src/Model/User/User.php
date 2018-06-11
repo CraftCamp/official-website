@@ -4,6 +4,7 @@ namespace App\Model\User;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Model\Organization;
+use Doctrine\Common\Collections\ArrayCollection;
 
 abstract class User implements UserInterface, \JsonSerializable
 {
@@ -25,11 +26,11 @@ abstract class User implements UserInterface, \JsonSerializable
     protected $isLocked;
     /** @var ArrayCollection **/
     protected $organizations;
-    /** @var \App\Entity\ActivationLink **/
+    /** @var ActivationLink **/
     protected $activationLink;
     /** @var \DateTime **/
     protected $createdAt;
-    /** @var \datetime **/
+    /** @var \DateTime **/
     protected $updatedAt;
 
     const TYPE_MEMBER = 'ME';
@@ -153,7 +154,7 @@ abstract class User implements UserInterface, \JsonSerializable
         return $this->isEnabled;
     }
 
-    public function setIsLocked(bool $isLocked): bool
+    public function setIsLocked(bool $isLocked): User
     {
         $this->isLocked = $isLocked;
 
@@ -196,7 +197,7 @@ abstract class User implements UserInterface, \JsonSerializable
         return $this;
     }
 
-    public function getActivationLink(): ActivationLink
+    public function getActivationLink(): ?ActivationLink
     {
         return $this->activationLink;
     }

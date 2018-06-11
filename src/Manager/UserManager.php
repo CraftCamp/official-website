@@ -162,7 +162,6 @@ class UserManager
         }
 
         $user->enable(true);
-        $user->setActivationLink(null);
         $this->em->persist($user);
         $this->em->remove($activationLink);
         $this->em->flush();

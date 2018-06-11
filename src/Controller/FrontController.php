@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use App\Manager\Community\CommunityManager;
 use App\Manager\MemberManager;
-use App\Manager\ProjectManager;
+use App\Manager\Project\ProjectManager;
 
 class FrontController extends Controller
 {

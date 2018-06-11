@@ -45,7 +45,7 @@ abstract class Picture implements \JsonSerializable
     {
         $this->file = $file;
         // check if we have an old image path
-        if (is_file($this->getAbsolutePath())) {
+        if ($this->file !== null && is_file($this->getAbsolutePath())) {
             // store the old name to delete after the update
             $this->temp = $this->getAbsolutePath();
             $this->path = null;

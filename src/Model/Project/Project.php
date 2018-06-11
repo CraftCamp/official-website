@@ -4,6 +4,7 @@ namespace App\Model\Project;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Model\Organization;
 
 abstract class Project implements \JsonSerializable
 {
@@ -45,7 +46,7 @@ abstract class Project implements \JsonSerializable
         return $this;
     }
 
-    public function getName(): string
+        public function getName(): string
     {
         return $this->name;
     }
@@ -141,7 +142,7 @@ abstract class Project implements \JsonSerializable
         return $this;
     }
 
-    public function getOrganization(): Organization
+    public function getOrganization(): ?Organization
     {
         return $this->organization;
     }

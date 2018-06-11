@@ -9,6 +9,7 @@ use App\Model\Project\Project as ProjectModel;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Project\ProjectRepository")
  * @ORM\Table(name="project__projects")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Project extends ProjectModel
 {

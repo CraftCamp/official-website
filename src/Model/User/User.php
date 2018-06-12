@@ -28,6 +28,10 @@ abstract class User implements UserInterface, \JsonSerializable
     protected $organizations;
     /** @var ActivationLink **/
     protected $activationLink;
+    /** @var int **/
+    protected $githubId;
+    /** @var string **/
+    protected $githubAccessToken;
     /** @var \DateTime **/
     protected $createdAt;
     /** @var \DateTime **/
@@ -200,6 +204,30 @@ abstract class User implements UserInterface, \JsonSerializable
     public function getActivationLink(): ?ActivationLink
     {
         return $this->activationLink;
+    }
+    
+    public function setGithubId(int $githubId): User
+    {
+        $this->githubId = $githubId;
+        
+        return $this;
+    }
+    
+    public function getGithubId(): ?int
+    {
+        return $this->githubId;
+    }
+    
+    public function setGithubAccessToken(string $accessToken): User
+    {
+        $this->githubAccessToken = $accessToken;
+        
+        return $this;
+    }
+    
+    public function getGithubAccessToken(): string
+    {
+        return $this->githubAccessToken;
     }
 
     public function setCreatedAt(\DateTime $createdAt): User

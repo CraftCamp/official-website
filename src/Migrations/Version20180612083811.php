@@ -15,7 +15,7 @@ final class Version20180612083811 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE users__user ADD github_id INT NOT NULL, ADD github_access_token VARCHAR(140) NOT NULL');
+        $this->addSql('ALTER TABLE users__user ADD github_id INT, ADD github_access_token VARCHAR(140)');
     }
 
     public function down(Schema $schema) : void

@@ -64,11 +64,11 @@ abstract class User extends UserModel
      */
     protected $activationLink;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $githubId;
     /**
-     * @ORM\Column(type="string", length=140)
+     * @ORM\Column(type="string", length=140, nullable=true)
      */
     protected $githubAccessToken;
     /**

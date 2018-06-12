@@ -21,6 +21,30 @@ class Organization extends OrganizationModel
      * @ORM\Column(type="integer")
      */
     protected $id;
+    /**
+     * @ORM\Column(type="string", length=125)
+     */
+    protected $name;
+    /**
+     * @ORM\Column(type="string", length=125)
+     */
+    protected $slug;
+    /**
+     * @ORM\Column(type="string", length=25) 
+     */
+    protected $type;
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $description;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $createdAt;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $updatedAt;
     
     /**
      * @ORM\PrePersist()

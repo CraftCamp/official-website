@@ -156,6 +156,9 @@ users:
     invalid_email: 'L''adresse email renseignée n''est pas valide'
     login: 'Connexion'
     connect: 'Se connecter'
+    connect_with: 'Se connecter avec'
+    signin_with: 'Utiliser mon compte'
+    github_signin: 'Github'
     
 website:
     full_date: 'd/m/Y à H:i'

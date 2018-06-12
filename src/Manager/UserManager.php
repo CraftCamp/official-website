@@ -50,13 +50,7 @@ class UserManager
         ;
     }
 
-    /**
-     * @param array $data
-     * @param string $type
-	 * @param Organization $organization
-     * @return User
-     */
-    public function createUser($data, $type, Organization $organization = null): User
+    public function createUser(array $data, string $type, Organization $organization = null): User
 	{
         if (empty($data['username']) || !$this->checkUsername($data['username'])) {
             throw new BadRequestHttpException('users.invalid_username');
@@ -104,10 +98,20 @@ class UserManager
 
         return $user;
     }
+    
+    public function createOAuthUser(User $user)
+    {
+        $user->setPlainPassword(md5(uniqid(null, true)));
+        $user->setSalt(md5(uniqid()));
+        $user->setPassword($this->encoder->encodePassword($user, $user->getPlainPassword()));
+        $user->addRole('ROLE_USER');
+        $user->enable(true);
+        $user->setIsLocked(false);
 
-    /**
-     * @param User $user
-     */
+        $this->em->persist($user);
+        $this->em->flush();
+    }
+
     public function updateUser(User $user)
     {
         $this->em->persist($user);

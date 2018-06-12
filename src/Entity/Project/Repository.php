@@ -8,7 +8,7 @@ use App\Model\Project\Repository as RepositoryModel;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="project__repositories")
+ * @ORM\Table(name="project__repositories__repository")
  * @ORM\HasLifecycleCallbacks
  */
 abstract class Repository extends RepositoryModel

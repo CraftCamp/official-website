@@ -204,6 +204,17 @@
     margin-bottom: 10px;
 }
 
+#login-form > section > form > .sign-in-button {
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FFF;
+    border: #FF9050 2px solid;
+    margin: auto;
+    color: #FF9050;
+}
+
 @media (max-width: 400px) {
     #home {
         margin-top: 40px;

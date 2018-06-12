@@ -27,6 +27,11 @@
                     {{ 'members.registration.validate' | trans }}
                 </button>
                 <div class="form-error"></div>
+                <h4>{{ 'users.signin_with' | trans }}</h4>
+                <a class="button sign-in-button" href="{{ url("hwi_oauth_service_redirect", {service: "github"}) }}">
+                    <i class="fab fa-github fa-2x"></i>
+                    {{ 'users.github_signin' | trans }}
+                </a>
             </form>
         </section>
     </div>

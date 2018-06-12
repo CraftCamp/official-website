@@ -29,6 +29,25 @@
     margin-top: 20px;
 }
 
+#registration > section > form > h4 {
+    text-align: center;
+    border-top: 1px solid #E0E0E0;
+    margin-top: 20px;
+    padding-top: 20px;
+    margin-bottom: 10px;
+}
+
+#registration > section > form > .sign-in-button {
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FFF;
+    border: #FF9050 2px solid;
+    margin: auto;
+    color: #FF9050;
+}
+
 #dashboard {
     width: 90%;
     margin: auto;

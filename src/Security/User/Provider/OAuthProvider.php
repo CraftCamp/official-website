@@ -7,7 +7,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-use App\Entity\Avatar;
 use App\Entity\User\User;
 use App\Entity\User\Member;
 use App\Manager\UserManager;
@@ -70,23 +69,24 @@ class OAuthProvider implements UserProviderInterface, OAuthAwareUserProviderInte
             ->{"set{$service}Id"}($response->getData()['id'])
             ->{"set{$service}AccessToken"}($response->getAccessToken())
         ;
-        if ($response->getProfilePicture() !== null) {
-            $this->setUserProfilePicture($user, $this->slugger->slugify($username), $response->getProfilePicture());
-        }
-        return $this->userManager->createOAuthUser($user);
+//        if ($response->getProfilePicture() !== null) {
+//            $this->setUserProfilePicture($user, $this->slugger->slugify($username), $response->getProfilePicture());
+//        }
+        $this->userManager->createOAuthUser($user);
+        return $user;
     }
     
-    protected function setUserProfilePicture(User $user, string $pictureName, string $profilePicture)
-    {
-        $extension = pathinfo($profilePicture, PATHINFO_EXTENSION);
-        $path = "{$pictureName}.{$extension}";
-        file_put_contents(Avatar::UPLOAD_DIR . "/{$path}", file_get_contents($profilePicture));
-        $user->setAvatar(
-            (new Avatar())
-            ->setName($pictureName)
-            ->setPath($path)
-        );
-    }
+//    protected function setUserProfilePicture(User $user, string $pictureName, string $profilePicture)
+//    {
+//        $extension = pathinfo($profilePicture, PATHINFO_EXTENSION);
+//        $path = "{$pictureName}.{$extension}";
+//        file_put_contents(Avatar::UPLOAD_DIR . "/{$path}", file_get_contents($profilePicture));
+//        $user->setAvatar(
+//            (new Avatar())
+//            ->setName($pictureName)
+//            ->setPath($path)
+//        );
+//    }
 
     protected function getOAuthService(ResourceOwnerInterface $resourceOwner): string
     {

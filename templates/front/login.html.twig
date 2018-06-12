@@ -25,9 +25,15 @@
                         <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
                     {% endif %}
                 </div>
+                
                 <button type="submit" class="button">
                     {{ 'users.connect' | trans }}
                 </button>
+                <h4>{{ 'users.connect_with' | trans }}</h4>
+                <a class="button sign-in-button" href="{{ url("hwi_oauth_service_redirect", {service: "github"}) }}">
+                    <i class="fab fa-github fa-2x"></i>
+                    {{ 'users.github_signin' | trans }}
+                </a>
                 <h4>{{ 'members.registration.catchphrase' | trans }}</h4>
                 <a href="{{ path('member_registration') }}" class="button">{{ 'members.registration.link' | trans}}</a>
             </form>

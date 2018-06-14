@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Projets{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/members.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/members.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="profile">
+        <header>
+            <h1>{{ 'users.profile.my_profile' | trans }}</h1>
+        </header>
+        <section>
+            <h3>{{ app.user.username }}</h3>
+            
+            <label for="email">{{ 'users.email' | trans }}</label>
+            <input id="email" type="text" name="email" disabled value="{{ app.user.email }}"/>
+            
+            
+        </section>
+        <section>
+            <h3>{{ 'users.profile.linked_accounts.title' | trans }}</h3>
+            
+            <div class="linked-account">
+                <div>
+                    <i class="fab fa-github fa-3x"></i>
+                    <span>{{ 'users.profile.linked_accounts.github' | trans }}</span>
+                </div>
+                {% if app.user.githubId is not null %}
+                    <button class="button sign-in-button disabled">
+                        {{ 'users.profile.linked_accounts.already_linked' | trans }}
+                    </button>
+                {% else %}
+                    <button class="button sign-in-button">
+                        {{ 'users.profile.linked_accounts.link' | trans }}
+                    </button>
+                {% endif %}
+            </div>
+    </div>
+{% endblock %}
+
+

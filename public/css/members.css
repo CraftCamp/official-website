@@ -49,21 +49,15 @@
 }
 
 #dashboard {
-    width: 90%;
+    width: 80%;
     margin: auto;
     margin-top: 40px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-}
-
-#profile {
-    width: 300px;
 }
 
 #communities {
     width: 300px;
-    margin-top: 40px;
 }
 
 .community {
@@ -94,6 +88,79 @@
 
 .community:hover > header > img {
     border: 2px solid #FF9050;
+}
+
+#profile-board > header > a {
+    text-decoration:
+}
+
+#profile
+{
+    width: 80%;
+    margin: auto;
+    margin-top: 60px;
+}
+
+#profile > header > h1 {
+    color: #FF9050;
+    font-family: Eczar;
+}
+
+#profile > section {
+    border-top: 1px solid #A0A0A0;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+#profile > section > h3 {
+    margin-top: 20px;
+    color: #808080;
+    font-size: 1.2em;
+    font-family: Eczar;
+}
+
+#profile > section > input {
+    display: block;
+    height: 35px;
+    margin-top: 10px;
+    padding-left: 20px;
+    border: none;
+    border-bottom: 1px solid #A0A0A0;
+}
+
+#profile > section > input:focus {
+    border-bottom: 1px solid #FF9050;
+}
+
+#profile > section > .linked-account {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#profile > section > .linked-account > div {
+    display: flex;
+    align-items: center;
+    color: #FF9050;
+    margin-right: 40px;
+}
+
+#profile > section > .linked-account > div > span {
+    padding-left: 20px;
+}
+
+#profile > section > .linked-account > button {
+    width: 150px;
+    background-color: #FFF;
+    border: #FF9050 2px solid;
+    color: #FF9050;
+}
+
+#profile > section > .linked-account > button.disabled {
+    width: 150px;
+    background-color: #FFF;
+    border: #2ca02c 2px solid;
+    color: #2CA02C;
 }
 
 @media (max-width: 400px) {

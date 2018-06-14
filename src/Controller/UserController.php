@@ -37,4 +37,13 @@ class UserController extends Controller
         }
         return $this->redirectToRoute("member_dashboard");
     }
+    
+    /**
+     * @Route("/profile", name="my_profile", methods={"GET"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function getMyProfile()
+    {
+        return $this->render('members/profile.html.twig');
+    }
 }

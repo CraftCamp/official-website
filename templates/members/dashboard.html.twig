@@ -38,17 +38,15 @@
                 </a>
             </footer>
         </div>
-        <div id="profile">
+        <div id="profile-board">
             <div>
                 <header>
                     <h3>{{ app.user.username }}</h3>
+                    <a class="button" href="{{ path('my_profile') }}">{{ 'users.profile.my_profile' | trans }}</a>
                 </header>
                 <section>
 
                 </section>
-            </div>
-            <div>
-                <iframe src="https://discordapp.com/widget?id=446593317254332416&theme=dark" width="300" height="400" allowtransparency="true" frameborder="0"></iframe>
             </div>
         </div>
     </div>

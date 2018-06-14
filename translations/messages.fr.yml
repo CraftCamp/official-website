@@ -159,6 +159,14 @@ users:
     connect_with: 'Se connecter avec'
     signin_with: 'Utiliser mon compte'
     github_signin: 'Github'
+    profile:
+        my_profile: 'Mon profil'
+        linked_accounts:
+            title: 'Comptes associés'
+            github: 'Github'
+            already_linked: 'Déjà associé'
+            link: 'Associer'
+    
     
 website:
     full_date: 'd/m/Y à H:i'

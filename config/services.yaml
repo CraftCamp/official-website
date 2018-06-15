@@ -24,6 +24,10 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
     
+    App\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, priority: 10 }
+    
     App\EventListener\AccountConnectorListener:
         tags:
             - { name: kernel.event_listener, event: hwi_oauth.connect.confirmed, method: onConnectConfirmed }

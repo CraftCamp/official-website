@@ -49,6 +49,11 @@ class UserManager
             ->findOneByUsernameOrEmail($identifier)
         ;
     }
+    
+    public function findUserByServiceId(string $service, int $id)
+    {
+        return $this->em->getRepository(User::class)->{"findOneBy{$service}Id"}($id);
+    }
 
     public function createUser(array $data, string $type, Organization $organization = null): User
 	{

@@ -37,6 +37,11 @@ class OAuthProvider implements UserProviderInterface, OAuthAwareUserProviderInte
     {
         return $this->userManager->findUserByUsernameOrEmail($username);
     }
+    
+    public function loadUserByServiceId(string $service, int $id)
+    {
+        return $this->userManager->findUserByServiceId($service, $id);
+    }
 
     public function refreshUser(UserInterface $user): UserInterface
     {
@@ -50,23 +55,23 @@ class OAuthProvider implements UserProviderInterface, OAuthAwareUserProviderInte
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
     {
-        $service = $this->getOAuthService($response->getResourceOwner());
-        if (($user = $this->loadUserByUsername($response->getEmail())) !== null) {
-            if (($id = $user->{"get{$service}Id"}()) !== $response->getData()['id']) {
+        $service = ucfirst($response->getResourceOwner()->getName());
+        $serviceId = $response->getData()['id'];
+        if (($user = $this->loadUserByServiceId($service, $serviceId)) !== null) {
+            if (($id = $user->{"get{$service}Id"}()) !== $serviceId) {
                 throw new AuthenticationException('users.connection.unbound_accounts');
             }
             return $user;
         }
-        $username =
-            ($this->userManager->checkUsername($response->getRealName()))
-            ? $response->getRealName()
-            : $response->getEmail()
-        ;
         $user =
             (new Member())
-            ->setUsername($username)
+            ->setUsername(
+                ($this->userManager->checkUsername($response->getRealName()))
+                ? $response->getRealName()
+                : $response->getEmail()
+            )
             ->setEmail($response->getEmail())
-            ->{"set{$service}Id"}($response->getData()['id'])
+            ->{"set{$service}Id"}($serviceId)
             ->{"set{$service}AccessToken"}($response->getAccessToken())
         ;
 //        if ($response->getProfilePicture() !== null) {
@@ -87,14 +92,4 @@ class OAuthProvider implements UserProviderInterface, OAuthAwareUserProviderInte
 //            ->setPath($path)
 //        );
 //    }
-
-    protected function getOAuthService(ResourceOwnerInterface $resourceOwner): string
-    {
-        switch (get_class($resourceOwner)) {
-            case GoogleResourceOwner::class: return 'Google';
-            case FacebookResourceOwner::class: return 'Facebook';
-            case GitHubResourceOwner::class: return 'Github';
-            default: throw new \ErrorException('Unknown resource owner');
-        }
-    }
 }

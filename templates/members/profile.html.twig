@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{{ parent() }} - Projets{% endblock %}
+{% block title %}{{ parent() }} - {{ 'users.profile.my_profile' | trans }} {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -38,9 +38,9 @@
                         {{ 'users.profile.linked_accounts.already_linked' | trans }}
                     </button>
                 {% else %}
-                    <button class="button sign-in-button">
+                    <a href="{{ url("hwi_oauth_service_redirect", {service: "github"}) }}" class="button sign-in-button">
                         {{ 'users.profile.linked_accounts.link' | trans }}
-                    </button>
+                    </a>
                 {% endif %}
             </div>
     </div>

@@ -11,4 +11,4 @@ hwi_oauth:
             
     connect:
         confirmation: false
-        account_connector: App\Security\User\AccountConnector
+        account_connector: App\Security\User\Connect\AccountConnector

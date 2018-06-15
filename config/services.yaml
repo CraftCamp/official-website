@@ -24,6 +24,10 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
     
+    App\EventListener\AccountConnectorListener:
+        tags:
+            - { name: kernel.event_listener, event: hwi_oauth.connect.confirmed, method: onConnectConfirmed }
+    
     App\DataFixtures\:
         resource: '../src/DataFixtures'
         exclude: '../src/DataFixtures/ORM/fixtures'

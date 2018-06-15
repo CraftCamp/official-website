@@ -36,7 +36,7 @@
         "symfony/security-bundle": "^4.0",
         "symfony/asset": "^4.0",
         "twig/extensions": "^1.5",
-        "hwi/oauth-bundle": "^0.6.2"
+        "hwi/oauth-bundle": "dev-master"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",

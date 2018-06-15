@@ -10,4 +10,5 @@ hwi_oauth:
             scope: 'user:email'
             
     connect:
+        confirmation: false
         account_connector: App\Security\User\AccountConnector

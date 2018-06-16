@@ -30,6 +30,17 @@
                     {% endif %}
                 </div>
             </nav>
+            <header>
+                {% for label, messages in app.flashes %}
+                    <div class="flash flash-{{ label }}">
+                        <ul>
+                            {% for message in messages %}
+                                <li>{{ message | trans }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %} 
+            </header>
             {% block body %}
 
             {% endblock %}

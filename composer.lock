@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5db00ebf4517ad171e20e49033d551a6",
+    "content-hash": "78e7356f49e85b24e628969d110e5fc5",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1220,16 +1220,16 @@
         },
         {
             "name": "hwi/oauth-bundle",
-            "version": "0.6.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "d94181ac3d90509a557e3ea2bf6a85fcc8cd67b6"
+                "reference": "030e0e9be9bb66d72877ae837df6cdcef8b42591"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/d94181ac3d90509a557e3ea2bf6a85fcc8cd67b6",
-                "reference": "d94181ac3d90509a557e3ea2bf6a85fcc8cd67b6",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/030e0e9be9bb66d72877ae837df6cdcef8b42591",
+                "reference": "030e0e9be9bb66d72877ae837df6cdcef8b42591",
                 "shasum": ""
             },
             "require": {
@@ -1374,7 +1374,7 @@
                 "yandex",
                 "youtube"
             ],
-            "time": "2018-03-28T16:21:10+00:00"
+            "time": "2018-06-13T15:07:19+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -7448,6 +7448,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "symfony/lts": 20,
+        "hwi/oauth-bundle": 20,
         "liip/functional-test-bundle": 15
     },
     "prefer-stable": false,

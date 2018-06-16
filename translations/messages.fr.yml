@@ -157,6 +157,9 @@ users:
     login: 'Connexion'
     connect: 'Se connecter'
     connect_with: 'Se connecter avec'
+    connection:
+        account_mismatch: 'Votre compte CraftCamp est déjà lié à un compte externe'
+        account_already_bound: 'Ce compte externe est déjà lié à un autre utilisateur'
     signin_with: 'Utiliser mon compte'
     github_signin: 'Github'
     profile:

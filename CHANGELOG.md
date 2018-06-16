@@ -1,3 +1,19 @@
+## [0.1.9] - 2018-06-16
+### Added
+- Registration via Github account
+- Connection via Github account
+- Binding between CraftCamp and Github accounts
+- User profile page
+- Exception listener with custom handling of exceptions
+- Flashbags display at pages top
+
+### Fixed
+- Dashboard page title
+
+### Removed
+- Agility bundle dependency
+- Discord widget in member dashboard
+
 ## [0.1.8] - 2018-06-06
 ### Added
 - Project workspace

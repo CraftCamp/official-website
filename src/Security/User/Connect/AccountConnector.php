@@ -33,7 +33,7 @@ class AccountConnector implements AccountConnectorInterface
         if (($id = $user->{"get{$service}Id"}()) !== null && $id !== $serviceUserId) {
             throw new ConnectException('users.connection.account_mismatch');
         } elseif ($id === null && $this->em->getRepository(User::class)->{"findOneBy{$service}Id"}($serviceUserId) !== null) {
-            throw new ConnectException('users.connection.account_already_bind');
+            throw new ConnectException('users.connection.account_already_bound');
         }
         $user
             ->{"set{$service}Id"}($response->getData()['id'])

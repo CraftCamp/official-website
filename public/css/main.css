@@ -67,6 +67,36 @@ body > nav > div > a {
     display: none;
 }
 
+.flash {
+    width: 80%;
+    padding: 1px;
+    margin: auto;
+    margin-top: 10px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.8);
+    color: #EFEFEF;
+    font-size: 1.1em;
+    font-family: Eczar;
+    border-radius: 13px;
+}
+
+.flash > ul {
+    padding: 20px 40px;
+    border: 2px dotted #EFEFEF;
+    border-radius: 10px;
+}
+
+.flash.flash-notice {
+    background-color: #08C;
+}
+
+.flash.flash-error {
+    background-color: #C02020;
+}
+
+.flash.flash-success {
+    background-color: #2CA02C;
+}
+
 @media (max-width: 400px) {
     body > nav > h1 {
         margin: auto;

@@ -14,10 +14,6 @@ use App\Manager\UserManager;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GoogleResourceOwner;
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\FacebookResourceOwner;
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GitHubResourceOwner;
 use App\Utils\Slugger;
 
 class OAuthProvider implements UserProviderInterface, OAuthAwareUserProviderInterface
@@ -59,7 +55,7 @@ class OAuthProvider implements UserProviderInterface, OAuthAwareUserProviderInte
         $serviceId = $response->getData()['id'];
         if (($user = $this->loadUserByServiceId($service, $serviceId)) !== null) {
             if (($id = $user->{"get{$service}Id"}()) !== $serviceId) {
-                throw new AuthenticationException('users.connection.unbound_accounts');
+                throw new AuthenticationException('users.connection.account_already_bound');
             }
             return $user;
         }

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use App\Security\User\Connect\ConnectException;
@@ -16,10 +17,13 @@ class ExceptionListener
 {
     /** @var UrlGeneratorInterface **/
     protected $router;
+    /** @var SessionInterface **/
+    protected $session;
     
-    public function __construct(UrlGeneratorInterface $router)
+    public function __construct(UrlGeneratorInterface $router, SessionInterface $session)
     {
         $this->router = $router;
+        $this->session = $session;
     }
     
     public function onKernelException(GetResponseForExceptionEvent $event)
@@ -35,6 +39,8 @@ class ExceptionListener
     {
         $event->stopPropagation();
         $event->setResponse(new RedirectResponse($this->router->generate('my_profile')));
+        
+        $this->session->getFlashbag()->add('error', $event->getException()->getMessage());
     }
     
     protected function handleException(GetResponseForExceptionEvent $event)

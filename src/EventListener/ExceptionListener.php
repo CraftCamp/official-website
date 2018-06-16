@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use App\Security\User\Connect\ConnectException;
 
 class ExceptionListener
@@ -23,15 +24,16 @@ class ExceptionListener
     
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        $event->stopPropagation();
         switch (get_class($event->getException())) {
             case ConnectException::class: return $this->handleConnectException($event);
+            case AccessDeniedException::class: return;
             default: return $this->handleException($event);
         }
     }
     
     protected function handleConnectException(GetResponseForExceptionEvent $event)
     {
+        $event->stopPropagation();
         $event->setResponse(new RedirectResponse($this->router->generate('my_profile')));
     }
     

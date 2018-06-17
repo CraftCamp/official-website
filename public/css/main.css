@@ -94,7 +94,7 @@ body > nav > div > a {
 }
 
 .flash.flash-success {
-    background-color: #2CA02C;
+    background-color: green;
 }
 
 @media (max-width: 400px) {

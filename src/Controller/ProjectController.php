@@ -119,7 +119,7 @@ class ProjectController extends Controller
         $this->denyAccessUnlessGranted('ROLE_USER');
         $project = $projectManager->get($request->attributes->get('slug'));
         $user = $this->getUser();
-        if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
+        if (!$user->getProjects()->contains($project)) {
             throw new AccessDeniedHttpException('projects.access_denied');
         }
         return $this->render('projects/details_edition.html.twig', [
@@ -136,7 +136,7 @@ class ProjectController extends Controller
         $this->denyAccessUnlessGranted('ROLE_USER');
         $project = $projectManager->get($request->attributes->get('slug'));
         $user = $this->getUser();
-        if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
+        if (!$user->getProjects()->contains($project)) {
             throw new AccessDeniedHttpException('projects.access_denied');
         }
         $details = $detailsManager->putProjectDetails($project, $request->request->all());

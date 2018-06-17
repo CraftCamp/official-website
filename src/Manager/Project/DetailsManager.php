@@ -4,6 +4,8 @@ namespace App\Manager\Project;
 
 use Doctrine\ORM\EntityManagerInterface;
 
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 use App\Entity\Project\Project;
 use App\Entity\Project\Details;
 
@@ -11,10 +13,13 @@ class DetailsManager
 {
     /** @var EntityManagerInterface **/
     protected $em;
+    /** @var SessionInterface **/
+    protected $session;
     
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, SessionInterface $session)
     {
         $this->em = $em;
+        $this->session = $session;
     }
     
     public function getProjectDetails(Project $project)
@@ -29,6 +34,7 @@ class DetailsManager
         if (($details = $this->getProjectDetails($project)) === null) {
             $details = (new Details())->setProject($project);
             $this->em->persist($details);
+            $this->session->getFlashbag()->add('success', 'projects.descriptions.first_completed');
         }
         $details
             ->setNeedDescription($data['need_description'])

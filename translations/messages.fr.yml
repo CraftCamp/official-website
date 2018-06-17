@@ -99,6 +99,7 @@ projects:
         next: 'Suivant'
         submit: 'Valider'
     descriptions:
+        first_completed: 'Votre projet est désormais suffisamment renseigné pour être soumis au vote !'
         title: 'Fiche projet'
         save: 'Sauvegarder'
         wording: |

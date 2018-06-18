@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Entity\Organization;
-use App\Entity\Project\Project;
 use App\Entity\User\ProductOwner;
 
 use App\Manager\OrganizationManager;
@@ -20,9 +19,12 @@ use App\Manager\UserManager;
 
 use App\Security\Authentication\AuthenticationManager;
 
-use App\Manager\Project\ProjectManager;
-use App\Manager\Project\DetailsManager;
-use App\Manager\Project\NewsManager;
+use App\Manager\Project\{
+    DetailsManager,
+    NewsManager,
+    PollManager,
+    ProjectManager
+};
 
 class ProjectController extends Controller
 {
@@ -102,12 +104,13 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{slug}/workspace", name="project_workspace", methods={"GET"})
      */
-    public function getWorkspaceAction(Request $request, ProjectManager $projectManager, DetailsManager $detailsManager)
+    public function getWorkspaceAction(Request $request, ProjectManager $projectManager, DetailsManager $detailsManager, PollManager $pollManager)
     {
         $project = $projectManager->get($request->attributes->get('slug'));
         return $this->render('projects/workspace.html.twig', [
             'project' => $project,
-            'details' => $detailsManager->getProjectDetails($project)
+            'details' => $detailsManager->getCurrentProjectDetails($project),
+            'poll' => $pollManager->getCurrentProjectPoll($project),
         ]);
     }
     
@@ -119,12 +122,12 @@ class ProjectController extends Controller
         $this->denyAccessUnlessGranted('ROLE_USER');
         $project = $projectManager->get($request->attributes->get('slug'));
         $user = $this->getUser();
-        if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
+        if (!$user->getProjects()->contains($project)) {
             throw new AccessDeniedHttpException('projects.access_denied');
         }
         return $this->render('projects/details_edition.html.twig', [
             'project' => $project,
-            'details' => $detailsManager->getProjectDetails($project)
+            'details' => $detailsManager->getCurrentProjectDetails($project)
         ]);
     }
     
@@ -136,7 +139,7 @@ class ProjectController extends Controller
         $this->denyAccessUnlessGranted('ROLE_USER');
         $project = $projectManager->get($request->attributes->get('slug'));
         $user = $this->getUser();
-        if (!$user instanceof ProductOwner || !$user->getProjects()->contains($project)) {
+        if (!$user->getProjects()->contains($project)) {
             throw new AccessDeniedHttpException('projects.access_denied');
         }
         $details = $detailsManager->putProjectDetails($project, $request->request->all());

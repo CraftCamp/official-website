@@ -60,6 +60,10 @@ abstract class User extends UserModel
      */
     protected $organizations;
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project\Project", mappedBy="productOwner")
+     */
+    protected $projects;
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\User\ActivationLink", cascade={"remove"})
      */
     protected $activationLink;

@@ -4,7 +4,9 @@ namespace App\Model\User;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Model\Organization;
+use App\Model\Project\Project;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 abstract class User implements UserInterface, \JsonSerializable
 {
@@ -26,6 +28,8 @@ abstract class User implements UserInterface, \JsonSerializable
     protected $isLocked;
     /** @var ArrayCollection **/
     protected $organizations;
+    /** @var ArrayCollction **/
+    protected $projects;
     /** @var ActivationLink **/
     protected $activationLink;
     /** @var int **/
@@ -46,6 +50,7 @@ abstract class User implements UserInterface, \JsonSerializable
     public function __construct()
     {
         $this->organizations = new ArrayCollection();
+        $this->projects = new ArrayCollection();
         $this->roles = new ArrayCollection();
     }
 
@@ -192,6 +197,18 @@ abstract class User implements UserInterface, \JsonSerializable
     public function getOrganizations(): ArrayCollection
     {
         return $this->organizations;
+    }
+    
+    public function addProject(Project $project): User
+    {
+        $this->projects->add($project);
+        
+        return $this;
+    }
+    
+    public function getProjects(): Collection
+    {
+        return $this->projects;
     }
 
     public function setActivationLink(ActivationLink $activationLink): User

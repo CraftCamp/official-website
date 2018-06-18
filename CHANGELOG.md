@@ -1,3 +1,12 @@
+## [Unreleased]
+### Added
+- Poll creation from the project workspace
+- Notification when project details are completed for the first time
+
+### Fixed
+- Project creation from a member account
+- Project details access from a member owner account
+
 ## [0.1.9] - 2018-06-16
 ### Added
 - Registration via Github account

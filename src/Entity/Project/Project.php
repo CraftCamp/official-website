@@ -40,7 +40,7 @@ class Project extends ProjectModel
      */
     protected $updatedAt;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User\ProductOwner")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User\User")
      */
     protected $productOwner;
     /**

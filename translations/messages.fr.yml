@@ -99,6 +99,7 @@ projects:
         next: 'Suivant'
         submit: 'Valider'
     descriptions:
+        first_completed: 'Votre projet est désormais suffisamment renseigné pour être soumis au vote !'
         title: 'Fiche projet'
         save: 'Sauvegarder'
         wording: |
@@ -118,6 +119,13 @@ projects:
                 Des visiteurs que vous devez convaincre ?
             goal: 'Objectif'
             goal_wording: ''
+    votes:
+        title: 'Votes'
+        wording: |
+            Maintenant que votre projet est suffisamment renseigné, vous pouvez le soumettre au vote de la communauté.
+            Chaque membre exprimera son approbation ou son refus du projet.
+            Si le projet est accepté, les travaux débuteront.
+            En cas de refus, vous pourrez retravailler les axes de votre projet et le présenter à nouveau au vote.
         
     list:
         title: 'Projets'

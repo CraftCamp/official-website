@@ -25,15 +25,12 @@ class PollManager
     
     public function createPoll(Project $project, Details $details): Poll
     {
-        $createdAt = new \DateTime();
-        dump($this->pollDuration);
-        dump($createdAt->add(new \DateInterval($this->pollDuration)));
         $poll =
             (new Poll())
             ->setProject($project)
             ->setDetails($details)
-            ->setCreatedAt($createdAt)
-            ->setEndedAt($createdAt->add(new \DateInterval($this->pollDuration)))
+            ->setCreatedAt(new \DateTime())
+            ->setEndedAt(new \DateTime($this->pollDuration))
         ;
         $this->em->persist($poll);
         $this->em->flush();

@@ -19,7 +19,7 @@
         <!-- Configure your db driver and server_version in config/packages/doctrine.yaml -->
         <env name="DATABASE_URL" value="sqlite:///var/developtech_test.sqlite"/>
         <!-- ###- doctrine/doctrine-bundle ### -->
-
+        <env name="POLL_DURATION" value="+3 days"/>
         <!-- ###+ symfony/swiftmailer-bundle ### -->
         <!-- For Gmail as a transport, use: "gmail://username:password@localhost" -->
         <!-- For a generic SMTP server, use: "smtp://localhost:25?encryption=&auth_mode=" -->

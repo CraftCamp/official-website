@@ -44,6 +44,9 @@ services:
         resource: '../src/Manager'
         public: true
         
+    App\Manager\Project\PollManager:
+        $pollDuration: "%env(resolve:POLL_DURATION)%"
+        
     App\Utils\:
         resource: '../src/Utils'
         public: true

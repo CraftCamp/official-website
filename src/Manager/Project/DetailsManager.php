@@ -22,16 +22,19 @@ class DetailsManager
         $this->session = $session;
     }
     
-    public function getProjectDetails(Project $project)
+    public function getCurrentProjectDetails(Project $project)
     {
-        return $this->em->getRepository(Details::class)->findOneBy([
+        $results = $this->em->getRepository(Details::class)->findBy([
             'project' => $project
-        ]);
+        ], [
+            'updatedAt' => 'DESC'
+        ], 1);
+        return (count($results) > 0) ? $results[0] : null;
     }
     
     public function putProjectDetails(Project $project, array $data): Details
     {
-        if (($details = $this->getProjectDetails($project)) === null) {
+        if (($details = $this->getCurrentProjectDetails($project)) === null) {
             $details = (new Details())->setProject($project);
             $this->em->persist($details);
             $this->session->getFlashbag()->add('success', 'projects.descriptions.first_completed');

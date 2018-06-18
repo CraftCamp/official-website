@@ -199,7 +199,7 @@ abstract class User implements UserInterface, \JsonSerializable
         return $this->organizations;
     }
     
-    public function addProject(Project $project): ProductOwner
+    public function addProject(Project $project): User
     {
         $this->projects->add($project);
         

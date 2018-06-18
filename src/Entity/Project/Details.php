@@ -15,7 +15,12 @@ class Details extends DetailsModel
 {
     /**
      * @ORM\Id
-     * @ORM\OneToOne(targetEntity="App\Entity\Project\Project")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project\Project")
      */
     protected $project;
     /**
@@ -53,5 +58,17 @@ class Details extends DetailsModel
     public function preUpdate()
     {
         $this->updatedAt = new \DateTime();
+    }
+    
+    public function setId(int $id): Details
+    {
+        $this->id = $id;
+        
+        return $this;
+    }
+    
+    public function getId(): int
+    {
+        return $this->id;
     }
 }

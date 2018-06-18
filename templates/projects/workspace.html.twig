@@ -19,6 +19,23 @@
                 <h1>{{ project.name }}</h1>
             </header>
             <section>
+                {% if details is not null and details.needDescription | length >= 20 and details.targetDescription | length >= 20 and details.goalDescription | length >= 20 %}
+                    <div id="votes">
+                        <header>
+                            <h3>{{ 'projects.votes.title' | trans }}</h3>
+                            <p>{{ 'projects.votes.wording' | trans }}</p>
+                        </header>
+                        <section>
+                            {% if poll is null %}
+                                <form method="POST" action="{{ path('create_project_poll', { "slug": project.slug }) }}">
+                                    <button type="submit" class="indicator orange">Lancer un vote</button>
+                                </form>
+                            {% else %}
+                                <a href="{{ path('get_poll', { 'id': poll.id }) }}" class="indicator green">Voir le vote</a>
+                            {% endif %}
+                        </section>
+                    </div>
+                {% endif %}
                 <div id="descriptions">
                     <header>
                         <h3>{{ 'projects.descriptions.title' | trans }}</h3>

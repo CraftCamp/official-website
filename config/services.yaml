@@ -31,6 +31,10 @@ services:
     App\EventListener\AccountConnectorListener:
         tags:
             - { name: kernel.event_listener, event: hwi_oauth.connect.confirmed, method: onConnectConfirmed }
+            
+    App\EventListener\NotificationRegistryListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
     
     App\DataFixtures\:
         resource: '../src/DataFixtures'

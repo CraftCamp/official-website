@@ -8,6 +8,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use App\Entity\User\Notification;
 
 use App\Entity\User\Member;
+use App\Entity\User\User;
 
 class NotificationManager
 {
@@ -22,6 +23,16 @@ class NotificationManager
         $this->translator = $translator;
     }
     
+    public function getUserUnreadNotifications(User $user): array
+    {
+        return $this->em->getRepository(Notification::class)->findBy([
+            'user' => $user,
+            'readAt' => null
+        ], [
+            'createdAt' => 'DESC'
+        ]);
+    }
+
     public function notifyAllMembers(string $content, array $parameters = [])
     {
         $this->notify($this->em->getRepository(Member::class)->findAll(), $content, $parameters);

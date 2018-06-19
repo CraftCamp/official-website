@@ -62,17 +62,11 @@ services:
             - "%env(resolve:WEBSITE_MAIL)%"
             - "%env(resolve:MAILER_NAME)%"
             
-    App\Subscriber\Community\NewsSubscriber:
+    App\Subscriber\:
+        resource: '../src/Subscriber'
         tags:
             - {name: kernel.event_subscriber}
             
-    App\Subscriber\Project\NewsSubscriber:
-        tags:
-            - {name: kernel.event_subscriber}
-
-    App\Subscriber\JsonRequestSubscriber:
-        tags:
-            - {name: kernel.event_subscriber}
             
     App\Twig\NewsIconExtension:
         tags:

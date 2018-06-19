@@ -126,6 +126,7 @@ projects:
             Chaque membre exprimera son approbation ou son refus du projet.
             Si le projet est accepté, les travaux débuteront.
             En cas de refus, vous pourrez retravailler les axes de votre projet et le présenter à nouveau au vote.
+        notification: 'Le projet %project% est <a href="/polls/%poll_id%">en cours de vote</a> !'
         
     list:
         title: 'Projets'

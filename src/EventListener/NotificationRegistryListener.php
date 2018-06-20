@@ -35,6 +35,6 @@ class NotificationRegistryListener
             !($user = $this->tokenStorage->getToken()->getUser()) instanceof User) {
             return;
         }
-        $this->registry->storeNotifications($this->manager->getUserUnreadNotifications($user));
+        $this->registry->store($this->manager->getUserUnreadNotifications($user));
     }
 }

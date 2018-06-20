@@ -22,7 +22,7 @@
                     <a href="{{ path('projects_list') }}">{{ 'projects.menu_item' | trans }}</a>
                     {% if is_granted("ROLE_USER") %}
                         
-                        {% set notifications = notifications_registry.getAll() %}
+                        {% set notifications = notifications_registry.getItems() %}
                         <span class="fa-layers fa-fw fa-2x">
                             {% if notifications | length > 0 %}
                                 <i class="far fa-bell" style="color:#FF9050"></i>

@@ -2,16 +2,16 @@
 
 namespace App\Registry;
 
-class NotificationRegistry
+class NotificationRegistry implements RegistryInterface
 {
     protected $notifications = [];
     
-    public function storeNotifications(array $notifications = [])
+    public function store(array $items = [])
     {
-        $this->notifications = $notifications;
+        $this->notifications = $items;
     }
     
-    public function getAll(): array
+    public function getItems(): array
     {
         return $this->notifications;
     }

@@ -23,7 +23,7 @@
                     {% if is_granted("ROLE_USER") %}
                         
                         {% set notifications = notifications_registry.getItems() %}
-                        <span class="fa-layers fa-fw fa-2x">
+                        <span id="notifications-counter" class="fa-layers fa-fw fa-2x" onclick="toggleNotifications();">
                             {% if notifications | length > 0 %}
                                 <i class="far fa-bell" style="color:#FF9050"></i>
                                 <span class="fa-layers-counter fa-lg" style="background:Tomato">
@@ -33,6 +33,11 @@
                                 <i class="far fa-bell"></i>
                             {% endif %}
                         </span>
+                        <div id="notifications">
+                            {% for notification in notifications %}
+                                <div>{{ notification.content | raw }}</div>
+                            {% endfor %}
+                        </div>
                         <a href="{{ path('member_dashboard') }}" class="button">{{ 'users.dashboard' | trans }}</a>
                         <a href="{{ path('logout') }}">
                             <i class="fas fa-sign-out-alt fa-2x" style="color: #FFA05A;"></i>

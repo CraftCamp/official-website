@@ -6,3 +6,7 @@ const formToJson = form => {
     }
     return JSON.stringify(jsonObject);
 };
+
+const toggleNotifications = () => {
+    document.querySelector('#notifications').classList.toggle('show');
+};

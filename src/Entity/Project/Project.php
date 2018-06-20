@@ -32,6 +32,10 @@ class Project extends ProjectModel
      */
     protected $description;
     /**
+     * @ORM\OneToOne(targetEntity="Poll")
+     */
+    protected $approvalPoll;
+    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;

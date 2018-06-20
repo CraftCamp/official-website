@@ -25,16 +25,18 @@ use App\Manager\Project\{
     PollManager,
     ProjectManager
 };
+use App\Registry\ProjectRegistry;
 
 class ProjectController extends Controller
 {
     /**
      * @Route("/projects", name="projects_list", methods={"GET"})
      */
-    public function getListAction(ProjectManager $projectManager)
+    public function getListAction(ProjectManager $projectManager, ProjectRegistry $projectRegistry)
     {
+        $projectRegistry->store($projectManager->getAll());
         return $this->render('projects/list.html.twig', [
-            'projects' => $projectManager->getAll()
+            'projects' => $projectRegistry->getItems()
         ]);
     }
 

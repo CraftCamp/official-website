@@ -12,24 +12,48 @@
 {% endblock %}
 
 {% block body %}
-    <div id="projects">
-        <header>
-            <h3>{{ 'projects.list.title' | trans }}</h3>
-            <a class="button" href="{{ path('new_project') }}">
-                {{ 'projects.creation.link' | trans }}
-            </a>
-        </header>
-        <section>
-            {% for project in projects %}
-                <div class="project">
-                    <header>
-                        <i class="fa fa-cog fa-4x"></i>
-                    </header>
-                    <section>
-                        <a href="{{ path('project_page', {"slug": project.slug }) }}">{{ project.name }}</a>
-                    </section>
-                </div>
-            {% endfor %}
-        </section>
+    <div id="toolbar">
+        <a class="button" href="{{ path('new_project') }}">
+            {{ 'projects.creation.link' | trans }}
+        </a>
     </div>
+    
+    {% if projects["working"] | length > 0 %}
+        <div class="projects">
+            <header>
+                <h3>{{ 'projects.list.wip_title' | trans }}</h3>
+            </header>
+            <section>
+                {% for project in projects["working"] %}
+                    <div>
+                        <header>
+                            <i class="fa fa-cog fa-4x"></i>
+                        </header>
+                        <section>
+                            <a href="{{ path('project_page', {"slug": project.slug }) }}">{{ project.name }}</a>
+                        </section>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+    {% endif %}
+    {% if projects["submitted"] | length > 0 %}
+        <div class="projects">
+            <header>
+                <h3>{{ 'projects.list.poll_title' | trans }}</h3>
+            </header>
+            <section>
+                {% for project in projects["submitted"] %}
+                    <div>
+                        <header>
+                            <i class="fa fa-cog fa-4x"></i>
+                        </header>
+                        <section>
+                            <a href="{{ path('project_page', {"slug": project.slug }) }}">{{ project.name }}</a>
+                        </section>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -129,7 +129,8 @@ projects:
         notification: 'Le projet %project% est <a href="/polls/%poll_id%">en cours de vote</a> !'
         
     list:
-        title: 'Projets'
+        wip_title: 'Projets en cours'
+        poll_title: 'Projets en vote'
     menu_item: 'Projets'
     return_to_list: 'Retourner à la liste'
     join: 'Participer à ce projet'

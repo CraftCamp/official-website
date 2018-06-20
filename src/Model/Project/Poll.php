@@ -8,6 +8,8 @@ abstract class Poll
     protected $project;
     /** @var Details **/
     protected $details;
+    /** @var bool **/
+    protected $isEnded;
     /** @var \DateTime **/
     protected $createdAt;
     /** @var \DateTime **/
@@ -35,6 +37,18 @@ abstract class Poll
     public function getDetails(): Details
     {
         return $this->details;
+    }
+    
+    public function setIsEnded(bool $isEnded): Poll
+    {
+        $this->isEnded = $isEnded;
+        
+        return $this;
+    }
+    
+    public function getIsEnded(): bool
+    {
+        return $this->isEnded;
     }
     
     public function setCreatedAt(\DateTime $createdAt): Poll

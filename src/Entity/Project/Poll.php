@@ -27,6 +27,10 @@ class Poll extends PollModel
      */
     protected $details;
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isEnded;
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $createdAt;

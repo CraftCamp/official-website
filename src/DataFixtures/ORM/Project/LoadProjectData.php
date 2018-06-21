@@ -1,36 +1,20 @@
 <?php
 
-namespace App\DataFixtures\ORM;
+namespace App\DataFixtures\ORM\Project;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\{
     AbstractFixture,
     OrderedFixtureInterface
 };
-use Symfony\Component\DependencyInjection\{
-    ContainerInterface,
-    ContainerAwareInterface
-};
 use App\Entity\Project\Project;
 
-class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
-    /** @var ContainerInterface */
-    private $container;
-
-    /**
-     * @param ContainerInterface $container
-     */
-    public function setContainer(ContainerInterface $container = null) {
-        $this->container = $container;
-    }
-
-    /**
-     * @param ObjectManager $manager
-     */
-    public function load(ObjectManager $manager) {
-        $data = include('fixtures/projects.php');
-        foreach ($data as $projectData)
-        {
+class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
+{
+    public function load(ObjectManager $manager)
+    {
+        $data = include(dirname(__DIR__) . '/fixtures/projects.php');
+        foreach ($data as $projectData) {
             $project =
                 (new Project())
                 ->setId($projectData['id'])
@@ -41,15 +25,13 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
                 ->setCreatedAt(new \DateTime($projectData['created_at']))
             ;
             $manager->persist($project);
+            $this->addReference("project-{$projectData['slug']}", $project);
         }
         $manager->flush();
-        $manager->clear(Project::class);
     }
 
-    /**
-     * @return int
-     */
-    public function getOrder() {
+    public function getOrder(): int
+    {
         return 4;
     }
 }

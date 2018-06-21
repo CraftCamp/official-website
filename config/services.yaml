@@ -31,6 +31,10 @@ services:
     App\EventListener\AccountConnectorListener:
         tags:
             - { name: kernel.event_listener, event: hwi_oauth.connect.confirmed, method: onConnectConfirmed }
+            
+    App\EventListener\NotificationRegistryListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
     
     App\DataFixtures\:
         resource: '../src/DataFixtures'
@@ -62,17 +66,11 @@ services:
             - "%env(resolve:WEBSITE_MAIL)%"
             - "%env(resolve:MAILER_NAME)%"
             
-    App\Subscriber\Community\NewsSubscriber:
+    App\Subscriber\:
+        resource: '../src/Subscriber'
         tags:
             - {name: kernel.event_subscriber}
             
-    App\Subscriber\Project\NewsSubscriber:
-        tags:
-            - {name: kernel.event_subscriber}
-
-    App\Subscriber\JsonRequestSubscriber:
-        tags:
-            - {name: kernel.event_subscriber}
             
     App\Twig\NewsIconExtension:
         tags:

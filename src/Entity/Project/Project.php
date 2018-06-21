@@ -32,6 +32,15 @@ class Project extends ProjectModel
      */
     protected $description;
     /**
+     * @ORM\OneToMany(targetEntity="Details", mappedBy="project", fetch="LAZY")
+     */
+    protected $details;
+    /**
+     * @ORM\OneToOne(targetEntity="Poll")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    protected $approvalPoll;
+    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;

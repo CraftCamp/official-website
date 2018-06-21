@@ -14,6 +14,8 @@ abstract class Project implements \JsonSerializable
     protected $slug;
     /** @var string **/
     protected $description;
+    /** @var Poll **/
+    protected $approvalPoll;
     /** @var \DateTime **/
     protected $createdAt;
     /** @var \DateTime **/
@@ -73,6 +75,18 @@ abstract class Project implements \JsonSerializable
     public function getDescription(): string
     {
         return $this->description;
+    }
+    
+    public function setApprovalPoll(Poll $poll): Project
+    {
+        $this->approvalPoll = $poll;
+        
+        return $this;
+    }
+    
+    public function getApprovalPoll(): ?Poll
+    {
+        return $this->approvalPoll;
     }
 
     public function setCreatedAt($createdAt): Project

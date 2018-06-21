@@ -97,6 +97,87 @@ body > nav > div > a {
     background-color: green;
 }
 
+#notifications-counter {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+#notifications {
+    position:absolute;
+    list-style:none;
+    text-align:center;
+    width:180px;
+    right: 225px;
+    margin-left:-90px;
+    top:60px;
+    font:bold 12px 'Open Sans Condensed', sans-serif;
+
+    /* This is important for the show/hide CSS animation */
+    max-height:0px;
+    overflow:hidden;
+
+    -webkit-transition:max-height 0.4s linear;
+    -moz-transition:max-height 0.4s linear;
+    transition:max-height 0.4s linear;
+}
+
+#notifications.show {
+    max-height:200px;
+}
+
+#notifications div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.2em;
+    color: #565656;
+    background-color:#EFEFEF;
+    border-left: 1px solid #FF9050;
+    border-right: 1px solid #FF9050;
+}
+
+#notifications > div > a {
+    color: #FF9050;
+    text-decoration: none;
+}
+
+#notifications div:nth-child(odd) { /* zebra stripes */
+    background-color:#FFEFEF;
+}
+
+#notifications div:hover {
+    background-color:#FFF5F5;
+    cursor: pointer;
+}
+
+#notifications div:first-child {
+    border-radius:5px 5px 0 0;
+    margin-top:15px;
+    position:relative;
+    border-top: 1px solid #FF9050;
+}
+
+#notifications div:last-child {
+    border-bottom: 1px solid #FF9050;
+    border-radius: 0px 0px 5px 5px;
+}
+
+#notifications div:first-child:before { /* the pointer tip */
+    content:'';
+    position:absolute;
+    width:1px;
+    height:1px;
+    border:5px solid transparent;
+    border-bottom-color: #FF9050;
+    left:50%;
+    top:-10px;
+    margin-left:-5px;
+}
+
+#notifications div:last-child {
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius:3px;
+}
+
 @media (max-width: 400px) {
     body > nav > h1 {
         margin: auto;

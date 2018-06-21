@@ -20,7 +20,8 @@ class Details extends DetailsModel
      */
     protected $id;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project\Project")
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="details")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     protected $project;
     /**

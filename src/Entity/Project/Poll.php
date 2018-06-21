@@ -20,12 +20,17 @@ class Poll extends PollModel
     protected $id;
     /**
      * @ORM\ManyToOne(targetEntity="Project")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     protected $project;
     /**
      * @ORM\OneToOne(targetEntity="Details")
      */
     protected $details;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isEnded;
     /**
      * @ORM\Column(type="datetime")
      */

@@ -3,6 +3,9 @@
 namespace App\Manager\Project;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+use App\Event\Project\NewPollEvent;
 
 use App\Entity\Project\{
     Details,
@@ -14,12 +17,15 @@ class PollManager
 {
     /** @var EntityManagerInterface **/
     protected $em;
+    /** @var EventDispatcherInterface **/
+    protected $eventDispatcher;
     /** @var string **/
     protected $pollDuration;
     
-    public function __construct(EntityManagerInterface $em, string $pollDuration)
+    public function __construct(EntityManagerInterface $em, EventDispatcherInterface $eventDispatcher, string $pollDuration)
     {
         $this->em = $em;
+        $this->eventDispatcher = $eventDispatcher;
         $this->pollDuration = $pollDuration;
     }
     
@@ -34,6 +40,7 @@ class PollManager
         ;
         $this->em->persist($poll);
         $this->em->flush();
+        $this->eventDispatcher->dispatch(NewPollEvent::NAME, new NewPollEvent($poll));
         return $poll;
     }
     

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Model\User\Notification as NotificationModel;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\User\NotificationRepository")
  * @ORM\Table(name="users__notifications")
  * @ORM\HasLifecycleCallbacks
  */

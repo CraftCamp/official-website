@@ -32,6 +32,11 @@ class NotificationManager
             'createdAt' => 'DESC'
         ]);
     }
+    
+    public function read(array $ids = [])
+    {
+        $this->em->getRepository(Notification::class)->read($ids);
+    }
 
     public function notifyAllMembers(string $content, array $parameters = [])
     {

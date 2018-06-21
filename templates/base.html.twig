@@ -35,7 +35,9 @@
                         </span>
                         <div id="notifications">
                             {% for notification in notifications %}
-                                <div>{{ notification.content | raw }}</div>
+                                <div data-id="{{ notification.id }}" {% if notification.readAt is null %}class="unread"{% endif %}>
+                                    {{ notification.content | raw }}
+                                </div>
                             {% endfor %}
                         </div>
                         <a href="{{ path('member_dashboard') }}" class="button">{{ 'users.dashboard' | trans }}</a>

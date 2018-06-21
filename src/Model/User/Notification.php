@@ -58,7 +58,7 @@ abstract class Notification
         return $this;
     }
     
-    public function getReadAt(): \DateTime
+    public function getReadAt(): ?\DateTime
     {
         return $this->readAt;
     }

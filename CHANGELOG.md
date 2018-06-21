@@ -1,4 +1,4 @@
-## [Unreleased]
+## [0.1.10] - 2018-06-22
 ### Added
 - Poll creation from the project workspace
 - Notification when project details are completed for the first time

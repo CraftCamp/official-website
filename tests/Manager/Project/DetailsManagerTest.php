@@ -14,12 +14,15 @@ class DetailsManagerTest extends \PHPUnit\Framework\TestCase
     
     public function setUp()
     {
-        $this->manager = new DetailsManager($this->getEntityManagerMock());
+        $this->manager = new DetailsManager(
+            $this->getEntityManagerMock(),
+            $this->getSessionMock()
+        );
     }
     
     public function testGetProjectDetails()
     {
-        $details = $this->manager->getProjectDetails((new Project())->setId(1));
+        $details = $this->manager->getCurrentProjectDetails((new Project())->setId(1));
         
         $this->assertInstanceOf(Details::class, $details);
         $this->assertEquals(1, $details->getProject()->getId());
@@ -28,7 +31,7 @@ class DetailsManagerTest extends \PHPUnit\Framework\TestCase
     
     public function testGetUnexistingProjectDetails()
     {
-        $this->assertNull($this->manager->getProjectDetails((new Project())->setId(3)));
+        $this->assertNull($this->manager->getCurrentProjectDetails((new Project())->setId(3)));
     }
     
     public function testPutExistingProjectDetails()
@@ -88,7 +91,7 @@ class DetailsManagerTest extends \PHPUnit\Framework\TestCase
         ;
         $repositoryMock
             ->expects($this->any())
-            ->method('findOneBy')
+            ->method('findBy')
             ->willReturnCallback([$this, 'getDetailsMock'])
         ;
         return $repositoryMock;
@@ -97,14 +100,44 @@ class DetailsManagerTest extends \PHPUnit\Framework\TestCase
     public function getDetailsMock(array $criterias)
     {
         if ($criterias['project']->getId() === 3) {
-            return null;
+            return [];
         }
-        return
+        return [
             (new Details())
             ->setProject($criterias['project'])
             ->setNeedDescription('Besoin de rien, envie de toi')
             ->setTargetDescription('Delta 3B 456 Sud-Sud-Ouest')
             ->setGoalDescription('Conquer the world')
+        ];
+    }
+    
+    public function getSessionMock()
+    {
+        $sessionMock = $this
+            ->getMockBuilder(\Symfony\Component\HttpFoundation\Session\Session::class)
+            ->disableOriginalConstructor()
+            ->getMock()
         ;
+        $sessionMock
+            ->expects($this->any())
+            ->method('getFlashbag')
+            ->willReturnCallback([$this, 'getFlashbagMock'])
+        ;
+        return $sessionMock;      
+    }
+    
+    public function getFlashbagMock()
+    {
+        $flashbagMock = $this
+            ->getMockBuilder(\Symfony\Component\HttpFoundation\Session\Flash\FlashBag::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+        $flashbagMock
+            ->expects($this->any())
+            ->method('add')
+            ->willReturn(true)
+        ;
+        return $flashbagMock;
     }
 }

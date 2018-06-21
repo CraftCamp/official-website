@@ -7,7 +7,8 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 use App\DataFixtures\ORM\User\LoadActivationLinkData;
 use App\DataFixtures\ORM\User\LoadProductOwnerData;
 use App\DataFixtures\ORM\LoadOrganizationData;
-use App\DataFixtures\ORM\LoadProjectData;
+use App\DataFixtures\ORM\Project\LoadProjectData;
+use App\DataFixtures\ORM\Project\LoadPollData;
 
 class ProjectControllerTest extends WebTestCase
 {
@@ -17,7 +18,8 @@ class ProjectControllerTest extends WebTestCase
             LoadActivationLinkData::class,
             LoadOrganizationData::class,
             LoadProductOwnerData::class,
-            LoadProjectData::class
+            LoadProjectData::class,
+            LoadPollData::class
         ]);
     }
     
@@ -27,8 +29,8 @@ class ProjectControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/projects');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(2, $crawler->filter('.project'));
-        $this->assertContains('Site officiel DevelopTech', $crawler->filter('.project:first-child')->text());
+        $this->assertCount(2, $crawler->filter('.projects > section > div'));
+        $this->assertContains('Paradis sauvage', $crawler->filter('.projects > section > div:first-child')->text());
     }
 
     public function testNewAction()

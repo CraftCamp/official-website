@@ -2,6 +2,11 @@
 ### Added
 - Poll creation from the project workspace
 - Notification when project details are completed for the first time
+- User notifications model
+- User notifications list
+- User notifications reading
+- Notifications to all members when a project is submitted to vote
+- Voting projects list in projects listing page
 
 ### Fixed
 - Project creation from a member account

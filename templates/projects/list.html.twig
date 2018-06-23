@@ -18,6 +18,25 @@
         </a>
     </div>
     
+    {% if projects["owned"] | length > 0 %}
+        <div class="projects">
+            <header>
+                <h3>{{ 'projects.list.owned_title' | trans }}</h3>
+            </header>
+            <section>
+                {% for project in projects["working"] %}
+                    <div>
+                        <header>
+                            <i class="fa fa-cog fa-4x"></i>
+                        </header>
+                        <section>
+                            <a href="{{ path('project_page', {"slug": project.slug }) }}">{{ project.name }}</a>
+                        </section>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+    {% endif %}
     {% if projects["working"] | length > 0 %}
         <div class="projects">
             <header>

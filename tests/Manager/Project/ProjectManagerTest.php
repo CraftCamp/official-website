@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityRepository;
 
 use App\Entity\Project\Member;
 use App\Entity\Project\Project;
+use App\Entity\Organization;
 use App\Entity\User\ProductOwner;
 
 use App\Utils\Slugger;
@@ -25,6 +26,29 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
             $this->getEventDispatcherMock(),
             new Slugger()
         );
+    }
+    
+    public function testCreate()
+    {
+        $project = $this->manager->createProject(
+            'CraftCamp',
+            'Association exceptionnelle',
+            $this->getUserMock(),
+            $this->getOrganizationMock()
+        );
+        
+        $this->assertInstanceOf(Project::class, $project);
+        $this->assertInstanceOf(ProductOwner::class, $project->getProductOwner());
+        $this->assertInstanceOf(Organization::class, $project->getOrganization());
+    }
+    
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+     * @expectedExceptionMessage projects.existing_name
+     */
+    public function testCreateWithExistingName()
+    {
+        $this->manager->createProject('Pokemon', 'Super jeu', $this->getUserMock());
     }
     
     public function testJoinProject()
@@ -83,7 +107,42 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
         return $entityManagerMock;
     }
     
-    public function getRepositoryMock()
+    public function getRepositoryMock(string $repository)
+    {
+        return $this->{[
+            Member::class => 'getMemberRepositoryMock',
+            Project::class => 'getProjectRepositoryMock'
+        ][$repository]}();
+    }
+    
+    public function getProjectRepositoryMock()
+    {
+        $repositoryMock = $this
+            ->getMockBuilder(EntityRepository::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['findOneByName'])
+            ->getMock()
+        ;
+        $repositoryMock
+            ->expects($this->any())
+            ->method('findOneByName')
+            ->willReturnCallback([$this, 'getProjectMock'])
+        ;
+        return $repositoryMock;
+    }
+    
+    public function getProjectMock(string $name)
+    {
+        if ($name !== 'Pokemon') {
+            return null;
+        }
+        return
+            (new Project())
+            ->setName($name)
+        ;
+    }
+    
+    public function getMemberRepositoryMock()
     {
         $repositoryMock = $this
             ->getMockBuilder(EntityRepository::class)
@@ -148,5 +207,21 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
             ->willReturn(true)
         ;
         return $eventDispatcherMock;
+    }
+    
+    public function getUserMock()
+    {
+        return
+            (new ProductOwner())
+            ->setUsername('Toto')
+        ;
+    }
+    
+    public function getOrganizationMock()
+    {
+        return
+            (new Organization())
+            ->setName('Testing area')
+        ;
     }
 }

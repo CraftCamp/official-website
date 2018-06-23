@@ -1,3 +1,10 @@
+## [Unreleased]
+### Added
+- Current user's owned projects in project page
+
+### Fixed
+- HWI dependency deprecations fo Symfony 4.1
+
 ## [0.1.10] - 2018-06-22
 ### Added
 - Poll creation from the project workspace

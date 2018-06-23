@@ -1224,12 +1224,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "030e0e9be9bb66d72877ae837df6cdcef8b42591"
+                "reference": "352f64de06fdb7069a208dda8528728b2548ff81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/030e0e9be9bb66d72877ae837df6cdcef8b42591",
-                "reference": "030e0e9be9bb66d72877ae837df6cdcef8b42591",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/352f64de06fdb7069a208dda8528728b2548ff81",
+                "reference": "352f64de06fdb7069a208dda8528728b2548ff81",
                 "shasum": ""
             },
             "require": {
@@ -1374,7 +1374,7 @@
                 "yandex",
                 "youtube"
             ],
-            "time": "2018-06-13T15:07:19+00:00"
+            "time": "2018-06-22T09:56:56+00:00"
         },
         {
             "name": "jdorn/sql-formatter",

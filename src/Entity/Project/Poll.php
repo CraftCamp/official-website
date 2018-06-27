@@ -30,7 +30,7 @@ class Poll extends PollModel
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isEnded;
+    protected $isEnded = false;
     /**
      * @ORM\Column(type="datetime")
      */

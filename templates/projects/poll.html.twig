@@ -15,9 +15,47 @@
 
 {% block body %}
     <div id="poll-container">
-        <header>
-            <h3>{{ poll.project.name }}</h3>
-        </header>
+        <div id="poll-infos">
+            <header>
+                <h2>{{ poll.project.name }}</h2>
+            </header>
+            <section>
+                <h3>{{ 'projects.product_owner' | trans }}</h3>
+                <h4>{{ poll.project.productOwner.username }}</h4>
+                {% if poll.project.organization is not null %}
+                    <h4>{{ 'projects.organization' | trans }}</h4>
+                    <p>{{ poll.project.organization.name }}</p>
+                    <p>{{ poll.project.organization.description }}</p>
+                {% endif %}
+            </section>
+            <section>
+                <h5>{{ 'projects.votes.created_at' | trans }}</h5>
+                {{ poll.createdAt.format('website.full_date' | trans) }}
+                <h5>{{ 'projects.votes.ended_at' | trans }}</h5>
+                {{ poll.endedAt.format('website.full_date' | trans) }}
+            </section>
+        </div>
+        <div id="poll-details">
+            <header>
+                <h3>{{ 'projects.descriptions.title' | trans }}</h3>
+            </header>
+            <section>
+                {% for key, title in {
+                    'need': 'projects.descriptions.categories.need' | trans,
+                    'target': 'projects.descriptions.categories.target' | trans,
+                    'goal': 'projects.descriptions.categories.goal' | trans
+                } %}
+                    <div class="description">
+                        <header>
+                            <h4>{{ title }}</h4>
+                        </header>
+                        <section>
+                            {{ attribute(details, key ~ 'Description') | raw }}
+                        </section>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
     </div>
 {% endblock %}
 

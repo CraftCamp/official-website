@@ -83,6 +83,7 @@ projects:
     access_denied: 'Vous n''avez pas accès à cette partie du projet'
     name: 'Nom'
     description: 'Description'
+    organization: 'Organisation'
     existing_name: 'Ce nom de projet est déjà pris'
     creation:
         account_tab_title: 'Votre compte'
@@ -121,6 +122,8 @@ projects:
             goal_wording: ''
     votes:
         title: 'Votes'
+        created_at: 'Date de lancement'
+        ended_at: 'Date de fin'
         wording: |
             Maintenant que votre projet est suffisamment renseigné, vous pouvez le soumettre au vote de la communauté.
             Chaque membre exprimera son approbation ou son refus du projet.

@@ -14,60 +14,69 @@
 
 {% block body %}
     <div id="project-container">
-        <div id="project">
-            <header>
-                <h1>{{ project.name }}</h1>
-                <p>{{ project.description }}</p>
-            </header>
-            <section>
-                <div>
-                    <h3>{{ 'projects.news.title' | trans }}</h3>
-                    {% for new in news %}
-                        <div class="news">
-                            {{ new | news_icon('fa-2x') }}
-                            <div>
-                                <p>{{ ('projects.news.' ~ new.category) | trans(new.data) }}</p>
-                                <span>{{ new.createdAt | date('website.full_date' | trans) }}</span>
+        <header>
+            <h1>{{ project.name }}</h1>
+            <div>
+                {% if membership is null and app.user is not null %}
+                    <button id="join-button" onclick="joinProject('{{ project.slug }}');" class="button">
+                        Rejoindre
+                    </button>
+                {% endif %}
+                {% if membership is not null %}
+                    <a href="{{ path('project_workspace', { "slug": project.slug }) }}" class="button link">
+                        Workspace
+                    </a>
+                {% endif %}
+            </div>
+        </header>
+        <section>
+            <div id="project">
+                <header>
+                    <p>{{ project.description }}</p>
+                </header>
+                <section>
+                    <div>
+                        <h3>{{ 'projects.news.title' | trans }}</h3>
+                        {% for new in news %}
+                            <div class="news">
+                                {{ new | news_icon('fa-2x') }}
+                                <div>
+                                    <p>{{ ('projects.news.' ~ new.category) | trans(new.data) }}</p>
+                                    <span>{{ new.createdAt | date('website.full_date' | trans) }}</span>
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+            <div id="project-infos">
+                <div id="project-owner">
+                    <header>
+                        <h3>{{ 'projects.product_owner' | trans }}</h3>
+                        <h4>{{ project.productOwner.username }}</h4>
+                    </header>
+                    <section>
+                        {% if project.organization is not null %}
+                            <h4>{{ 'projects.organization' | trans }}</h4>
+                            <p>{{ project.organization.name }}</p>
+                            <p>{{ project.organization.description }}</p>
+                        {% endif %}
+                    </section>
                 </div>
-            </section>
-        </div>
-        <div id="project-infos">
-            <div id="project-owner">
-                <header>
-                    <h3>{{ 'projects.product_owner' | trans }}</h3>
-                    <h4>{{ project.productOwner.username }}</h4>
-                </header>
-                <section>
-                    {% if project.organization is not null %}
-                        <h4>Organisation</h4>
-                        <p>{{ project.organization.name }}</p>
-                        <p>{{ project.organization.description }}</p>
-                    {% endif %}
-                </section>
+                <div id="project-members">
+                    <header>
+                        <h3>{{ 'projects.members' | trans }}</h3>
+                    </header>
+                    <section>
+                        {% for membership in members %}
+                            <div class="member">
+                                {{ membership.user.username }}
+                            </div>
+                        {% endfor %}
+                    </section>
+                </div>
             </div>
-            <div id="project-members">
-                <header>
-                    <h3>{{ 'projects.members' | trans }}</h3>
-                </header>
-                <section>
-                    {% for membership in members %}
-                        <div class="member">
-                            {{ membership.user.username }}
-                        </div>
-                    {% endfor %}
-                </section>
-                <footer>
-                    {% if membership is null and app.user is not null %}
-                        <button id="join-button" onclick="joinProject('{{ project.slug }}');" class="button">
-                            Rejoindre
-                        </button>
-                    {% endif %}
-                </footer>
-            </div>
-        </div>
+        </section>
     </div>
 {% endblock %}
 

@@ -5,7 +5,6 @@ namespace App\Controller\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Symfony\Component\HttpKernel\Exception\{
     AccessDeniedHttpException,
@@ -23,10 +22,10 @@ class PollController extends Controller
 {
     /**
      * @Route("/projects/{slug}/polls", name="create_project_poll", methods={"POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function createPoll(ProjectManager $projectManager, DetailsManager $detailsManager, PollManager $pollManager, string $slug)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         if (($project = $projectManager->get($slug)) === null) {
             throw new NotFoundHttpException('projects.not_found');
         }
@@ -38,17 +37,25 @@ class PollController extends Controller
         }
         $poll = $pollManager->createPoll($project, $details);
         return $this->redirectToRoute('get_poll', [
+            'slug' => $slug,
             'id' => $poll->getId()
         ]);
     }
     
     /**
-     * @Route("/polls/{id}", name="get_poll", methods={"GET"})
+     * @Route("/projects/{slug}/polls/{id}", name="get_poll", methods={"GET"})
      */
-    public function getPoll(PollManager $pollManager, int $id)
+    public function getPoll(ProjectManager $projectManager, PollManager $pollManager, DetailsManager $detailsManager, string $slug, int $id)
     {
+        if (($project = $projectManager->get($slug)) === null) {
+            throw new NotFoundHttpException('projects.not_found');
+        }
+        if (($poll = $pollManager->get($id)) === null) {
+            throw new NotFoundHttpException('projects.votes.not_found');
+        }
         return $this->render('projects/poll.html.twig', [
-            'poll' => $pollManager->get($id)
+            'poll' => $poll,
+            'details' => $detailsManager->getCurrentProjectDetails($project)
         ]);
     }
 }

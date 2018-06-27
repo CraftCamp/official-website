@@ -65,7 +65,7 @@ abstract class Member implements \JsonSerializable
         return $this->createdAt;
     }
     
-    public function setUpatedAt(\DateTime $updatedAt): Member
+    public function setUpdatedAt(\DateTime $updatedAt): Member
     {
         $this->updatedAt = $updatedAt;
         

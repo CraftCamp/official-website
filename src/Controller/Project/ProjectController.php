@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Project;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -108,7 +109,13 @@ class ProjectController extends Controller
      */
     public function getWorkspaceAction(Request $request, ProjectManager $projectManager, DetailsManager $detailsManager, PollManager $pollManager)
     {
-        $project = $projectManager->get($request->attributes->get('slug'));
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        if (($project = $projectManager->get($request->attributes->get('slug'))) === null) {
+            throw new NotFoundHttpException('projects.not_found');
+        }
+        if (!$this->getUser()->getProjects()->contains($project)) {
+            throw new AccessDeniedHttpException('projects.access_denied');
+        }
         return $this->render('projects/workspace.html.twig', [
             'project' => $project,
             'details' => $detailsManager->getCurrentProjectDetails($project),

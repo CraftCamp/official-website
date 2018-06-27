@@ -31,7 +31,7 @@
                                     <button type="submit" class="indicator orange">Lancer un vote</button>
                                 </form>
                             {% else %}
-                                <a href="{{ path('get_poll', { 'id': poll.id }) }}" class="indicator green">Voir le vote</a>
+                                <a href="{{ path('get_poll', { 'slug': project.slug, 'id': poll.id }) }}" class="indicator green">Voir le vote</a>
                             {% endif %}
                         </section>
                     </div>

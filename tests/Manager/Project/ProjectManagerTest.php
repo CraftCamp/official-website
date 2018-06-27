@@ -173,7 +173,7 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
             ->setProject($criterias['project'])
             ->setUser($criterias['user'])
             ->setCreatedAt(new \DateTime())
-            ->setUpatedAt(new \DateTime())
+            ->setUpdatedAt(new \DateTime())
             ->setIsActive(true)
         ;
     }
@@ -184,12 +184,12 @@ class ProjectManagerTest extends \PHPUnit\Framework\TestCase
             (new Member())
             ->setProject($project)
             ->setCreatedAt(new \DateTime())
-            ->setUpatedAt(new \DateTime())
+            ->setUpdatedAt(new \DateTime())
             ->setIsActive(true),
             (new Member())
             ->setProject($project)
             ->setCreatedAt(new \DateTime())
-            ->setUpatedAt(new \DateTime())
+            ->setUpdatedAt(new \DateTime())
             ->setIsActive(true)
         ];
     }

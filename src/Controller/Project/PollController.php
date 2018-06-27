@@ -50,8 +50,11 @@ class PollController extends Controller
         if (($project = $projectManager->get($slug)) === null) {
             throw new NotFoundHttpException('projects.not_found');
         }
+        if (($poll = $pollManager->get($id)) === null) {
+            throw new NotFoundHttpException('projects.votes.not_found');
+        }
         return $this->render('projects/poll.html.twig', [
-            'poll' => $pollManager->get($id),
+            'poll' => $poll,
             'details' => $detailsManager->getCurrentProjectDetails($project)
         ]);
     }

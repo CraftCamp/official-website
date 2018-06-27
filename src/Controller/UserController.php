@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -31,10 +30,10 @@ class UserController extends Controller
     
     /**
      * @Route("/login/redirect", name="login_redirect")
-     * @Security("has_role('ROLE_USER')")
      */
     public function loginRedirect()
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         if ($this->getUser() instanceof ProductOwner) {
             return $this->redirectToRoute("project_workspace", [
                 'slug' => $this->getUser()->getProjects()->first()->getSlug()
@@ -45,19 +44,19 @@ class UserController extends Controller
     
     /**
      * @Route("/profile", name="my_profile", methods={"GET"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function getMyProfile()
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         return $this->render('members/profile.html.twig');
     }
     
     /**
      * @Route("/users/me/notifications/read", name="read_notifications", methods={"PATCH"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function readNotifications(Request $request, NotificationManager $notificationManager)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $notificationManager->read($request->request->get('ids'));
         return new Response(null, 204);
     }

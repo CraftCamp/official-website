@@ -5,7 +5,6 @@ namespace App\Controller\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Symfony\Component\HttpKernel\Exception\{
     AccessDeniedHttpException,
@@ -23,10 +22,10 @@ class PollController extends Controller
 {
     /**
      * @Route("/projects/{slug}/polls", name="create_project_poll", methods={"POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function createPoll(ProjectManager $projectManager, DetailsManager $detailsManager, PollManager $pollManager, string $slug)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         if (($project = $projectManager->get($slug)) === null) {
             throw new NotFoundHttpException('projects.not_found');
         }

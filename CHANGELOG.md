@@ -1,8 +1,11 @@
 ## [Unreleased]
 ### Added
 - Current user's owned projects in project page
+- Poll details page
+- Fixtures for project details and polls
 
 ### Fixed
+- Security access control to protected controllers
 - HWI dependency deprecations fo Symfony 4.1
 
 ## [0.1.10] - 2018-06-22

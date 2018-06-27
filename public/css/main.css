@@ -59,8 +59,18 @@ body > nav > div > a {
     border-radius: 50px;
     transition: background-color 0.2s ease-out;
 }
+.button.link {
+    background-color: white;
+    color: #FFA05A;
+    border: 2px solid #FFA05A;
+}
 .button:hover, .button:focus {
 	background-color: #FF9050;
+}
+.button.link:hover {
+    background-color: white;
+    color: #FF9050;
+    border: 2px solid #FF9050;
 }
 
 #bottom-menu, #end-page {

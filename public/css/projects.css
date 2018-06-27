@@ -50,12 +50,26 @@
 }
 
 #project-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
     width: 80%;
     margin: auto;
     margin-top: 40px;
+}
+
+#project-container > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#project-container > header > h1 {
+    color: #FF9050;
+    font-family: Eczar;
+}
+
+#project-container > section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 #project {
@@ -196,6 +210,67 @@
 #project-details > footer {
     text-align: center;
     margin-bottom: 100px;
+}
+
+#poll-container {
+    display: flex;
+    margin-top: 50px;
+}
+
+#poll-infos {
+    padding: 0px 40px;
+}
+
+#poll-infos > header {
+    padding-bottom: 10px;
+    color: #FF9050;
+    font-family: Eczar;
+}
+
+#poll-infos > section {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-top: 1px solid #A0A0A0;
+}
+
+#poll-infos > section > h3 {
+    color: #A0A0A0;
+    font-family: Eczar;
+    padding-bottom: 10px;
+}
+
+#poll-infos > section > h5 {
+    font-family: Eczar;
+    font-size: 1.0em;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    color: #A0A0A0;
+}
+
+#poll-details {
+    margin-left: 100px;
+}
+
+#poll-details > header > h3 {
+    font-family: Eczar;
+}
+
+#poll-details > section {
+    margin-top: 50px;
+}
+
+#poll-details > section > .description > header {
+    color: #FF9050;
+    font-family: Eczar;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#poll-details > section > .description > section {
+    padding: 20px;
+    border: 1px solid #EFEFEF;
+    border-radius: 10px;
+    background-color: #FAFAFA;
 }
 
 @media (max-width: 400px) {

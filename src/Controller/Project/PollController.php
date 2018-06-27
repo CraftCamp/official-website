@@ -43,12 +43,16 @@ class PollController extends Controller
     }
     
     /**
-     * @Route("/polls/{id}", name="get_poll", methods={"GET"})
+     * @Route("/projects/{slug}/polls/{id}", name="get_poll", methods={"GET"})
      */
-    public function getPoll(PollManager $pollManager, int $id)
+    public function getPoll(ProjectManager $projectManager, PollManager $pollManager, DetailsManager $detailsManager, string $slug, int $id)
     {
+        if (($project = $projectManager->get($slug)) === null) {
+            throw new NotFoundHttpException('projects.not_found');
+        }
         return $this->render('projects/poll.html.twig', [
-            'poll' => $pollManager->get($id)
+            'poll' => $pollManager->get($id),
+            'details' => $detailsManager->getCurrentProjectDetails($project)
         ]);
     }
 }

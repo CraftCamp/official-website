@@ -37,6 +37,7 @@ class PollController extends Controller
         }
         $poll = $pollManager->createPoll($project, $details);
         return $this->redirectToRoute('get_poll', [
+            'slug' => $slug,
             'id' => $poll->getId()
         ]);
     }

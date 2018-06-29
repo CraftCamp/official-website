@@ -38,6 +38,7 @@ class PollManager
             ->setCreatedAt(new \DateTime())
             ->setEndedAt(new \DateTime($this->pollDuration))
         ;
+        $project->setApprovalPoll($poll);
         $this->em->persist($poll);
         $this->em->flush();
         $this->eventDispatcher->dispatch(NewPollEvent::NAME, new NewPollEvent($poll));

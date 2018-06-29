@@ -23,9 +23,9 @@ class LoadPollData extends AbstractFixture implements OrderedFixtureInterface
                 ->setCreatedAt(new \DateTime($pollData['created_at']))
                 ->setEndedAt(new \DateTime($pollData['ended_at']))
             ;
-                if ($pollData['is_approval'] === true) {
-                    $project->setApprovalPoll($poll);
-                }
+            if ($pollData['is_approval'] === true) {
+                $project->setApprovalPoll($poll);
+            }
             $manager->persist($poll);
         }
         $manager->flush();

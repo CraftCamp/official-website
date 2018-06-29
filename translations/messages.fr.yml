@@ -129,6 +129,7 @@ projects:
         created_at: 'Date de lancement'
         ended_at: 'Date de fin'
         previous: 'Précédent'
+        product_owner_cannot_vote: 'Vous ne pouvez pas voter pour votre propre projet'
         wording: |
             Maintenant que votre projet est suffisamment renseigné, vous pouvez le soumettre au vote de la communauté.
             Chaque membre exprimera son approbation ou son refus du projet.

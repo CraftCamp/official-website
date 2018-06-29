@@ -51,7 +51,7 @@ class PollController extends Controller
     /**
      * @Route("/projects/{slug}/polls/{id}", name="get_poll", methods={"GET"})
      */
-    public function getPoll(ProjectManager $projectManager, PollManager $pollManager, DetailsManager $detailsManager, string $slug, int $id)
+    public function getPoll(ProjectManager $projectManager, PollManager $pollManager, DetailsManager $detailsManager, VoteManager $voteManager, string $slug, int $id)
     {
         if (($project = $projectManager->get($slug)) === null) {
             throw new NotFoundHttpException('projects.not_found');
@@ -61,6 +61,7 @@ class PollController extends Controller
         }
         return $this->render('projects/poll.html.twig', [
             'poll' => $poll,
+            'has_already_voted' => $this->getUser() !== null && $voteManager->getUserVote($poll, $this->getUser()) !== null,
             'details' => $detailsManager->getCurrentProjectDetails($project)
         ]);
     }
@@ -73,6 +74,9 @@ class PollController extends Controller
         $this->denyAccessUnlessGranted('ROLE_USER');
         if (($poll = $pollManager->get($id)) === null) {
             throw new NotFoundHttpException('projects.votes.not_found');
+        }
+        if ($poll->getProject()->getProductOwner() === $this->getUser()) {
+            throw new AccessDeniedHttpException('projects.votes.product_owner_cannot_vote');
         }
         return new JsonResponse($voteManager->vote(
             $poll,

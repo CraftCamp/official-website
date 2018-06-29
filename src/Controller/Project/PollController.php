@@ -6,6 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\{
+    Request,
+    JsonResponse
+};
+
 use Symfony\Component\HttpKernel\Exception\{
     AccessDeniedHttpException,
     BadRequestHttpException,
@@ -15,7 +20,8 @@ use Symfony\Component\HttpKernel\Exception\{
 use App\Manager\Project\{
     DetailsManager,
     PollManager,
-    ProjectManager
+    ProjectManager,
+    VoteManager
 };
 
 class PollController extends Controller
@@ -57,5 +63,22 @@ class PollController extends Controller
             'poll' => $poll,
             'details' => $detailsManager->getCurrentProjectDetails($project)
         ]);
+    }
+    
+    /**
+     * @Route("/projects/{slug}/polls/{id}/vote", name="vote_project_poll", methods={"POST"})
+     */
+    public function vote(PollManager $pollManager, VoteManager $voteManager, Request $request, int $id)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        if (($poll = $pollManager->get($id)) === null) {
+            throw new NotFoundHttpException('projects.votes.not_found');
+        }
+        return new JsonResponse($voteManager->vote(
+            $poll,
+            $this->getUser(),
+            $request->request->get('is_positive'),
+            $request->request->get('choice')
+        ), 201);
     }
 }

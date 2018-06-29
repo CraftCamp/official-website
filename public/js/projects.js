@@ -42,3 +42,16 @@ const hideVoteForm = type => {
     document.querySelector('#vote-positive').style.display = 'none';
     document.querySelector('#vote-negative').style.display = 'none';
 };
+
+const voteProjectPoll = (slug, id, event) => {
+    event.preventDefault();
+    
+    fetch(`/projects/${slug}/polls/${id}/vote`, {
+        method: 'POST',
+        body: new FormData(event.target),
+        credentials: 'include'
+    }).then(response => response.json())
+    .then(vote => {
+        document.querySelector('#poll-infos > section:last-child').style.display = 'none';
+    });
+}

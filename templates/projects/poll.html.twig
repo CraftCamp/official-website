@@ -45,13 +45,13 @@
                     </button>
                 </div>
                 <div id="vote-positive">
-                    <form>
+                    <form onsubmit="voteProjectPoll('{{ poll.project.slug }}', {{ poll.id }}, event);">
                         <div>
-                            <input id="radio-positive-tech" type="radio" name="option" value="positive_tech" />
+                            <input id="radio-positive-tech" type="radio" name="choice" value="positive.tech" />
                             <label for="radio-positive-tech"><span></span>{{ 'projects.votes.positive_tech' | trans }}</label>
                         </div>
                         <div>
-                            <input id="radio-positive-purpose" type="radio" name="option" value="positive_purpose" />
+                            <input id="radio-positive-purpose" type="radio" name="choice" value="positive.purpose" />
                             <label for="radio-positive-purpose"><span></span>{{ 'projects.votes.positive_purpose' | trans }}</label>
                         </div>
                         <input type="hidden" name="is_positive" value="true" />
@@ -60,17 +60,17 @@
                     </form>
                 </div>
                 <div id="vote-negative">
-                    <form>
+                    <form onsubmit="voteProjectPoll('{{ poll.project.slug }}', {{ poll.id }}, event);">
                         <div>
-                            <input id="radio-negative-tech" type="radio" name="option" value="negative_tech" />
+                            <input id="radio-negative-tech" type="radio" name="choice" value="negative.tech" />
                             <label for="radio-negative-tech"><span></span>{{ 'projects.votes.negative_tech' | trans }}</label>
                         </div>
                         <div>
-                            <input id="radio-negative-purpose" type="radio" name="option" value="negative_purpose" />
+                            <input id="radio-negative-purpose" type="radio" name="choice" value="negative.purpose" />
                             <label for="radio-negative-purpose"><span></span>{{ 'projects.votes.negative_purpose' | trans }}</label>
                         </div>
                         <div>
-                            <input id="radio-negative-infos" type="radio" name="option" value="negative_infos" />
+                            <input id="radio-negative-infos" type="radio" name="choice" value="negative.infos" />
                             <label for="radio-negative-infos"><span></span>{{ 'projects.votes.negative_infos' | trans }}</label>
                         </div>
                         

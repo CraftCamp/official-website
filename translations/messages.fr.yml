@@ -85,6 +85,7 @@ projects:
     description: 'Description'
     organization: 'Organisation'
     existing_name: 'Ce nom de projet est déjà pris'
+    workspace: 'Espace de travail'
     creation:
         account_tab_title: 'Votre compte'
         account_title: 'Création de votre compte'
@@ -122,14 +123,26 @@ projects:
             goal_wording: ''
     votes:
         title: 'Votes'
+        action_title: 'Voter'
+        create: 'Lancer un vote'
+        see: 'Voir le vote'
         created_at: 'Date de lancement'
         ended_at: 'Date de fin'
+        previous: 'Précédent'
+        product_owner_cannot_vote: 'Vous ne pouvez pas voter pour votre propre projet'
         wording: |
             Maintenant que votre projet est suffisamment renseigné, vous pouvez le soumettre au vote de la communauté.
             Chaque membre exprimera son approbation ou son refus du projet.
             Si le projet est accepté, les travaux débuteront.
             En cas de refus, vous pourrez retravailler les axes de votre projet et le présenter à nouveau au vote.
         notification: 'Le projet %project% est <a href="/polls/%poll_id%">en cours de vote</a> !'
+        positive: 'Pour'
+        positive_tech: 'Le projet est intéressant techniquement'
+        positive_purpose: 'J''approuve la cause défendue par ce projet'
+        negative: 'Contre'
+        negative_tech: 'Le projet n''est pas intéressant techniquement'
+        negative_purpose: 'Je ne soutiens pas la cause de ce projet'
+        negative_infos: 'Il manque des informations pour comprendre ce projet'
         
     list:
         wip_title: 'Projets en cours'

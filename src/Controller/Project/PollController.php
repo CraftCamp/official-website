@@ -6,6 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\{
+    Request,
+    JsonResponse
+};
+
 use Symfony\Component\HttpKernel\Exception\{
     AccessDeniedHttpException,
     BadRequestHttpException,
@@ -15,7 +20,8 @@ use Symfony\Component\HttpKernel\Exception\{
 use App\Manager\Project\{
     DetailsManager,
     PollManager,
-    ProjectManager
+    ProjectManager,
+    VoteManager
 };
 
 class PollController extends Controller
@@ -45,7 +51,7 @@ class PollController extends Controller
     /**
      * @Route("/projects/{slug}/polls/{id}", name="get_poll", methods={"GET"})
      */
-    public function getPoll(ProjectManager $projectManager, PollManager $pollManager, DetailsManager $detailsManager, string $slug, int $id)
+    public function getPoll(ProjectManager $projectManager, PollManager $pollManager, DetailsManager $detailsManager, VoteManager $voteManager, string $slug, int $id)
     {
         if (($project = $projectManager->get($slug)) === null) {
             throw new NotFoundHttpException('projects.not_found');
@@ -55,7 +61,28 @@ class PollController extends Controller
         }
         return $this->render('projects/poll.html.twig', [
             'poll' => $poll,
+            'has_already_voted' => $this->getUser() !== null && $voteManager->getUserVote($poll, $this->getUser()) !== null,
             'details' => $detailsManager->getCurrentProjectDetails($project)
         ]);
+    }
+    
+    /**
+     * @Route("/projects/{slug}/polls/{id}/vote", name="vote_project_poll", methods={"POST"})
+     */
+    public function vote(PollManager $pollManager, VoteManager $voteManager, Request $request, int $id)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        if (($poll = $pollManager->get($id)) === null) {
+            throw new NotFoundHttpException('projects.votes.not_found');
+        }
+        if ($poll->getProject()->getProductOwner() === $this->getUser()) {
+            throw new AccessDeniedHttpException('projects.votes.product_owner_cannot_vote');
+        }
+        return new JsonResponse($voteManager->vote(
+            $poll,
+            $this->getUser(),
+            $request->request->get('is_positive'),
+            $request->request->get('choice')
+        ), 201);
     }
 }

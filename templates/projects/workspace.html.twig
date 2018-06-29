@@ -28,10 +28,10 @@
                         <section>
                             {% if poll is null %}
                                 <form method="POST" action="{{ path('create_project_poll', { "slug": project.slug }) }}">
-                                    <button type="submit" class="indicator orange">Lancer un vote</button>
+                                    <button type="submit" class="indicator orange">{{ 'projects.votes.create' | trans }}</button>
                                 </form>
                             {% else %}
-                                <a href="{{ path('get_poll', { 'slug': project.slug, 'id': poll.id }) }}" class="indicator green">Voir le vote</a>
+                                <a href="{{ path('get_poll', { 'slug': project.slug, 'id': poll.id }) }}" class="indicator green">{{ 'projects.votes.see' | trans }}</a>
                             {% endif %}
                         </section>
                     </div>

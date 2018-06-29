@@ -34,6 +34,54 @@
                 <h5>{{ 'projects.votes.ended_at' | trans }}</h5>
                 {{ poll.endedAt.format('website.full_date' | trans) }}
             </section>
+            {% if app.user is not null and has_already_voted == false and poll.project.productOwner != app.user %}
+                <section>
+                    <h3>{{ 'projects.votes.action_title' | trans }}</h3>
+                    <div id="vote-first-step">
+                        <button class="button" onclick="showVoteForm('positive');">
+                            {{ 'projects.votes.positive' | trans }}
+                        </button>
+                        <button class="button" onclick="showVoteForm('negative');">
+                            {{ 'projects.votes.negative' | trans }}
+                        </button>
+                    </div>
+                    <div id="vote-positive">
+                        <form onsubmit="voteProjectPoll('{{ poll.project.slug }}', {{ poll.id }}, event);">
+                            <div>
+                                <input id="radio-positive-tech" type="radio" name="choice" value="positive.tech" />
+                                <label for="radio-positive-tech"><span></span>{{ 'projects.votes.positive_tech' | trans }}</label>
+                            </div>
+                            <div>
+                                <input id="radio-positive-purpose" type="radio" name="choice" value="positive.purpose" />
+                                <label for="radio-positive-purpose"><span></span>{{ 'projects.votes.positive_purpose' | trans }}</label>
+                            </div>
+                            <input type="hidden" name="is_positive" value="true" />
+                            <button type="button" class="button link" onclick="hideVoteForm();">{{ 'projects.votes.previous' | trans }}</button>
+                            <button type="submit" class="button">{{ 'projects.votes.action_title' | trans }}</button>
+                        </form>
+                    </div>
+                    <div id="vote-negative">
+                        <form onsubmit="voteProjectPoll('{{ poll.project.slug }}', {{ poll.id }}, event);">
+                            <div>
+                                <input id="radio-negative-tech" type="radio" name="choice" value="negative.tech" />
+                                <label for="radio-negative-tech"><span></span>{{ 'projects.votes.negative_tech' | trans }}</label>
+                            </div>
+                            <div>
+                                <input id="radio-negative-purpose" type="radio" name="choice" value="negative.purpose" />
+                                <label for="radio-negative-purpose"><span></span>{{ 'projects.votes.negative_purpose' | trans }}</label>
+                            </div>
+                            <div>
+                                <input id="radio-negative-infos" type="radio" name="choice" value="negative.infos" />
+                                <label for="radio-negative-infos"><span></span>{{ 'projects.votes.negative_infos' | trans }}</label>
+                            </div>
+
+                            <input type="hidden" name="is_positive" value="false" />
+                            <button type="button" class="button link" onclick="hideVoteForm();">{{ 'projects.votes.previous' | trans }}</button>
+                            <button type="submit" class="button">{{ 'projects.votes.action_title' | trans }}</button>
+                        </form>
+                    </div>
+                </section>
+            {% endif %}
         </div>
         <div id="poll-details">
             <header>

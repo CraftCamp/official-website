@@ -17,14 +17,19 @@
         <header>
             <h1>{{ project.name }}</h1>
             <div>
+                {% if project.approvalPoll is not null and project.approvalPoll.isEnded == false %}
+                    <a href="{{ path('get_poll', { "slug": project.slug, "id": project.approvalPoll.id }) }}" class="button link">
+                        {{ 'projects.votes.see' | trans }}
+                    </a>
+                {% endif %}
                 {% if membership is null and app.user is not null %}
                     <button id="join-button" onclick="joinProject('{{ project.slug }}');" class="button">
-                        Rejoindre
+                        {{ 'projects.join' | trans }}
                     </button>
                 {% endif %}
                 {% if membership is not null %}
                     <a href="{{ path('project_workspace', { "slug": project.slug }) }}" class="button link">
-                        Workspace
+                        {{ 'projects.workspace' | trans }}
                     </a>
                 {% endif %}
             </div>

@@ -85,6 +85,7 @@ projects:
     description: 'Description'
     organization: 'Organisation'
     existing_name: 'Ce nom de projet est déjà pris'
+    workspace: 'Espace de travail'
     creation:
         account_tab_title: 'Votre compte'
         account_title: 'Création de votre compte'
@@ -123,6 +124,8 @@ projects:
     votes:
         title: 'Votes'
         action_title: 'Voter'
+        create: 'Lancer un vote'
+        see: 'Voir le vote'
         created_at: 'Date de lancement'
         ended_at: 'Date de fin'
         previous: 'Précédent'

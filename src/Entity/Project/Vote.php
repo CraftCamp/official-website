@@ -30,7 +30,7 @@ class Vote extends VoteModel
     /**
      * @ORM\Column(type="string")
      */
-    protected $option;
+    protected $choice;
     /**
      * @ORM\Column(type="boolean")
      */

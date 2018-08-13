@@ -82,6 +82,12 @@
                     </div>
                 </section>
             {% endif %}
+            {% if votes | length > 0 %}
+                <section>
+                    <h3>Votes</h3>
+                    {{ votes | project_poll_votes() }}
+                </section>
+            {% endif %}
         </div>
         <div id="poll-details">
             <header>

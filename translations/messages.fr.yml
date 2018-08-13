@@ -129,6 +129,9 @@ projects:
         created_at: 'Date de lancement'
         ended_at: 'Date de fin'
         previous: 'Précédent'
+        already_ended: 'Ce vote est terminé'
+        already_voted: 'Vous avez déjà voté'
+        invalid_choice: 'L''option indiquée n''existe pas'
         product_owner_cannot_vote: 'Vous ne pouvez pas voter pour votre propre projet'
         wording: |
             Maintenant que votre projet est suffisamment renseigné, vous pouvez le soumettre au vote de la communauté.

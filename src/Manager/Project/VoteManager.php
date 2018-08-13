@@ -30,13 +30,21 @@ class VoteManager
         ]);
     }
     
+    public function getPollVotes(Poll $poll): array
+    {
+        return $this->em->getRepository(Vote::class)->findByPoll($poll);
+    }
+    
     public function vote(Poll $poll, User $user, bool $isPositive, string $choice): Vote
     {
+        if ($poll->getIsEnded() === true) {
+            throw new BadRequestHttpException('projects.votes.already_ended');
+        }
         if ($this->getUserVote($poll, $user) !== null) {
             throw new BadRequestHttpException('projects.votes.already_voted');
         }
         if (!$this->supportChoice($choice)) {
-            throw new BadRequestHttpException('projects.votes.invalid_option');
+            throw new BadRequestHttpException('projects.votes.invalid_choice');
         }
         $vote =
             (new Vote())

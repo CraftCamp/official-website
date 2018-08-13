@@ -62,7 +62,8 @@ class PollController extends Controller
         return $this->render('projects/poll.html.twig', [
             'poll' => $poll,
             'has_already_voted' => $this->getUser() !== null && $voteManager->getUserVote($poll, $this->getUser()) !== null,
-            'details' => $detailsManager->getCurrentProjectDetails($project)
+            'details' => $detailsManager->getCurrentProjectDetails($project),
+            'votes' => ($this->isGranted('ROLE_USER') && $this->getUser()->getProjects()->contains($project)) ? $voteManager->getPollVotes($poll) : [],
         ]);
     }
     

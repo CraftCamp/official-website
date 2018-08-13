@@ -2,6 +2,8 @@
 ### Added
 - Current user's owned projects in project page
 - Poll details page
+- Project poll vote
+- Project poll results preview for project owner
 - Fixtures for project details and polls
 
 ### Fixed

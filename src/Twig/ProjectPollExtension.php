@@ -13,6 +13,24 @@ class ProjectPollExtension extends AbstractExtension
 {
     /** @var TranslatorInterface **/
     protected $translator;
+    /** @var array **/
+    protected $options = [
+        'positive' => [
+            'count' => 0,
+            'choices' => [
+                Vote::CHOICE_POSITIVE_TECH => 0,
+                Vote::CHOICE_POSITIVE_PURPOSE => 0,
+            ]
+        ],
+        'negative' => [
+            'count' => 0,
+            'choices' => [
+                Vote::CHOICE_NEGATIVE_TECH => 0,
+                Vote::CHOICE_NEGATIVE_PURPOSE => 0,
+                Vote::CHOICE_NEGATIVE_INFOS => 0
+            ]
+        ]
+    ];
     
     public function __construct(TranslatorInterface $translator)
     {
@@ -32,29 +50,13 @@ class ProjectPollExtension extends AbstractExtension
     {
         $result = '';
         $nbVotes = count($votes);
-        $options = [
-            'positive' => [
-                'count' => 0,
-                'choices' => [
-                    Vote::CHOICE_POSITIVE_TECH => 0,
-                    Vote::CHOICE_POSITIVE_PURPOSE => 0,
-                ]
-            ],
-            'negative' => [
-                'count' => 0,
-                'choices' => [
-                    Vote::CHOICE_NEGATIVE_TECH => 0,
-                    Vote::CHOICE_NEGATIVE_PURPOSE => 0,
-                    Vote::CHOICE_NEGATIVE_INFOS => 0
-                ]
-            ]
-        ];
+        
         foreach ($votes as $vote) {
             $option = ($vote->getIsPositive()) ? 'positive' : 'negative';
-            $options[$option]['count']++;
-            $options[$option]['choices'][$vote->getChoice()]++;
+            $this->options[$option]['count']++;
+            $this->options[$option]['choices'][$vote->getChoice()]++;
         }
-        foreach ($options as $key => $data) {
+        foreach ($this->options as $key => $data) {
             $result .= "<h4>{$this->translator->trans("projects.votes.{$key}")}<span>{$data['count']}</span></h4>";
             foreach ($data['choices'] as $key => $count) {
                 $percent = round($count * 100 / $nbVotes, 2);
@@ -65,5 +67,10 @@ class ProjectPollExtension extends AbstractExtension
             }
         }
         return $result;
+    }
+    
+    public function getOptions(): array
+    {
+        return $this->options;
     }
 }

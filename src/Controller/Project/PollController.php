@@ -63,7 +63,7 @@ class PollController extends Controller
             'poll' => $poll,
             'has_already_voted' => $this->getUser() !== null && $voteManager->getUserVote($poll, $this->getUser()) !== null,
             'details' => $detailsManager->getCurrentProjectDetails($project),
-            'votes' => ($this->getUser()->getProjects()->contains($project)) ? $voteManager->getPollVotes($poll) : [],
+            'votes' => ($this->isGranted('ROLE_USER') && $this->getUser()->getProjects()->contains($project)) ? $voteManager->getPollVotes($poll) : [],
         ]);
     }
     

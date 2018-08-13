@@ -30,6 +30,11 @@ class VoteManager
         ]);
     }
     
+    public function getPollVotes(Poll $poll): array
+    {
+        return $this->em->getRepository(Vote::class)->findByPoll($poll);
+    }
+    
     public function vote(Poll $poll, User $user, bool $isPositive, string $choice): Vote
     {
         if ($this->getUserVote($poll, $user) !== null) {

@@ -44,6 +44,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    App\Gateway\:
+        resource: '../src/Gateway'
+        public: true
+        
     App\Manager\:
         resource: '../src/Manager'
         public: true

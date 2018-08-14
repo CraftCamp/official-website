@@ -52,7 +52,7 @@ class ProjectPollExtension extends AbstractExtension
         $nbVotes = count($votes);
         
         foreach ($votes as $vote) {
-            $option = ($vote->getIsPositive()) ? 'positive' : 'negative';
+            $option = ($vote->getIsPositive() === true) ? 'positive' : 'negative';
             $this->options[$option]['count']++;
             $this->options[$option]['choices'][$vote->getChoice()]++;
         }

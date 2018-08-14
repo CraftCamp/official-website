@@ -55,7 +55,7 @@
                                 <input id="radio-positive-purpose" type="radio" name="choice" value="positive.purpose" />
                                 <label for="radio-positive-purpose"><span></span>{{ 'projects.votes.positive_purpose' | trans }}</label>
                             </div>
-                            <input type="hidden" name="is_positive" value="true" />
+                            <input type="hidden" name="is_positive" value="1" />
                             <button type="button" class="button link" onclick="hideVoteForm();">{{ 'projects.votes.previous' | trans }}</button>
                             <button type="submit" class="button">{{ 'projects.votes.action_title' | trans }}</button>
                         </form>
@@ -75,7 +75,7 @@
                                 <label for="radio-negative-infos"><span></span>{{ 'projects.votes.negative_infos' | trans }}</label>
                             </div>
 
-                            <input type="hidden" name="is_positive" value="false" />
+                            <input type="hidden" name="is_positive" value="0" />
                             <button type="button" class="button link" onclick="hideVoteForm();">{{ 'projects.votes.previous' | trans }}</button>
                             <button type="submit" class="button">{{ 'projects.votes.action_title' | trans }}</button>
                         </form>

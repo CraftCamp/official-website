@@ -54,4 +54,4 @@ const voteProjectPoll = (slug, id, event) => {
     .then(vote => {
         document.querySelector('#poll-infos > section:last-child').style.display = 'none';
     });
-}
+};

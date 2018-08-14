@@ -84,7 +84,7 @@ class PollController extends Controller
         return new JsonResponse($voteManager->vote(
             $poll,
             $this->getUser(),
-            $request->request->get('is_positive'),
+            (bool) $request->request->get('is_positive'),
             $request->request->get('choice')
         ), 201);
     }

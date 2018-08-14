@@ -2,7 +2,7 @@
 
 return [
     [
-        'project' => 'site-officiel-developtech',
+        'project' => 'plateforme-craftcamp',
         'user_id' => 1,
         'is_active' => true,
         'created_at' => '-2 days',

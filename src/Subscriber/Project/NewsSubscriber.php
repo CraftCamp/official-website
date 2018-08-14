@@ -5,6 +5,7 @@ namespace App\Subscriber\Project;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 use App\Event\Project\{
+    AcceptedPollEvent,
     NewCommunityEvent,
     NewMemberEvent,
     NewReleaseEvent,
@@ -28,11 +29,22 @@ class NewsSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
+            AcceptedPollEvent::NAME => 'onAcceptedPoll',
             NewCommunityEvent::NAME => 'onNewCommunity',
             NewMemberEvent::NAME => 'onNewMember',
             NewReleaseEvent::NAME => 'onNewRelease',
             NewRepositoryEvent::NAME => 'onNewRepository',
         ];
+    }
+    
+    public function onAcceptedPoll(AcceptedPollEvent $event)
+    {
+        $poll = $event->getPoll();
+        
+        $this->newsManager->create($poll->getProject(), News::CATEGORY_ACCEPTED_POLL, [
+            '%score%' => $event->getScore(),
+            '%nb_votes%' => $event->getNbVotes()
+        ]);
     }
     
     public function onNewCommunity(NewCommunityEvent $event)

@@ -10,6 +10,8 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+use Psr\Log\LoggerInterface;
+
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use App\Security\User\Connect\ConnectException;
 
@@ -17,12 +19,15 @@ class ExceptionListener
 {
     /** @var UrlGeneratorInterface **/
     protected $router;
+    /** @var LoggerInterface **/
+    protected $logger;
     /** @var SessionInterface **/
     protected $session;
     
-    public function __construct(UrlGeneratorInterface $router, SessionInterface $session)
+    public function __construct(UrlGeneratorInterface $router, LoggerInterface $logger, SessionInterface $session)
     {
         $this->router = $router;
+        $this->logger = $logger;
         $this->session = $session;
     }
     
@@ -46,6 +51,7 @@ class ExceptionListener
     protected function handleException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
+        $this->logger->error("{$exception->getFile()}.{$exception->getLine()}: {$exception->getMessage()}");
         $response = 
             ($event->getRequest()->getContentType() === 'json')
             ? new JsonResponse(['message' => $exception->getMessage()])

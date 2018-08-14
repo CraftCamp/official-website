@@ -8,10 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\{
     Request,
+    Response,
     JsonResponse
 };
 
 use Symfony\Component\HttpKernel\Exception\{
+    UnauthorizedHttpException,
     AccessDeniedHttpException,
     BadRequestHttpException,
     NotFoundHttpException
@@ -93,12 +95,12 @@ class PollController extends Controller
     public function close(PollManager $pollManager, VoteManager $voteManager, Request $request, int $id)
     {
         if ($request->getHttpHost() !== 'craftcamp_website') {
-            throw new AccessDeniedHttpException('projects.access_denied');
+            throw new UnauthorizedHttpException('projects.access_denied');
         }
         if (($poll = $pollManager->get($id)) === null) {
             throw new NotFoundHttpException('projects.votes.not_found');
         }
         $pollManager->processResults($poll, $voteManager->getPollVotes($poll));
-        return null;
+        return new Response('', 204);
     }
 }

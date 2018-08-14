@@ -11,6 +11,8 @@ use App\DataFixtures\ORM\Project\LoadDetailsData;
 use App\DataFixtures\ORM\Project\LoadProjectData;
 use App\DataFixtures\ORM\Project\LoadPollData;
 
+use App\Gateway\SchedulerGateway;
+
 class PollControllerTest extends WebTestCase
 {
     public function setUp()
@@ -53,9 +55,26 @@ class PollControllerTest extends WebTestCase
         
         $this->assertStatusCode(403, $client);
         
-        $client->request('POST', '/projects/site-officiel-developtech/polls');
+        $client->request('POST', '/projects/plateforme-craftcamp/polls');
         
         $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect('/projects/site-officiel-developtech/polls/3'));
+        $this->assertTrue($client->getResponse()->isRedirect('/projects/plateforme-craftcamp/polls/4'));
+    }
+    
+    public function testClosePoll()
+    {
+        $client = $this->makeClient();
+        
+        $client->request('PUT', '/projects/bloodline/polls/3/close');
+        
+        $this->assertStatusCode(401, $client);
+        
+        $client->request('PUT', 'http://craftcamp_website/projects/bloodline/polls/999/close');
+        
+        $this->assertStatusCode(404, $client);
+        
+        $client->request('PUT', 'http://craftcamp_website/projects/bloodline/polls/3/close');
+        
+        $this->assertStatusCode(204, $client);
     }
 }

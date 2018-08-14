@@ -1,0 +1,6 @@
+---
+services:
+    Tests\Gateway\Mock\SchedulerGatewayMock:
+        public: true
+    
+    App\Gateway\SchedulerGateway: '@Tests\Gateway\Mock\SchedulerGatewayMock'

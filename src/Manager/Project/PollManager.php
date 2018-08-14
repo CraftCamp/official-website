@@ -81,14 +81,13 @@ class PollManager
     public function processResults(Poll $poll, array $votes)
     {
         $count = 0;
-        $votes = $this->getPollVotes($poll);
         $nbVotes = count($votes);
         foreach ($votes as $vote) {
             if ($vote->getIsPositive()) {
                 $count++;
             }
         }
-        $score = round($count * 100 / $nbVotes, 2);
+        $score = ($nbVotes > 0) ? round($count * 100 / $nbVotes, 2) : 0;
         
         $poll->setIsEnded(true);
         

@@ -70,7 +70,7 @@ class ProjectControllerTest extends WebTestCase
     public function testGetWorkspaceAction()
     {
         $client = $this->makeClient(true);
-        $crawler = $client->request('GET', '/projects/site-officiel-developtech/workspace');
+        $crawler = $client->request('GET', '/projects/plateforme-craftcamp/workspace');
         
         $this->assertStatusCode(200, $client);
         $this->assertContains('Fiche projet', $crawler->filter('#descriptions > header')->text());
@@ -79,7 +79,7 @@ class ProjectControllerTest extends WebTestCase
     public function testGetDetailsAction()
     {
         $client = $this->makeClient();
-        $client->request('GET', '/projects/site-officiel-developtech/details');
+        $client->request('GET', '/projects/plateforme-craftcamp/details');
         
         $this->assertStatusCode(302, $client);
         
@@ -89,7 +89,7 @@ class ProjectControllerTest extends WebTestCase
         $this->assertStatusCode(403, $client);
         
         $client = $this->makeClient(true);
-        $crawler = $client->request('GET', '/projects/site-officiel-developtech/details');
+        $crawler = $client->request('GET', '/projects/plateforme-craftcamp/details');
         
         $this->assertStatusCode(200, $client);
         $this->assertContains('Sauvegarder', $crawler->filter('#project-details > footer')->text());
@@ -98,7 +98,7 @@ class ProjectControllerTest extends WebTestCase
     public function testPutDetailsAction()
     {
         $client = $this->makeClient();
-        $client->request('PUT', '/projects/site-officiel-developtech/details', [], [], [
+        $client->request('PUT', '/projects/plateforme-craftcamp/details', [], [], [
             'CONTENT_TYPE' => 'application/json'
         ], json_encode([
             'need_description' => 'I need a really great website !',
@@ -120,7 +120,7 @@ class ProjectControllerTest extends WebTestCase
         $this->assertStatusCode(403, $client);
         
         $client = $this->makeClient(true);
-        $client->request('PUT', '/projects/site-officiel-developtech/details', [], [], [
+        $client->request('PUT', '/projects/plateforme-craftcamp/details', [], [], [
             'CONTENT_TYPE' => 'application/json'
         ], json_encode([
             'need_description' => 'I need a really great website !',

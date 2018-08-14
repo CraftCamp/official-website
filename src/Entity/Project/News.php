@@ -17,6 +17,7 @@ class News extends NewsModel
      */
     protected $project;
     
+    const CATEGORY_ACCEPTED_POLL = 'accepted_poll';
     const CATEGORY_NEW_COMMUNITY = 'new_community';
     const CATEGORY_NEW_MEMBER = 'new_member';
     const CATEGORY_NEW_RELEASE = 'new_release';

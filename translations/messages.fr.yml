@@ -160,6 +160,7 @@ projects:
     members: 'Membres'
     news:
         title: 'Dernières actualités'
+        accepted_poll: 'Le projet a été approuvé à %score%% (%nb_votes% votes) !'
         new_community: 'La communauté %name% a rejoint le projet !'
         new_member: '%username% a rejoint le projet !'
         new_release: 'La version %version% est sortie !'

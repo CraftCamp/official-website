@@ -14,7 +14,7 @@ return [
         'goal' => 'Que tous les auteurs puissent publier leur ouvrage'
     ],
     [
-        'project' => 'site-officiel-developtech',
+        'project' => 'plateforme-craftcamp',
         'need' => 'Une plateforme communautaire capable d\'offrir des outils de gestion de projet aux associations bénéficiaires de notre service bénévole',
         'target' => 'Les associations ainsi que les étudiants et personnes en reconversion professionnelle, ou encore les professionnels souhaitant avoir un rôle de coach',
         'goal' => 'Que les associations puissent obtenir des outils numériques, et les apprenants décrocher un premier emploi'
